@@ -39,7 +39,7 @@ public class AdminService {
 	
 	private MailSender mailSender;
 	
-	//Validate Admin 123
+	//Validate Admin 123 edits
 	public boolean validateAdmin(String email, String password, HttpServletRequest request)
 	{
 		System.out.println("test admin login");
