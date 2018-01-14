@@ -1,2 +1,0 @@
-# careervidhya
-Online Examination Tool
