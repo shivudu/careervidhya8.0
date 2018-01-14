@@ -343,6 +343,7 @@ public class AdminController {
 		return studentsList;
 	}
 	
+	
 	public BatchService getBatchService() {
 		return batchService;
 	}
@@ -537,5 +538,11 @@ public class AdminController {
 		return adminService.updateTotalFee(email,totalFee);
 		else 
 			return "{\"status\":"+false+",\"notification\":\"Not acceptable\"}";
+	}
+	
+	@RequestMapping(value="/updateStudent/{email}",method=RequestMethod.POST)
+	public @ResponseBody String updateStudent(@PathVariable("email") String email)
+	{
+		return "Under Implementation";
 	}
 }

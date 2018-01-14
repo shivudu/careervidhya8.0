@@ -1011,6 +1011,7 @@ $(document).ready( function(){
 				<div class="col-sm-2"></div>
 			</div>
 			
+			
 			<div class="form-group">
 				<label class="control-label col-sm-4" style="text-align:right;" for="feeTotal">Enter Total Fee:</label>
 				<div class="col-sm-6">
@@ -1018,6 +1019,7 @@ $(document).ready( function(){
 				</div>
 				<div class="col-sm-2"></div>
 			</div>	
+			
 			
 			<div class="form-group">
 				<label class="control-label col-sm-4" style="text-align:right;" for="joinDate">joinDate:</label>
