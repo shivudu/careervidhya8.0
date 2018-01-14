@@ -182,7 +182,7 @@ public class StudentController {
 	public @ResponseBody String fileUpload(@RequestParam("file") MultipartFile file,
 			HttpServletRequest request)
 	{
-		System.out.println(file.getContentType());
+		System.out.println(file.getContentType()); //Edited By Rajkiran
 		return studentService.uploadResume(file,request);
 		 
 		
