@@ -541,8 +541,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/updateStudent/{email}",method=RequestMethod.POST)
-	public @ResponseBody String updateStudent(@PathVariable("email") String email)
+	public @ResponseBody String updateStudent(@ModelAttribute("student") CVStudent student)
 	{
+		adminService.updateStudent(student);
 		return "Under Implementation";
 	}
 }

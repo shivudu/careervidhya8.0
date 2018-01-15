@@ -568,5 +568,12 @@ public class AdminService {
 		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 	}
 
+	public void updateStudent(CVStudent student) {
+		// TODO Auto-generated method stub
+		
+		
+		
+	}
+
 	
 }

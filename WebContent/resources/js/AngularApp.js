@@ -2,7 +2,7 @@ var app=angular.module("App",[]);
 
 app.controller("viewController",viewController);
 
-app.constant("appUrl","http://13.59.96.99");
+app.constant("appUrl","http://localhost:8080/CareerVidhya_Operations8.0");
 
 
 
@@ -391,6 +391,59 @@ function viewController($http, appUrl,$scope)
 		return parseInt(v);
 	}
 	
+	
+	this.updateFee=function(t)
+	{
+		console.log("Test fee Pay");
+		if(t.feePaid>=t.feeTotal)
+		{
+		alert("fee already paid");
+		}
+	else if(document.getElementById(t.email+"Fee").value!=""){
+		var v=document.getElementById(t.email+"Fee").value;
+		var pay=v;
+		v= parseInt(v)+parseInt(t.feePaid);
+		//document.getElementById("feeLoad").style.display='block';
+		if(confirm("Are you confirm that student"+t.fullName+" is paying"+pay+" Rupees?"))
+			{
+			
+			
+		//sendData("updateFee/"+t.email,"/"+v,"feeLoad",-1);
+		
+		 $http.get("updateFee/"+t.email+"/"+v).then(function(data) {
+			 
+			 data=data.data;
+			 
+			 if(data["status"]){
+				   document.getElementById('success').style.display='block';
+				document.getElementById('reportT').innerHTML=data["notification"];
+				$('#success').flash_message({
+			        text: ' ',
+			        how: 'append',
+			        idR :'success'
+			    });
+				
+				
+				}
+				else{
+					document.getElementById('fail').style.display='block';
+					document.getElementById('reportF').innerHTML=data["notification"];
+					$('#fail').flash_message({
+				        text: ' ',
+				        how: 'append',
+				        idR :'fail'
+				    });
+					
+				}
+		
+		//document.getElementById("feeLoad").style.display='none';
+		//document.getElementById(e).style.display='none';
+		 });
+		
+			}
+	}
+		
+	}
 	
 	this.updateTotalFee=function(email)
 	{

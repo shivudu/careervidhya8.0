@@ -433,9 +433,17 @@ $(document).ready( function(){
 				<i style="margin-left:1%;" class="fa fa-calendar" aria-hidden="true"></i> <span class="welcomeDate" id="welDate"></span> </span><br>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:20px;margin-left:0px !important">
+			  <ul style="float:right;color:#000;cursor:pointer"><li class="dropdown">
+			  <a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i class="fa fa-user" aria-hidden="true"></i>Profile<span class="caret"></span></a>
+			   <ul class="dropdown-menu">
 			
-				<a onclick="displayDiv('changePassword')" style="float:right;color:#000;cursor:pointer">&nbsp<i style="color:#000;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a>
+				<li><a onclick="displayDiv('changePassword')" style="float:right;color:#000;cursor:pointer">&nbsp<i style="color:#000;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a>
+				</li><li>
 				<a href="Logout" style="float:right;color:#000"><i style="color:#000;marggin-right:1%;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a>	
+			</li>
+			</ul>
+			</li>
+			</ul>
 			</div>
 		</div>
 	</div>
@@ -459,9 +467,9 @@ $(document).ready( function(){
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-	        <li><a href="#" onclick="displayDiv('regForm')"><i class="fa fa-user" aria-hidden="true"></i> Register a New Student</a></li>
+	        
 	        <li class="dropdown">
-				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i> View Students<span class="caret"></span></a>
+				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i>Student's<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<c:forEach items="${batches }" var="b">
 					<li>
@@ -483,7 +491,9 @@ $(document).ready( function(){
 					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()">View All Students</a>
 					
 					</li>
+					<li><a href="#" onclick="displayDiv('regForm')"><i class="fa fa-user" aria-hidden="true"></i> Register a New Student</a></li>
 					<!-- <li><a style="cursor:pointer;" ng-click="viewAll();">View All Students</a></li>-->
+					<li><a href="#" onclick="displayDiv('uploadFile')"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment File</a></li>
 				</ul>
 			</li>
 			<!-- Multiple choice menu begin-->
@@ -517,7 +527,7 @@ $(document).ready( function(){
 			<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Mail To Students<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-			<li><a style="cursor:pointer" onclick="displayDiv('mailToBatch')"> Mail To Batches</a></li>
+			<li><a style="cursor:pointer" onclick="displayDiv('mailToBatch')"></a></li>
 			<li><a style="cursor:pointer" onclick="displayDiv('mailToStudent')"> Mail To Single Student or Others</a></li>
 			
 			</ul>
@@ -569,7 +579,7 @@ $(document).ready( function(){
 			
 			
 			</li>
-			<li><a href="#" onclick="displayDiv('uploadFile')"><i class="fa fa-upload" aria-hidden="true"></i> Upload File</a></li>
+			
 	      </ul>
 	      <!-- <ul class="nav navbar-nav navbar-right">
 	        <li><a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
@@ -1238,16 +1248,15 @@ $(document).ready( function(){
 
 <div id="stArea" style="display:none;border-radius:5px;">
 <p><i ng-click="view.displayD('filterDiv')" style="cursor:pointer;padding:0.5%;margin:0.5%;color:#00a69c !important; border: 2px solid #00a69c;border-radius:25% !important;" title="Search Student" class="fa fa-filter" aria-hidden="true"></i>
-<span>{{fstudentsList.length}}</span></p>
-<div class="row">
-<div class="col-md-4 col-sm-4">
+<span>{{fstudentsList.length}} / {{view.studentsList.length}}</span></p>
+
 <div id="filterDiv" class='container-fluid' style="border-bottom: 1px solid black;display:none">
 <div class='row'>
-<div class='col-md-12 col-sm-12'>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='col-md-6 col-sm-6'>
+<div class='form-group col-md-4 col-sm-4'>
 <input type='text'  placeholder='Student Name' ng-model="studentName" style='height:28px !important;width:90% !important;font-size:12px !important;float:left' class='form-control'>
 <i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='form-group col-md-4 col-sm-4'>
 <select ng-model="yearOfPass" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
 <option value="" selected="selected">Year Of Passing</option>
 <option value='2019'>2019</option>
@@ -1256,7 +1265,7 @@ $(document).ready( function(){
 <option value='2015'>2015</option><option value='2014'>2014</option>
 <option value='2013'>2013</option><option value='2012'>2012</option>
 </select><i class="fa fa-times" ng-click='yearOfPass=""' style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='form-group col-md-4 col-sm-4'>
 <select ng-model="branchName" class='form-control' style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
 <option value="" selected>Branch</option>
  <optgroup label="B Tech or M Tech Branches">
@@ -1288,7 +1297,7 @@ $(document).ready( function(){
 </select>
 <i class="fa fa-times" ng-click='branchName=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
 </div>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='form-group col-md-4 col-sm-4'>
 <select ng-model="graduationType" class='form-control' style='height:28px !important;width:90% !important;font-size:12px !important;float:left;'>
 <option value='' selected="selected">Garduation Type</option>
 <option value='Btech'>BTech</option><option value='Mtech'>MTech</option><option value='MCA'>MCA</option><option value='MBA'>MBA</option>
@@ -1296,7 +1305,7 @@ $(document).ready( function(){
 </select>
 <i class="fa fa-times" ng-click='graduationType=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
 </div>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='form-group col-md-4 col-sm-4'>
 <select ng-model="fee" class='form-control' style='height:28px !important;float:left;width:90% !important;font-size:12px !important;'>
 <option selected="selected" value="-1">Fee</option>
 <option value="1">Paid</option>
@@ -1305,7 +1314,7 @@ $(document).ready( function(){
 </select>
 <i class="fa fa-times" ng-click='fee=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
 </div>
-<div class='form-group col-md-12 col-sm-12'>
+<div class='form-group col-md-4 col-sm-4'>
 <select ng-model="genderI" class='form-control' style='height:28px !important;float:left;width:90% !important;font-size:12px !important;'>
 <option value="" selected="selected">Gender</option>
 <option value='male'>Male</option><option value='female'>Female</option></select>
@@ -1341,15 +1350,16 @@ $(document).ready( function(){
 </div></div></div>
 
 
-</div>
-<div class="col-sm-8">
+
 <div id="innerStArea">
 
-<div class='container-fluid' style='height:430px;overflow:scroll;'><div class'row'><div class='col-md-12'> 
+<div class='container-fluid'><div class='row'>
+
+<div class='col-md-8 col-sm-8' style='height:430px;overflow:scroll;'> 
  		<table class='table table-bordered' style='margin-top:1%;'>
  		<thead> 
- 		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>Batchno</th><th class='thText'>FullName</th><th class='thText'>Email</th><th class='thText'>MobileNumber</th><th class='thText'>FeePaid</th> 
- 		<th class='thText'>TotalFee</th><th class='thText'>Graduation YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th><th class='thText' colspan='2'>View More</th> 
+ 		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>B No</th><th class='thText'>FullName</th><th class='thText'>FeePaid</th> 
+ 		<th class='thText'>TotalFee</th><th class='thText'>G YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th><th class='thText' colspan='2'>View More</th> 
  		<th class='thText'>Resume</th></tr> 
  		</thead> 
  		
@@ -1370,18 +1380,19 @@ $(document).ready( function(){
  		<span ng-if="t.feeTotal-t.feePaid > 0" style="background-color:red;padding:15% !important;color:white; border-radius:50%;">{{t.batchNumber}}</span>
  		
  		</td>
- 		<td class='myTip tdText'>{{t.fullName}}<span class='tooltiptext'>Grad {{t.graduationPercentage}}%<br> Inter {{t.interPercentage}}%<br>SSC {{t.sscPercentage}}%</span></td>
- 		<td class='tdText'>{{t.email}}</td>
- 		<td class='tdText'>{{t.mobile}}</td>
- 		<td class='tdText'><span id="">{{t.feePaid}}</span><input class='form-control' type='number' style='display:none;border:1px solid #00a69c !important;' placeholder='Add fee' id='"+t.email+"Fee'/> <i class='fa fa-plus-square' ng-click='view.showhide(t.email+"Fee")' aria-hidden='true'></i></td>
+ 		<td class='tdText'>{{t.fullName}}<br> <i ng-click='view.displayD("V"+t.email)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		
+ 		<td class='tdText'><span>{{t.feePaid}}<i class='fa fa-plus-square' ng-click='view.showhide("paidUFee_"+t.email)' aria-hidden='true'></i></span>
+ 		
+ 	   <span id='{{"paidUFee_"+t.email}}' style='display:none'><input class='form-control' type='number' style='border:1px solid #00a69c !important;' placeholder='Add fee' id='{{t.email+"Fee"}}'/> <i class='fa fa-plus-square' ng-click='view.updateFee(t)' aria-hidden='true'></i></span></td>
  		<td class='tdText'><span id='{{"feeUpdate_"+t.email}}'>{{t.feeTotal}}<i style='cursor:pointer;' ng-click='view.showhide("totalUFee_"+t.email)' class='fa fa-pencil-square' aria-hidden='true'></i></span>
  		<span style="display:none" id='{{"totalUFee_"+t.email}}'><input type='number' id='{{"totalFee_"+t.email}}' value='20000'><i style='cursor:pointer;color:66ffff' ng-click='view.updateTotalFee(t.email)' class='fa fa-pencil-square' aria-hidden='true'></i>
  		</span></td>
  		<td class='tdText'>{{t.graduationYOP}}</td>
- 		<td class='tdText'>{{view.convertToInt(t.aggregate)}}</td>
- 		<td style='font-size:12px !important;'><button ng-click='view.displayD("V"+t.email)' class='btn btn-default viewTableBtn'>View More Details</button></td>
- 		<td style='font-size:12px !important;'><button ng-click='view.fetchReport(t.email)'  class='btn btn-default viewTableBtn'>View Progress</button></td>
- 		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><button class='btn btn-default viewTableBtn'>download</button></a></td>
+ 		<td class='tdText'>({{t.sscPercentage}}+{{t.interPercentage}}+{{t.graduationPercentage}})<br>{{view.convertToInt(t.aggregate)}}</td>
+ 		<td style='font-size:12px !important;'> <i ng-click='view.displayD("V"+t.email)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		<td style='font-size:12px !important;'><i class="fa fa-tasks" ng-click='view.fetchReport(t.email)' aria-hidden="true"></i></td>
+ 		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td>
  		</tr>
  	
  
@@ -1448,13 +1459,22 @@ $(document).ready( function(){
  		
  		</tbody>
 	</table>
-		</div></div></div>
+		</div>
+		<div class="col-md-4 col-sm-4">
+		<h3>{{view.studentFullName}}</h3>
+		Student 
+		Profile
+		</div>
+		
+		
+		
+		
+		</div></div>
  		
  		
  		
 
-</div>
-</div>
+
 </div>
 
 

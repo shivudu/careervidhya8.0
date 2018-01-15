@@ -20,7 +20,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.spri
     
     <bean id="dbConnection" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-    <property name="url" value="jdbc:mysql://cvcorp.chan2viov052.us-east-1.rds.amazonaws.com:3306/cvcorp"></property>
+    <property name="url" value="jdbc:mysql://localhost:3306/cvcorp"></property>
     <property name="username" value="root"></property>
     <property name="password" value="shivudu3"></property>
     </bean>
