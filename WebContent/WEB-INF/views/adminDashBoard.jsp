@@ -1247,6 +1247,8 @@ $(document).ready( function(){
 <!-- student view div begin-->    
 
 <div id="stArea" style="display:none;border-radius:5px;">
+
+
 <p><i ng-click="view.displayD('filterDiv')" style="cursor:pointer;padding:0.5%;margin:0.5%;color:#00a69c !important; border: 2px solid #00a69c;border-radius:25% !important;" title="Search Student" class="fa fa-filter" aria-hidden="true"></i>
 <span>{{fstudentsList.length}} / {{view.studentsList.length}}</span></p>
 
@@ -1355,7 +1357,7 @@ $(document).ready( function(){
 
 <div class='container-fluid'><div class='row'>
 
-<div class='col-md-8 col-sm-8' style='height:430px;overflow:scroll;'> 
+<div class='col-md-8 col-sm-8' style='height:430px;overflow:scroll;border:1px solid #00a69c;'> 
  		<table class='table table-bordered' style='margin-top:1%;'>
  		<thead> 
  		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>B No</th><th class='thText'>FullName</th><th class='thText'>FeePaid</th> 
@@ -1380,7 +1382,7 @@ $(document).ready( function(){
  		<span ng-if="t.feeTotal-t.feePaid > 0" style="background-color:red;padding:15% !important;color:white; border-radius:50%;">{{t.batchNumber}}</span>
  		
  		</td>
- 		<td class='tdText'>{{t.fullName}}<br> <i ng-click='view.displayD("V"+t.email)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		<td class='tdText'>{{t.fullName}}<br> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
  		
  		<td class='tdText'><span>{{t.feePaid}}<i class='fa fa-plus-square' ng-click='view.showhide("paidUFee_"+t.email)' aria-hidden='true'></i></span>
  		
@@ -1395,8 +1397,10 @@ $(document).ready( function(){
  		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td>
  		</tr>
  	
- 
+ <!-- 
  	<tr><td colspan='10'><div id='{{"V"+t.email}}' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
+ 			
+ 			
  			<div class'row' style='margin:1% !important;'>
  			<h3 style='color:#ff6666;text-align:center !important;'>More details</h3>
  				<div class='col-md-6 col-sm-6'>
@@ -1441,29 +1445,132 @@ $(document).ready( function(){
 				 </div>
 			</div>
 			</div>
+			
+			
+			
 			</td>
 			</tr>
- 	
- 	<tr><td colspan='10'><div id='progress'></div>
- 	<div class='container-fluid' id='{{t.email+"Chart"}}' style='display:none;width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
- 	<div class='row'>
- 	<div class='col-md-6 col-sm-6 col-xs-12' style='border-right:1px solid black'>
- 	<span id='{{t.email+"ChartAError"}}' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='{{t.email+"ChartA"}}'  style='display:none;width:100%;height: 300px;'></canvas>
- 	</div>
- 	<div class='col-md-6 col-sm-6 col-xs-12'>
- 	<span id='{{t.email+"ChartMError"}}' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='{{t.email+"ChartM"}}'  style='display:none;width:100%;height: 300px;'></canvas> 	</div>
- 	</div></div></td></tr>
- 		
- 		
+			 -->
  		</tbody>
 	</table>
 		</div>
-		<div class="col-md-4 col-sm-4">
-		<h3>{{view.studentFullName}}</h3>
-		Student 
-		Profile
+		<div class="col-md-4 col-sm-4" style='height:430px;overflow:scroll;border:1px solid #00a69c;'>
+		<h3>{{view.student.fullName}}</h3>
+		
+		<div id='viewMore_Student' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border-radius:10px;'>
+ 			
+ 			
+ 			
+ 			
+ 			<h4 style='color:#ff6666;text-align:center !important;'>Personal-details</h4>
+ 				<div class='col-md-12 col-sm-12'>
+ 					<div class='row' style='margin:1% !important;'>
+ 						<div class='col-md-6 col-sm-6'>
+ 						    <p style='font-weight:600;padding-top:1% !important;'>Full Name<span style='float:right;'>:</span></p>
+				 			<p style='padding-top:1% !important;font-weight:600;'>Parent Name<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Gender<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>DOB<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Parent Mobile<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>HouseNo<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Locality or street<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>City or District<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>State<span style='float:right;'>:</span></p>
+				 		</div>
+				 		<div class='col-md-6 col-sm-6'>
+				 		    <p>{{view.student.fullName}}</p>
+				 			<p>{{view.student.parentName}}</p>
+				 			<p>{{view.student.gender}}</p>
+				 			<p>{{view.student.dob}}</p>
+				 			
+				 			<p>{{view.student.mobile_Parent}}</p>
+				 			<p>{{view.student.houseNo}}</p>
+				 			<p>{{view.student.locality}}</p>
+				 			<p>{{view.student.city}}</p>
+				 			<p>{{view.student.state}}</p>
+				 		</div>
+				 	</div>
+				 </div>
+				 
+				 
+		
+				 
+				<h4 style='color:#ff6666;text-align:center !important;'>Education-details</h4>
+	 			<div class='col-md-12 col-sm-12'>
+	 				<div class='row'>
+	 					<div class='col-md-6 col-sm-6'>
+	 					    <p style='font-weight:600;'>Graduation YOP<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Branch<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>SSC Percentage<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Inter Percentage<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Graduation Percentage<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Aggregation<span style='float:right;'>:</span></p>
+				 			
+				 			<p style='font-weight:600;'>Graduation Type<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Graduation College<span style='float:right;'>:</span></p>
+				 		</div>
+				 		<div class='col-md-6 col-sm-6'>
+				 		    <p>{{view.student.graduationYOP}}</p>
+				 			<p>{{view.student.graduationBranch}}</p>	
+				 			<p>{{view.student.sscPercentage}}</p>
+				 			<p>{{view.student.interPercentage}}</p>
+				 			<p>{{view.student.graduationPercentage}}</p>
+				 			<p>{{view.student.aggregate}}</p>
+				 			<p>{{view.student.graduationType}}</p>
+				 			<p>{{view.student.graduationCollege}}</p>
+				 		</div>
+				 	</div>
+				 </div>
+				 
+				 
+				 
+				 
+				 <h4 style='color:#ff6666;text-align:center !important;'>Contact-details</h4>
+ 				<div class='col-md-12 col-sm-12'>
+ 					<div class='row' style='margin:1% !important;'>
+ 						<div class='col-md-6 col-sm-6'>
+ 						  
+				 			<p style='font-weight:600;'>Email<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Mobile<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>Parent Mobile<span style='float:right;'>:</span></p>
+				 			
+				 			<p style='font-weight:600;'>Locality or street<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>City or District<span style='float:right;'>:</span></p>
+				 			<p style='font-weight:600;'>State<span style='float:right;'>:</span></p>
+				 		</div>
+				 		<div class='col-md-6 col-sm-6'>
+				 		   
+				 			<p>{{view.student.email}}</p>
+				 			<p>{{view.student.mobile}}</p>
+				 			
+				 			<p>{{view.student.mobile_Parent}}</p>
+				 			
+				 			<p>{{view.student.locality}}</p>
+				 			<p>{{view.student.city}}</p>
+				 			<p>{{view.student.state}}</p>
+				 		</div>
+				 	</div>
+				 </div>
+				 
+				 
+			
+			</div>
+			
+			
+			<div id='progress'></div>
+ 	<div class='container-fluid' id='{{view.student.email+"Chart"}}' style='display:none;width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
+ 	<div class='row'>
+ 	<div class='col-md-6 col-sm-6 col-xs-12' style='border-right:1px solid black'>
+ 	<span id='{{view.student.email+"ChartAError"}}' style='color:#d00d0d;font-size:20px;'></span>
+ 	<canvas id='{{view.student.email+"ChartA"}}'  style='display:none;width:100%;height: 300px;'></canvas>
+ 	</div>
+ 	<div class='col-md-6 col-sm-6 col-xs-12'>
+ 	<span id='{{view.student.email+"ChartMError"}}' style='color:#d00d0d;font-size:20px;'></span>
+ 	<canvas id='{{view.student.email+"ChartM"}}'  style='display:none;width:100%;height: 300px;'></canvas> 	</div>
+ 	</div></div>
+			
+			
+			
+		
 		</div>
 		
 		

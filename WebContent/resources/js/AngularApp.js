@@ -481,4 +481,11 @@ function viewController($http, appUrl,$scope)
 		
 	};
 	
+	
+	this.studentDetails=function(student)
+	{
+	  currentScope.student=student;
+	  document.getElementById('viewMore_Student').style.display="block";
+	}
+	
 }
