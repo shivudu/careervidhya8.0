@@ -1280,7 +1280,7 @@ $(document).ready( function(){
 
 <div class='form-group col-md-4 col-sm-4'>
 <select ng-model="batchNumber" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
-<option value="" selected="selected">All</option>
+<option value="" selected="selected">All Branches</option>
 <c:forEach items="${batches }" var="b">
 <option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
 </c:forEach>
