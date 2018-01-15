@@ -37,7 +37,10 @@ var adminName='<%=name%>';
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
+	<script src="<c:url value="/resources/js/xeditable.js"/>"></script>
 	
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/xeditable.css"/>"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
 	   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/adminDashBoard.css"/>"/>
 	   <style>
 	   
@@ -471,12 +474,13 @@ $(document).ready( function(){
 	        <li class="dropdown">
 				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i>Student's<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<c:forEach items="${batches }" var="b">
+					
+				<!--  	<c:forEach items="${batches }" var="b">
 					<li>
 					
- 			<!-- 	<a style="cursor:pointer;" onclick="sendData('viewBatch/',${b.getBatchNumber()},'stArea',-1); displayDiv('stArea')">
+ 				<a style="cursor:pointer;" onclick="sendData('viewBatch/',${b.getBatchNumber()},'stArea',-1); displayDiv('stArea')">
 					BATCH ${b.getBatchNumber()}</a>
-					-->
+					
 	
 	     	        <a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestBatchStudents(${b.getBatchNumber()})">
 					BATCH ${b.getBatchNumber()}</a>
@@ -484,16 +488,19 @@ $(document).ready( function(){
 					
 					
 					</li>
+					
 					</c:forEach>
+					-->
+					
+					
 					<li>
-					
 				<!--  	<a style="cursor:pointer;" onclick="sendData('viewAll','','stArea',-1); displayDiv('stArea')">View All Students</a>-->
-					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()">View All Students</a>
-					
+					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()"><i class="fa fa-users" aria-hidden="true"></i>View Students</a>
 					</li>
 					<li><a href="#" onclick="displayDiv('regForm')"><i class="fa fa-user" aria-hidden="true"></i> Register a New Student</a></li>
 					<!-- <li><a style="cursor:pointer;" ng-click="viewAll();">View All Students</a></li>-->
 					<li><a href="#" onclick="displayDiv('uploadFile')"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment File</a></li>
+				   <li><a onclick="displayDiv('takeAttendance');verifyPresents();"><i class="fa fa-male" aria-hidden="true"></i> Take Attendance</a></li>
 				</ul>
 			</li>
 			<!-- Multiple choice menu begin-->
@@ -527,7 +534,7 @@ $(document).ready( function(){
 			<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Mail To Students<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-			<li><a style="cursor:pointer" onclick="displayDiv('mailToBatch')"></a></li>
+			<li><a style="cursor:pointer" onclick="displayDiv('mailToBatch')">Mail To Batches</a></li>
 			<li><a style="cursor:pointer" onclick="displayDiv('mailToStudent')"> Mail To Single Student or Others</a></li>
 			
 			</ul>
@@ -556,6 +563,7 @@ $(document).ready( function(){
 			<ul class="dropdown-menu">
 			<li><a onclick="displayDiv('addBatch')"> Enroll a New Batch </a></li>
 			<li><a onclick="displayDiv('viewBatches')"> View All Batches and Info</a></li>
+			 <li><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Batch-Progress</a></li>
 			</ul>
 			
 			</li>
@@ -564,10 +572,10 @@ $(document).ready( function(){
 		
 		
 		<!-- batch progress start-->
-	        <li><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Batch-Progress</a></li>
+	       
 	
 		<!-- batch progress end--> 
-		<li><a onclick="displayDiv('takeAttendance');verifyPresents();"><i class="fa fa-male" aria-hidden="true"></i> Take Attendance</a></li>
+		
 		
 		<li class="dropdown">
 			
@@ -1258,6 +1266,8 @@ $(document).ready( function(){
 <div class='form-group col-md-4 col-sm-4'>
 <input type='text'  placeholder='Student Name' ng-model="studentName" style='height:28px !important;width:90% !important;font-size:12px !important;float:left' class='form-control'>
 <i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
+
+
 <div class='form-group col-md-4 col-sm-4'>
 <select ng-model="yearOfPass" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
 <option value="" selected="selected">Year Of Passing</option>
@@ -1267,6 +1277,15 @@ $(document).ready( function(){
 <option value='2015'>2015</option><option value='2014'>2014</option>
 <option value='2013'>2013</option><option value='2012'>2012</option>
 </select><i class="fa fa-times" ng-click='yearOfPass=""' style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
+
+<div class='form-group col-md-4 col-sm-4'>
+<select ng-model="batchNumber" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
+<option value="" selected="selected">All</option>
+<c:forEach items="${batches }" var="b">
+<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
+</c:forEach>
+</select><i class="fa fa-times" ng-click='batchNumber=""' style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
+
 <div class='form-group col-md-4 col-sm-4'>
 <select ng-model="branchName" class='form-control' style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
 <option value="" selected>Branch</option>
@@ -1367,7 +1386,7 @@ $(document).ready( function(){
  		
  		
  		
- 		<tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationYOP: yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
+ 		<tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationYOP: yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
  		
  		
  		
@@ -1392,7 +1411,7 @@ $(document).ready( function(){
  		</span></td>
  		<td class='tdText'>{{t.graduationYOP}}</td>
  		<td class='tdText'>({{t.sscPercentage}}+{{t.interPercentage}}+{{t.graduationPercentage}})<br>{{view.convertToInt(t.aggregate)}}</td>
- 		<td style='font-size:12px !important;'> <i ng-click='view.displayD("V"+t.email)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		<td style='font-size:12px !important;'> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
  		<td style='font-size:12px !important;'><i class="fa fa-tasks" ng-click='view.fetchReport(t.email)' aria-hidden="true"></i></td>
  		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td>
  		</tr>
@@ -1455,11 +1474,20 @@ $(document).ready( function(){
 	</table>
 		</div>
 		<div class="col-md-4 col-sm-4" style='height:430px;overflow:scroll;border:1px solid #00a69c;'>
-		<h3>{{view.student.fullName}}</h3>
+		<form editable-form name="editableForm" onaftersave="saveStudent()">
+		
+		<h3>{{view.student.fullName}}<i class="fa fa-pencil-square-o" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" aria-hidden="true"></i> </h3>
 		
 		<div id='viewMore_Student' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border-radius:10px;'>
  			
- 			
+ 			<span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </span>
  			
  			
  			<h4 style='color:#ff6666;text-align:center !important;'>Personal-details</h4>
@@ -1470,23 +1498,14 @@ $(document).ready( function(){
 				 			<p style='padding-top:1% !important;font-weight:600;'>Parent Name<span style='float:right;'>:</span></p>
 				 			<p style='font-weight:600;'>Gender<span style='float:right;'>:</span></p>
 				 			<p style='font-weight:600;'>DOB<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Parent Mobile<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>HouseNo<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Locality or street<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>City or District<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>State<span style='float:right;'>:</span></p>
+				 		
 				 		</div>
 				 		<div class='col-md-6 col-sm-6'>
-				 		    <p>{{view.student.fullName}}</p>
-				 			<p>{{view.student.parentName}}</p>
-				 			<p>{{view.student.gender}}</p>
-				 			<p>{{view.student.dob}}</p>
-				 			
-				 			<p>{{view.student.mobile_Parent}}</p>
-				 			<p>{{view.student.houseNo}}</p>
-				 			<p>{{view.student.locality}}</p>
-				 			<p>{{view.student.city}}</p>
-				 			<p>{{view.student.state}}</p>
+				 		    <p editable-text="view.student.fullName" e-name="fullName">{{view.student.fullName}}</p>
+				 			<p editable-text="view.student.parentName" e-name="parentName">{{view.student.parentName}}</p>
+				 			<p editable-select="view.student.gender" e-name="gender" e-ng-options="s.value as s.text for s in genders">{{view.student.gender}}</p>
+				 			<p editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy">{{view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
+		
 				 		</div>
 				 	</div>
 				 </div>
@@ -1498,25 +1517,25 @@ $(document).ready( function(){
 	 			<div class='col-md-12 col-sm-12'>
 	 				<div class='row'>
 	 					<div class='col-md-6 col-sm-6'>
-	 					    <p style='font-weight:600;'>Graduation YOP<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Branch<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>SSC Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Inter Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Graduation Percentage<span style='float:right;'>:</span></p>
+	 					    <p  style='font-weight:600;'>Graduation YOP<span style='float:right;'>:</span></p>
+				 			<p  style='font-weight:600;'>Branch<span style='float:right;'>:</span></p>
+				 			<p  style='font-weight:600;'>SSC Percentage<span style='float:right;'>:</span></p>
+				 			<p  style='font-weight:600;'>Inter Percentage<span style='float:right;'>:</span></p>
+				 			<p  style='font-weight:600;' >Graduation Percentage<span style='float:right;'>:</span></p>
 				 			<p style='font-weight:600;'>Aggregation<span style='float:right;'>:</span></p>
 				 			
 				 			<p style='font-weight:600;'>Graduation Type<span style='float:right;'>:</span></p>
 				 			<p style='font-weight:600;'>Graduation College<span style='float:right;'>:</span></p>
 				 		</div>
 				 		<div class='col-md-6 col-sm-6'>
-				 		    <p>{{view.student.graduationYOP}}</p>
-				 			<p>{{view.student.graduationBranch}}</p>	
-				 			<p>{{view.student.sscPercentage}}</p>
-				 			<p>{{view.student.interPercentage}}</p>
-				 			<p>{{view.student.graduationPercentage}}</p>
-				 			<p>{{view.student.aggregate}}</p>
-				 			<p>{{view.student.graduationType}}</p>
-				 			<p>{{view.student.graduationCollege}}</p>
+				 		    <p editable-text="view.student.graduationYOP" e-name="graduationYOP">{{view.student.graduationYOP}}</p>
+				 			<p editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches">{{view.student.graduationBranch}}</p>	
+				 			<p editable-text="view.student.sscPercentage" e-name="sscPercentage">{{view.student.sscPercentage}}</p>
+				 			<p editable-text="view.student.interPercentage" e-name="interPercentage">{{view.student.interPercentage}}</p>
+				 			<p editable-text="view.student.graduationPercentage" e-name="graduationPercentage">{{view.student.graduationPercentage}}</p>
+				 			<p editable-text="view.student.aggregate" e-name="aggregate" >{{view.student.aggregate}}</p>
+				 			<p editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes">{{view.student.graduationType}}</p>
+				 			<p editable-text="view.student.graduationCollege" e-name="graduationCollege">{{view.student.graduationCollege}}</p>
 				 		</div>
 				 	</div>
 				 </div>
@@ -1539,38 +1558,41 @@ $(document).ready( function(){
 				 		</div>
 				 		<div class='col-md-6 col-sm-6'>
 				 		   
-				 			<p>{{view.student.email}}</p>
-				 			<p>{{view.student.mobile}}</p>
+				 			<p editable-text="view.student.email" e-name="email">{{view.student.email}}</p>
+				 			<p editable-text="view.student.mobile" e-name="mobile">{{view.student.mobile}}</p>
 				 			
-				 			<p>{{view.student.mobile_Parent}}</p>
+				 			<p editable-text="view.student.mobile_Parent" e-name="mobile_Parent">{{view.student.mobile_Parent}}</p>
 				 			
-				 			<p>{{view.student.locality}}</p>
-				 			<p>{{view.student.city}}</p>
-				 			<p>{{view.student.state}}</p>
+				 			<p editable-text="view.student.locality" e-name="locality">{{view.student.locality}}</p>
+				 			<p editable-text="view.student.city" e-name="city">{{view.student.city}}</p>
+				 			<p editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states">{{view.student.state}}</p>
 				 		</div>
 				 	</div>
 				 </div>
 				 
 				 
+				 
 			
 			</div>
-			
+		
+		
+		<h3>{{view.student.fullName}}</h3>	
 			
 			<div id='progress'></div>
- 	<div class='container-fluid' id='{{view.student.email+"Chart"}}' style='display:none;width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
+ 	<div class='container-fluid' id='ChartProgress' style='width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
+ 	
  	<div class='row'>
- 	<div class='col-md-6 col-sm-6 col-xs-12' style='border-right:1px solid black'>
- 	<span id='{{view.student.email+"ChartAError"}}' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='{{view.student.email+"ChartA"}}'  style='display:none;width:100%;height: 300px;'></canvas>
+ 	<span id='ChartAError' style='color:#d00d0d;font-size:20px;'></span>
+ 	<canvas id='ChartA'  style='display:none;width:100%;height: auto;'></canvas>
  	</div>
- 	<div class='col-md-6 col-sm-6 col-xs-12'>
- 	<span id='{{view.student.email+"ChartMError"}}' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='{{view.student.email+"ChartM"}}'  style='display:none;width:100%;height: 300px;'></canvas> 	</div>
- 	</div></div>
+ 	<div class='row'>
+ 	<span id='ChartMError' style='color:#d00d0d;font-size:20px;'></span>
+ 	<canvas id='ChartM'  style='display:none;width:100%;height: auto;'></canvas> 	</div>
+ 	</div>
 			
 			
 			
-		
+		</form>
 		</div>
 		
 		

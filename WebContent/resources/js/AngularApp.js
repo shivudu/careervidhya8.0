@@ -1,20 +1,28 @@
-var app=angular.module("App",[]);
+var app=angular.module("App",["xeditable", "ui.bootstrap"]);
 
 app.controller("viewController",viewController);
 
 app.constant("appUrl","http://localhost:8080/CareerVidhya_Operations8.0");
 
+app.run(['editableOptions', function(editableOptions) {
+	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+	}]);
 
 
 
 function viewController($http, appUrl,$scope)
 {
 
+	
+	
 	var currentScope=this;
 	
 	currentScope.filteredData=[];
 	
-	
+	$scope.degree=0;
+	$scope.aggregate=0;
+	$scope.inter=0;
+	$scope.SSC=0;
 	this.requestAllStudents=function(){
 		$('#ajaxPageLoader').show();
 	$http.get(appUrl+"/viewAll").then(function(response){
@@ -95,6 +103,48 @@ function viewController($http, appUrl,$scope)
 			
 	};
 	
+	
+	
+	
+	// Form Editable
+	
+	$scope.genders=[
+	                {value:"male",text:"Male"},
+	                {value:"female",text:"Female"}
+	                ];
+	
+	$scope.graduationTypes=[
+	                {value:"BTech",text:"BTech"},
+	                {value:"MTech",text:"MTech"},
+	                {value:"MCA",text:"MCA"},
+	                {value:"MBA",text:"MBA"},
+	                {value:"Degree",text:"Degree"},
+	                {value:"Others",text:"Others"}
+	                ];
+	
+	$scope.states=[
+	                {value:"Telangana",text:"Telangana"},
+	                {value:"AndhraPradesh",text:"Andhra Pradesh"},
+	                {value:"Others",text:"Others"}
+	                ];
+	$scope.graduationBranches=[
+	                {value:"CSE",text:"CSE"},
+	                {value:"IT",text:"IT"},
+	                {value:"ECE",text:"ECE"},
+	                {value:"EEE",text:"EEE"},
+	                {value:"MECH",text:"MECH"},
+	                {value:"CIVIL",text:"CIVIL"},
+	                {value:"Aeronautical",text:"Aeronautical"},
+	                {value:"Electronics & Instrumentation Engineering",text:"Electronics & Instrumentation Engineering"},
+	                {value:"Mechatronics Engineering",text:"Mechatronics Engineering"},
+	                {value:"BSC Computers",text:"BSC Computers"},
+	                {value:"BSC General",text:"BSC General"},
+	                {value:"BA",text:"BA"},
+	                {value:"Other",text:"Any Other"}
+	              
+	                ];
+	 
+	
 	// Filter Students Data
 	
 	$scope.sscFilter=function(st)
@@ -148,6 +198,7 @@ function viewController($http, appUrl,$scope)
 		$scope.branchName="";
 		$scope.yearOfPass="";
 		$scope.studentName="";
+		$scope.batchNumber="";
 	}
 	
 	
@@ -335,12 +386,11 @@ function viewController($http, appUrl,$scope)
 	
 	
 	this.fetchReport=function(email){ 
-		console.log(email);
+		
 		let url=appUrl+"/getStudentReport/"+email+"/any";
-		if(document.getElementById(email+"Chart").style.display=="none")
-			{
-			document.getElementById("V"+email).style.display="none";
-			document.getElementById(email+"Chart").style.display="block";
+		
+			//document.getElementById("V"+email).style.display="none";
+			//document.getElementById("ChartProgress").style.display="block";
 			
 			$('#ajaxPageLoader').show();
 			
@@ -351,28 +401,24 @@ function viewController($http, appUrl,$scope)
 	    	console.log(data);
 	    	if(data["scorePerc"]!=null)
 	    		{
-	    	displayChart(email+"ChartM",data["scorePerc"],"Students overall Exams %","Secured %","Lost %");
-	    	document.getElementById(email+"ChartM").style.display='block';
-	    	document.getElementById(email+"ChartMError").innerHTML="Student took  <strong>"+data["testCount"]+"</strong> exams in total";
-	    	document.getElementById(email+"ChartMError").style.color='#908684';
-	    	document.getElementById(email+"ChartMError").style.fontSize="16px";
+	    	displayChart("ChartM",data["scorePerc"],"Students overall Exams %","Secured %","Lost %");
+	    	document.getElementById("ChartM").style.display='block';
+	    	document.getElementById("ChartMError").innerHTML="Student took  <strong>"+data["testCount"]+"</strong> exams in total";
+	    	document.getElementById("ChartMError").style.color='#908684';
+	    	document.getElementById("ChartMError").style.fontSize="16px";
 	    		}
 	    	else{
-	    		document.getElementById(email+"ChartMError").innerHTML="<p style='color:#ff6666 !important;text-align:center !important;font-size:18px !important;'>Student might not taken any exam</p>";
+	    		document.getElementById("ChartMError").innerHTML="<p style='color:#ff6666 !important;text-align:center !important;font-size:18px !important;'>Student might not taken any exam</p>";
 	    	}
 	    	if(data["attendancePerc"]!=-1){
-	    	displayChart(email+"ChartA",data["attendancePerc"],"Students overall attendance %","Present %","Absent %");
-	    	document.getElementById(email+"ChartA").style.display='block';
+	    	displayChart("ChartA",data["attendancePerc"],"Students overall attendance %","Present %","Absent %");
+	    	document.getElementById("ChartA").style.display='block';
 	    	}else{
-	    		document.getElementById(email+"ChartAError").innerHTML="<p style='color:#ff6666 !important;text-align:center !important;font-size:18px !important;'>Attendance of Student is not updated</p>";
+	    		document.getElementById("ChartAError").innerHTML="<p style='color:#ff6666 !important;text-align:center !important;font-size:18px !important;'>Attendance of Student is not updated</p>";
 	    	}
 	    	$('#ajaxPageLoader').hide();
 	    });
-			}
 		
-		else{
-			document.getElementById(email+"Chart").style.display="none";
-		}
 	}
 	
 	
