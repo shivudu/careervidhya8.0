@@ -1504,7 +1504,7 @@ $(document).ready( function(){
 				 		    <p editable-text="view.student.fullName" e-name="fullName">{{view.student.fullName}}</p>
 				 			<p editable-text="view.student.parentName" e-name="parentName">{{view.student.parentName}}</p>
 				 			<p editable-select="view.student.gender" e-name="gender" e-ng-options="s.value as s.text for s in genders">{{view.student.gender}}</p>
-				 			<p editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy">{{view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
+				 			<p editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy">{{ (view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
 		
 				 		</div>
 				 	</div>
