@@ -60,20 +60,20 @@ var adminName='<%=name%>';
     </style>
         <style>
 			output { 
-  position: absolute;
-  background-image: linear-gradient(#444444, #999999);
-  width: 30px; 
-  height: 20px; 
-  text-align: center; 
-  color: white; 
-  border-radius: 10px; 
-  display: inline-block; 
-  font: bold 10px/5px Georgia;
-  bottom: 120%;
-  left: 0;
-  margin-left: 2%;
-}
-output:after { 
+			  position: relative;
+			  background-image: linear-gradient(#444444, #999999);
+			  width: 28px; 
+			  height: 20px; 
+			  text-align: center; 
+			  color: white; 
+			  border-radius: 10px; 
+			  display: inline-block; 
+			  font: bold 10px/5px Georgia;
+			  /*bottom: 120%;
+			  left: 0;*/
+			  margin-left: 2% !important;
+			}
+/*output:after { 
   content: '';
   position: absolute;
   width: 0;
@@ -85,7 +85,7 @@ output:after {
   left: 50%;
   /*margin-left: -5px;*/
   margin-top: -1px;
-}
+}*/
 
 
 		</style>
@@ -227,13 +227,13 @@ output:after {
 			}
 			#chat
 			{
-				width:10%;
+				width:5%;
 				height:30px !important;
 				position:fixed;
 				top:10;
 				right:0 !important;
 				margin-top:0.5%;
-				margin-right:2%;
+				margin-right:1%;
 				border-radius:3px;
 				border-color:#00a69c;
 				padding:5px 8px 5px 8px;
@@ -472,7 +472,7 @@ $(document).ready( function(){
 	        <li class="active"><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 	        
 	        <li class="dropdown">
-				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i>Student's<span class="caret"></span></a>
+				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i> Student's<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					
 				<!--  	<c:forEach items="${batches }" var="b">
@@ -495,7 +495,7 @@ $(document).ready( function(){
 					
 					<li>
 				<!--  	<a style="cursor:pointer;" onclick="sendData('viewAll','','stArea',-1); displayDiv('stArea')">View All Students</a>-->
-					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()"><i class="fa fa-users" aria-hidden="true"></i>View Students</a>
+					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()"><i class="fa fa-users" aria-hidden="true"></i> View Students</a>
 					</li>
 					<li><a href="#" onclick="displayDiv('regForm')"><i class="fa fa-user" aria-hidden="true"></i> Register a New Student</a></li>
 					<!-- <li><a style="cursor:pointer;" ng-click="viewAll();">View All Students</a></li>-->
@@ -619,7 +619,7 @@ $(document).ready( function(){
   <!--End of response-->
   
   <!-- Chat box code start  -->
-			<div id="chat" class="animated-chat tada" onclick="loadChatbox();speakBegin()">How Can I Help?</div>
+			<div id="chat" class="animated-chat tada" onclick="loadChatbox();speakBegin()"><span>Help </span><span><i class="fa fa-question-circle-o" aria-hidden="true"></i></span> </div>
 			<div class="chatbox" id="chatbox">
 			<span class="chat-text">Hello <%=name %></span>
 			<script>
@@ -1256,40 +1256,41 @@ $(document).ready( function(){
 
 <div id="stArea" style="display:none;border-radius:5px;">
 
-
-<p><i ng-click="view.displayD('filterDiv')" style="cursor:pointer;padding:0.5%;margin:0.5%;color:#00a69c !important; border: 2px solid #00a69c;border-radius:25% !important;" title="Search Student" class="fa fa-filter" aria-hidden="true"></i>
-<span>{{fstudentsList.length}} / {{view.studentsList.length}}</span></p>
-
-<div id="filterDiv" class='container-fluid' style="border-bottom: 1px solid black;display:none">
-<div class='row'>
-<div class='col-md-6 col-sm-6'>
-<div class='form-group col-md-4 col-sm-4'>
-<input type='text'  placeholder='Student Name' ng-model="studentName" style='height:28px !important;width:90% !important;font-size:12px !important;float:left' class='form-control'>
-<i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
-
-
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="yearOfPass" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
-<option value="" selected="selected">Year Of Passing</option>
-<option value='2019'>2019</option>
-<option value='2018'>2018</option>
-<option value='2017'>2017</option><option value='2016'>2016</option>
-<option value='2015'>2015</option><option value='2014'>2014</option>
-<option value='2013'>2013</option><option value='2012'>2012</option>
-</select><i class="fa fa-times" ng-click='yearOfPass=""' style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
-
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="batchNumber" style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
-<option value="" selected="selected">All Branches</option>
-<c:forEach items="${batches }" var="b">
-<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
-</c:forEach>
-</select><i class="fa fa-times" ng-click='batchNumber=""' style="color:#ff6666;float:right;" aria-hidden="true"></i></div>
-
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="branchName" class='form-control' style='height:28px !important;font-size:12px !important;float:left;width:90% !important;'>
-<option value="" selected>Branch</option>
- <optgroup label="B Tech or M Tech Branches">
+<div class="row">
+	<div class="col-md-1">
+		<p>
+			<i class="fa fa-refresh filterIconClass" aria-hidden="true"></i>
+			<i ng-click="view.displayD('filterDiv')" title="Search Student" class="fa fa-filter filterIconClass" aria-hidden="true"></i>
+		</p>
+	</div>
+	<div class="col-md-10" style="padding-left:0% !important;">
+		<div id="filterDiv" class='container-fluid' style="">
+			<div class='form-group col-md-2 col-sm-2'>
+				<input type='text'  placeholder='Student Name' ng-model="studentName" class='form-control inputFieldClass'>
+				<i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="yearOfPass" class="form-control inputFieldClass">
+				<option value="" selected="selected">Year Of Passing</option>
+				<option value='2019'>2019</option>
+				<option value='2018'>2018</option>
+				<option value='2017'>2017</option><option value='2016'>2016</option>
+				<option value='2015'>2015</option><option value='2014'>2014</option>
+				<option value='2013'>2013</option><option value='2012'>2012</option>
+				</select><i class="fa fa-times" ng-click='yearOfPass=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="batchNumber" class="form-control inputFieldClass">
+				<option value="" selected="selected">All Branches</option>
+				<c:forEach items="${batches }" var="b">
+				<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
+				</c:forEach>
+				</select><i class="fa fa-times" ng-click='batchNumber=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="branchName" class='form-control inputFieldClass'>
+				<option value="" selected>Branch</option>
+				 <optgroup label="B Tech or M Tech Branches">
 				  <option value="CSE">CSE</option>
 				  <option value="IT">IT</option>
 				  <option value="ECE">ECE</option>
@@ -1313,75 +1314,80 @@ $(document).ready( function(){
 				   <option value="BA">BA</option>
 				   <option value="Other">Any Other</option>
 				  </optgroup>
-
-
-</select>
-<i class="fa fa-times" ng-click='branchName=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
+				</select>
+				<i class="fa fa-times" ng-click='branchName=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="graduationType" class='form-control inputFieldClass'>
+					<option value='' selected="selected">Garduation Type</option>
+					<option value='Btech'>BTech</option><option value='Mtech'>MTech</option><option value='MCA'>MCA</option><option value='MBA'>MBA</option>
+					<option value='Degree'>Degree</option><option value='Others'>Others</option>
+				</select>
+				<i class="fa fa-times" ng-click='graduationType=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="fee" class='form-control inputFieldClass'>
+					<option selected="selected" value="-1">Fee</option>
+					<option value="1">Paid</option>
+					<option value="0">Not Paid</option>
+					<option value="0.5">Partially Paid</option>
+				</select>
+				<i class="fa fa-times" ng-click='fee=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
+			</div>
+			<div class='form-group col-md-2 col-sm-2'>
+				<select ng-model="genderI" class='form-control inputFieldClass'>
+				<option value="" selected="selected">Gender</option>
+				<option value='male'>Male</option><option value='female'>Female</option></select>
+				<i class="fa fa-times" ng-click='genderI=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
+			</div>
+			<div class='col-md-2 col-sm-2'>
+				<p class="rangeInputText">Aggregation</p>
+				<input ng-model="aggregate" class="rangeInputClass" type='range' id='' name='rangeInput' min='0' max='100' value='0' oninput='amount.value=rangeInput.value'>
+				<output name='amount' id='amount' for='rangeInput'>0</output>
+				<i class="fa fa-times" ng-click='aggregate=0' style="color:#ff6666;" aria-hidden="true"></i>
+				
+			</div>
+			<div class='col-md-2 col-sm-2'>
+				<p class="rangeInputText">SSC</p>
+				<input ng-model="SSC" type='range' class="rangeInputClass" id='' name='rangeInput1' min='0' max='100' value='0' oninput='amount1.value=rangeInput1.value'>
+				<output name='amount1' id='amount1' for='rangeInput1'>0</output>
+				<i class="fa fa-times" ng-click='SSC=0' style="color:#ff6666;" aria-hidden="true"></i>
+				
+			</div>	
+			<div class='col-md-2 col-sm-2'>
+				<p class="rangeInputText">Inter</p>
+				<input ng-model="inter" type='range' class="rangeInputClass" id='' name='rangeInput2' min='0' max='100' value='0' oninput='amount2.value=rangeInput2.value'>
+				<output name='amount2' id='amount2' for='rangeInput2'>0</output>
+				<i class="fa fa-times" ng-click='inter=0' style="color:#ff6666;" aria-hidden="true"></i>
+				
+			</div>
+			<div class='col-md-2 col-sm-2'>
+				<p class="rangeInputText">Degree</p>
+				<input ng-model="degree" type='range' class="rangeInputClass" id='' name='rangeInput3' min='0' max='100' value='0' oninput='amount3.value=rangeInput3.value'>
+				<output name='amount3' id='amount3' for='rangeInput3'>0</output>
+				<i class="fa fa-times" ng-click='degree=0' style="color:#ff6666;" aria-hidden="true"></i>
+			</div>
+			<div class="col-md-2 col-sm-2">
+				<button ng-click="view.resetFilters()" class="btn btn-default resetBtnsInSearch">Reset</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-1 col-sm-0"></div>
 </div>
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="graduationType" class='form-control' style='height:28px !important;width:90% !important;font-size:12px !important;float:left;'>
-<option value='' selected="selected">Garduation Type</option>
-<option value='Btech'>BTech</option><option value='Mtech'>MTech</option><option value='MCA'>MCA</option><option value='MBA'>MBA</option>
-<option value='Degree'>Degree</option><option value='Others'>Others</option>
-</select>
-<i class="fa fa-times" ng-click='graduationType=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-</div>
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="fee" class='form-control' style='height:28px !important;float:left;width:90% !important;font-size:12px !important;'>
-<option selected="selected" value="-1">Fee</option>
-<option value="1">Paid</option>
-<option value="0">Not Paid</option>
-<option value="0.5">Partially Paid</option>
-</select>
-<i class="fa fa-times" ng-click='fee=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-</div>
-<div class='form-group col-md-4 col-sm-4'>
-<select ng-model="genderI" class='form-control' style='height:28px !important;float:left;width:90% !important;font-size:12px !important;'>
-<option value="" selected="selected">Gender</option>
-<option value='male'>Male</option><option value='female'>Female</option></select>
-<i class="fa fa-times" ng-click='genderI=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-</div></div>
-
-<div class='col-md-5 col-sm-12'>
-<div class='row'>
-<div class='col-md-3 col-sm-6'><p style="font-size:12px !important;text-align:right;">Aggregation</p></div>
-<div class='col-md-3 col-sm-6'>
-<input ng-model="aggregate" type='range' id='rangeInput' name='rangeInput' min='0' max='100' value='0' style="float:left !important;width:80% !important;" oninput='amount.value=rangeInput.value'>
-<i class="fa fa-times" ng-click='aggregate=0' style="color:#ff6666;float:right" aria-hidden="true"></i>
-<output name='amount' id='amount' for='rangeInput'>0</output></div>
-<div class='col-md-3 col-sm-6'>
-<p style="font-size:12px !important;text-align:right;">SSC</p>
-</div><div class='col-md-3 col-sm-6'>
-<input ng-model="SSC" type='range' id='rangeInput1' style="float:left !important;width:80% !important;" name='rangeInput1' min='0' max='100' value='0' oninput='amount1.value=rangeInput1.value'>
-<i class="fa fa-times" ng-click='SSC=0' style="color:#ff6666;float:right" aria-hidden="true"></i>
-<output name='amount1' id='amount1' for='rangeInput1'>0</output></div></div><br><div class='row'>
-<div class='col-md-3 col-sm-6'><p style="font-size:12px !important;text-align:right;">Inter</p></div>
-
-<div class='col-md-3 col-sm-6'>
-<input ng-model="inter" type='range' id='rangeInput2' style="float:left !important;width:80% !important;" name='rangeInput2' min='0' max='100' value='0' oninput='amount2.value=rangeInput2.value'>
-<i class="fa fa-times" ng-click='inter=0' style="color:#ff6666;float:right" aria-hidden="true"></i>
-<output name='amount2' id='amount2' for='rangeInput2'>0</output>
-</div><div class='col-md-3 col-sm-6'><p style="font-size:12px !important;text-align:right;">Degree</p></div>
-<div class='col-md-3 col-sm-6'>
-<input ng-model="degree" type='range' id='rangeInput3' style="float:left !important;width:80% !important;" name='rangeInput3' min='0' max='100' value='0' oninput='amount3.value=rangeInput3.value'>
-<i class="fa fa-times" ng-click='degree=0' style="color:#ff6666;float:right" aria-hidden="true"></i>
-<output name='amount3' id='amount3' for='rangeInput3'>0</output></div></div></div>
-<div class='col-md-2'>
-	<button ng-click="view.resetFilters()" class="btn btn-default resetBtnsInSearch">ResetFilters</button>
-</div></div></div>
-
-
+<p style="font-size:11px !important;padding-left:2%;">{{fstudentsList.length}} / {{view.studentsList.length}}</p>
+<hr class="htLineStdClass">
 
 <div id="innerStArea">
 
 <div class='container-fluid'><div class='row'>
 
-<div class='col-md-8 col-sm-8' style='height:430px;overflow:scroll;border:1px solid #00a69c;'> 
- 		<table class='table table-bordered' style='margin-top:1%;'>
- 		<thead> 
+<div class='col-md-8 col-sm-8' style='height:430px;'> 
+ 		<table class='table table-bordered' style='border: 1px solid #ddd !important;overflow-y:scroll;'>
+ 		<thead style="position: -webkit-sticky !important;position: sticky !important;top: 0 !important;z-index: 1;"> 
  		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>B No</th><th class='thText'>FullName</th><th class='thText'>FeePaid</th> 
- 		<th class='thText'>TotalFee</th><th class='thText'>G YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th><th class='thText' colspan='2'>View More</th> 
- 		<th class='thText'>Resume</th></tr> 
+ 		<th class='thText'>TotalFee</th><th class='thText'>G YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th>
+ 		<!-- <th class='thText' colspan='2'>View More</th> 
+ 		<th class='thText'>Resume</th> --></tr> 
  		</thead> 
  		
  		
@@ -1394,14 +1400,14 @@ $(document).ready( function(){
  		
  		
  		<tr>
- 		<td><div class='checkbox'><label><input ng-click="view.checkStudent(t,$event)" type='checkbox' style='height:15px;width:15px;margin-left:-17% !important;'></label></div></td>
+ 		<td style="width:6% !important;"><div class='checkbox'><label><input ng-click="view.checkStudent(t,$event)" type='checkbox' style='height:15px;width:15px;margin-left:-17% !important;'></label></div></td>
  		<td class='tdText' style='padding-top:1% !important;'>
  		
  		<span ng-if=" t.feeTotal-t.feePaid <= 0">{{t.batchNumber}}</span>
  		<span ng-if="t.feeTotal-t.feePaid > 0" style="background-color:red;padding:15% !important;color:white; border-radius:50%;">{{t.batchNumber}}</span>
  		
  		</td>
- 		<td class='tdText'>{{t.fullName}}<br> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		<td class='tdText' style="text-align: left !important;width:30% !important">{{t.fullName}} <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" style="padding-left:1%;" aria-hidden="true"></i></td>
  		
  		<td class='tdText'><span>{{t.feePaid}}<i class='fa fa-plus-square' ng-click='view.showhide("paidUFee_"+t.email)' aria-hidden='true'></i></span>
  		
@@ -1411,9 +1417,9 @@ $(document).ready( function(){
  		</span></td>
  		<td class='tdText'>{{t.graduationYOP}}</td>
  		<td class='tdText'>({{t.sscPercentage}}+{{t.interPercentage}}+{{t.graduationPercentage}})<br>{{view.convertToInt(t.aggregate)}}</td>
- 		<td style='font-size:12px !important;'> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
+ 		<!-- <td style='font-size:12px !important;'> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
  		<td style='font-size:12px !important;'><i class="fa fa-tasks" ng-click='view.fetchReport(t.email)' aria-hidden="true"></i></td>
- 		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td>
+ 		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td> -->
  		</tr>
  	
  <!-- 
@@ -1473,11 +1479,21 @@ $(document).ready( function(){
  		</tbody>
 	</table>
 		</div>
-		<div class="col-md-4 col-sm-4" style='height:430px;overflow:scroll;border:1px solid #00a69c;'>
+	<div class="col-md-4 col-sm-4" style='height:430px;overflow-y:scroll;'>
+		<div class="row fixedStdDetailsHeading">
+			<div class="col-md-8">
+				<h4>{{view.student.fullName}} <i class="fa fa-pencil-square-o" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" style="padding-left:1% !mportant" aria-hidden="true"></i> </h4>
+			</div>
+			<div class="col-md-4">
+				<i ng-click='view.studentDetails(view.student)' class="fa fa-address-card-o" aria-hidden="true"></i>
+				<i class="fa fa-tasks" ng-click='view.fetchReport(view.student.email)' aria-hidden="true"></i>
+				<a href='downloadResume/"+view.student.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 		<form editable-form name="editableForm" onaftersave="saveStudent()">
-		
-		<h3>{{view.student.fullName}}<i class="fa fa-pencil-square-o" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" aria-hidden="true"></i> </h3>
-		
+			
 		<div id='viewMore_Student' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border-radius:10px;'>
  			
  			<span ng-show="editableForm.$visible">
@@ -1569,15 +1585,8 @@ $(document).ready( function(){
 				 		</div>
 				 	</div>
 				 </div>
-				 
-				 
-				 
-			
 			</div>
 		
-		
-		<h3>{{view.student.fullName}}</h3>	
-			
 			<div id='progress'></div>
  	<div class='container-fluid' id='ChartProgress' style='width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
  	
@@ -1593,6 +1602,8 @@ $(document).ready( function(){
 			
 			
 		</form>
+		</div>
+		</div>
 		</div>
 		
 		
@@ -2890,10 +2901,10 @@ $(function() {
    
    // Move bubble
    el
-     .next("output")
+     .next("output")//.next("output")
      .css({
-       left: newPlace,
-       marginLeft: offset + "%"
+       //left: newPlace,
+       //marginLeft: offset + "%"
      })
      .text(el.val());
  })

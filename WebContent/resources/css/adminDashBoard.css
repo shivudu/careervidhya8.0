@@ -492,7 +492,7 @@ a{
 }
 .resetBtnsInSearch
 {
-    border:1px solid #ff6666 !important;background-color:#ff6666 !important;color:#fff !important;font-size:11px!important;font-weight: 600!important;width:50%!important;margin:auto !important;display:block !important;margin-top:9% !important;
+    border:1px solid #ff6666 !important;background-color:#ff6666 !important;color:#fff !important;font-size:11px!important;font-weight: 600!important;float:left !important;display:block !important;margin-top:2% !important;
 }
 .viewTableBtn
 {
@@ -512,7 +512,7 @@ a{
 }
 .tdText
 {
-    font-size:13px !important;text-align: center !important;padding-top:1% !important;
+    font-size:12px !important;text-align: center !important;padding-top:1% !important;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 3px !important;
@@ -1200,5 +1200,55 @@ a{
 		{
 			font-size:13px;
 		}
-	}		
+	}	
+	
+	
+.filterIconClass
+{
+	cursor:pointer;
+	padding:3% !important;
+	margin-top: 20% !important;
+	color:#00a69c !important;
+	border: 2px solid #00a69c !important;
+	border-radius:25% !important;
+}
+.inputFieldClass
+{
+	height:28px !important;border-radius:0px !important;width:90% !important;font-size:11px !important;float:left;
+	padding: 6px 1px !important;margin-top: 3% !important;
+}
+.rangeInputClass
+{
+	float:left !important;width:65% !important;
+}
+.rangeInputText
+{
+	font-size:11px !important;margin: -6px 0 0 0px !important;
+}
+.fixedStdDetailsHeading
+{
+	position: -webkit-sticky !important;
+  	position: sticky !important;
+	top: 0 !important;
+	z-index: 1;
+    border-bottom: 1px solid #00a69c;
+    background-color:#fff;
+}
+
+.table>tbody>tr>td
+{
+	vertical-align: middle !important;
+}
+.htLineStdClass
+{
+	border:0.5px solid #00a69c !important;width:98% !important;margin-top: 15px !important;margin-bottom: 15px !important;
+}
+
+
+
+
+
+
+
+
 	

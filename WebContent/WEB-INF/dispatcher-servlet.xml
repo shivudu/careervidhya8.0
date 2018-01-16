@@ -22,7 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.spri
     <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
     <property name="url" value="jdbc:mysql://localhost:3306/cvcorp"></property>
     <property name="username" value="root"></property>
-    <property name="password" value="shivudu3"></property>
+    <property name="password" value="root123"></property>
     </bean>
     
     <bean id="ds" class="org.springframework.jdbc.core.JdbcTemplate">

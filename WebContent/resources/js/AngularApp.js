@@ -2,7 +2,7 @@ var app=angular.module("App",["xeditable", "ui.bootstrap"]);
 
 app.controller("viewController",viewController);
 
-app.constant("appUrl","http://localhost:8080/CareerVidhya_Operations8.0");
+app.constant("appUrl","http://localhost:8082/CareerVidhya_Operations8.0");
 
 app.run(['editableOptions', function(editableOptions) {
 	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
