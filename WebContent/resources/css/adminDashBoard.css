@@ -82,8 +82,9 @@
 }
 body, html
 {
-    font-family: "lato", sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
     margin:0px;
+    /*background-color:#ecf0f1 !important;*/
 }
 .row
  {
@@ -1244,8 +1245,19 @@ a{
 	border:0.5px solid #00a69c !important;width:98% !important;margin-top: 15px !important;margin-bottom: 15px !important;
 }
 
-
-
+.batchNumClassForStdDet
+{
+	float:right;padding:1% !important;color:#ff6666;border:2px solid #ff6666 !important;border-radius:5px !important;
+	font-size: 11px !important;font-weight: 600;
+}
+.textOfStdDetails
+{
+	font-size: 11px !important;font-weight: 600;
+}
+.detailsBoxClass
+{
+	border: 1px solid rgba(34, 36, 38, 0.15);border-radius:5px;box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);padding:1%;
+}
 
 
 

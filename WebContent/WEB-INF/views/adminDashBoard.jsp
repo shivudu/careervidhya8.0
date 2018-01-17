@@ -1261,6 +1261,7 @@ $(document).ready( function(){
 		<p>
 			<i class="fa fa-refresh filterIconClass" aria-hidden="true"></i>
 			<i ng-click="view.displayD('filterDiv')" title="Search Student" class="fa fa-filter filterIconClass" aria-hidden="true"></i>
+			<p style="font-size:11px !important;margin-left:-2%;">{{fstudentsList.length}} / {{view.studentsList.length}}</p>
 		</p>
 	</div>
 	<div class="col-md-10" style="padding-left:0% !important;">
@@ -1374,15 +1375,15 @@ $(document).ready( function(){
 	</div>
 	<div class="col-md-1 col-sm-0"></div>
 </div>
-<p style="font-size:11px !important;padding-left:2%;">{{fstudentsList.length}} / {{view.studentsList.length}}</p>
 <hr class="htLineStdClass">
+
 
 <div id="innerStArea">
 
 <div class='container-fluid'><div class='row'>
 
-<div class='col-md-8 col-sm-8' style='height:430px;'> 
- 		<table class='table table-bordered' style='border: 1px solid #ddd !important;overflow-y:scroll;'>
+<div class='col-md-8 col-sm-8' style='height:430px;overflow-y:scroll;'> 
+ 		<table class='table table-bordered' style='border: 1px solid #ddd !important;'>
  		<thead style="position: -webkit-sticky !important;position: sticky !important;top: 0 !important;z-index: 1;"> 
  		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>B No</th><th class='thText'>FullName</th><th class='thText'>FeePaid</th> 
  		<th class='thText'>TotalFee</th><th class='thText'>G YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th>
@@ -1393,11 +1394,6 @@ $(document).ready( function(){
  		
  		
  		<tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationYOP: yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
- 		
- 		
- 		
- 		
- 		
  		
  		<tr>
  		<td style="width:6% !important;"><div class='checkbox'><label><input ng-click="view.checkStudent(t,$event)" type='checkbox' style='height:15px;width:15px;margin-left:-17% !important;'></label></div></td>
@@ -1506,85 +1502,86 @@ $(document).ready( function(){
       </span>
  			
  			
- 			<h4 style='color:#ff6666;text-align:center !important;'>Personal-details</h4>
- 				<div class='col-md-12 col-sm-12'>
- 					<div class='row' style='margin:1% !important;'>
- 						<div class='col-md-6 col-sm-6'>
- 						    <p style='font-weight:600;padding-top:1% !important;'>Full Name<span style='float:right;'>:</span></p>
-				 			<p style='padding-top:1% !important;font-weight:600;'>Parent Name<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Gender<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>DOB<span style='float:right;'>:</span></p>
-				 		
-				 		</div>
-				 		<div class='col-md-6 col-sm-6'>
-				 		    <p editable-text="view.student.fullName" e-name="fullName">{{view.student.fullName}}</p>
-				 			<p editable-text="view.student.parentName" e-name="parentName">{{view.student.parentName}}</p>
-				 			<p editable-select="view.student.gender" e-name="gender" e-ng-options="s.value as s.text for s in genders">{{view.student.gender}}</p>
-				 			<p editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy">{{ (view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
-		
-				 		</div>
-				 	</div>
-				 </div>
+ 			<h5 style='color:#ff6666;text-align:left;'>Personal-details</h5>
+ 				<div class='col-md-12 col-sm-12 detailsBoxClass'>
+ 					<div class="row">
+ 						<div class="col-md-6">
+ 							<p class="textOfStdDetails" style="float:left;" editable-text="view.student.fullName" e-name="fullName"><i class="fa fa-user" aria-hidden="true"></i> Name :  {{view.student.fullName}}</p> 
+		 					<p class="textOfStdDetails" editable-text="view.student.parentName" e-name="parentName"><i class="fa fa-user" aria-hidden="true"></i> ParentName : {{view.student.parentName}}</p>
+		 			
+ 						</div>
+ 						<div class="col-md-6">
+ 							<p class="textOfStdDetails"><i class="fa fa-btc" aria-hidden="true"></i> Batch Number : <span class="batchNumClassForStdDet">{{view.student.batchNumber}}</span></p>
+ 							<p class="textOfStdDetails" editable-select="view.student.gender" e-name="gender" e-ng-options="s.value as s.text for s in genders"><i class="fa fa-user-circle" aria-hidden="true"></i> Gender : {{view.student.gender}}</p>
+		 					<p class="textOfStdDetails" editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy"><i class="fa fa-calendar" aria-hidden="true"></i> DOB : {{ (view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
+ 						</div>
+ 					</div>
+		 		</div>
 				 
 				 
 		
 				 
-				<h4 style='color:#ff6666;text-align:center !important;'>Education-details</h4>
-	 			<div class='col-md-12 col-sm-12'>
+				<h5 style='color:#ff6666;text-align:left'>Education-details</h5>
+	 			<div class='col-md-12 col-sm-12 detailsBoxClass'>
 	 				<div class='row'>
-	 					<div class='col-md-6 col-sm-6'>
-	 					    <p  style='font-weight:600;'>Graduation YOP<span style='float:right;'>:</span></p>
-				 			<p  style='font-weight:600;'>Branch<span style='float:right;'>:</span></p>
-				 			<p  style='font-weight:600;'>SSC Percentage<span style='float:right;'>:</span></p>
-				 			<p  style='font-weight:600;'>Inter Percentage<span style='float:right;'>:</span></p>
-				 			<p  style='font-weight:600;' >Graduation Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Aggregation<span style='float:right;'>:</span></p>
-				 			
-				 			<p style='font-weight:600;'>Graduation Type<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Graduation College<span style='float:right;'>:</span></p>
+				 		<div class='col-md-12 col-sm-12'>
+				 			<p class="textOfStdDetails" editable-text="view.student.graduationYOP" e-name="graduationYOP">{{view.student.graduationYOP}}</p>
+				 			<p class="textOfStdDetails" editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches">{{view.student.graduationBranch}}</p>	
+				 			<p class="textOfStdDetails" editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes">{{view.student.graduationType}}</p>
+				 			<p class="textOfStdDetails" editable-text="view.student.graduationCollege" e-name="graduationCollege">{{view.student.graduationCollege}}</p>
 				 		</div>
-				 		<div class='col-md-6 col-sm-6'>
-				 		    <p editable-text="view.student.graduationYOP" e-name="graduationYOP">{{view.student.graduationYOP}}</p>
-				 			<p editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches">{{view.student.graduationBranch}}</p>	
-				 			<p editable-text="view.student.sscPercentage" e-name="sscPercentage">{{view.student.sscPercentage}}</p>
-				 			<p editable-text="view.student.interPercentage" e-name="interPercentage">{{view.student.interPercentage}}</p>
-				 			<p editable-text="view.student.graduationPercentage" e-name="graduationPercentage">{{view.student.graduationPercentage}}</p>
-				 			<p editable-text="view.student.aggregate" e-name="aggregate" >{{view.student.aggregate}}</p>
-				 			<p editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes">{{view.student.graduationType}}</p>
-				 			<p editable-text="view.student.graduationCollege" e-name="graduationCollege">{{view.student.graduationCollege}}</p>
+				 	</div>
+				 	<div class="row">
+				 		<div class="col-md-12 col-sm-12">
+				 			<div style="border:1px solid #00a69c;border-radius:10px;padding:1%;width:100%;">
+				 				<p class="textOfStdDetails">
+				 					<div class="progress">
+					    				<div  editable-text="view.student.sscPercentage" e-name="sscPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.sscPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.sscPercentage}}%;">
+					      					SSC : {{view.student.sscPercentage}}%
+					    				</div>
+					 				</div>
+				 				</p>
+				 				<p class="textOfStdDetails">
+				 					<div class="progress">
+					    				<div editable-text="view.student.interPercentage" e-name="interPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.interPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.interPercentage}}%;">
+					      					Inter : {{view.student.interPercentage}}%
+					    				</div>
+					 				</div>
+				 				</p>
+				 				<p class="textOfStdDetails">
+				 					<div class="progress">
+					    				<div editable-text="view.student.graduationPercentage" e-name="graduationPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.graduationPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.graduationPercentage}}%;">
+					      					Degree : {{view.student.graduationPercentage}}%
+					    				</div>
+					 				</div>
+				 				</p>
+				 				<p class="textOfStdDetails">
+				 					<div class="progress">
+					    				<div editable-text="view.student.aggregate" e-name="aggregate"  class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.aggregate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.aggregate}}%;">
+					      					Aggregation : {{view.student.aggregate}}%
+					    				</div>
+					 				</div>
+				 				</p>
+				 			</div>
 				 		</div>
 				 	</div>
 				 </div>
 				 
-				 
-				 
-				 
-				 <h4 style='color:#ff6666;text-align:center !important;'>Contact-details</h4>
- 				<div class='col-md-12 col-sm-12'>
- 					<div class='row' style='margin:1% !important;'>
- 						<div class='col-md-6 col-sm-6'>
- 						  
-				 			<p style='font-weight:600;'>Email<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Mobile<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Parent Mobile<span style='float:right;'>:</span></p>
-				 			
-				 			<p style='font-weight:600;'>Locality or street<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>City or District<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>State<span style='float:right;'>:</span></p>
-				 		</div>
-				 		<div class='col-md-6 col-sm-6'>
-				 		   
-				 			<p editable-text="view.student.email" e-name="email">{{view.student.email}}</p>
-				 			<p editable-text="view.student.mobile" e-name="mobile">{{view.student.mobile}}</p>
-				 			
-				 			<p editable-text="view.student.mobile_Parent" e-name="mobile_Parent">{{view.student.mobile_Parent}}</p>
-				 			
-				 			<p editable-text="view.student.locality" e-name="locality">{{view.student.locality}}</p>
-				 			<p editable-text="view.student.city" e-name="city">{{view.student.city}}</p>
-				 			<p editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states">{{view.student.state}}</p>
-				 		</div>
-				 	</div>
-				 </div>
+				 <h5 style='color:#ff6666;text-align:left;'>Contact-details</h5>
+				 <div class="col-md-12 col-sm-12 detailsBoxClass">
+	 				<div class='col-md-6 col-sm-12'>
+			 			<p class="textOfStdDetails" editable-text="view.student.email" e-name="email">{{view.student.email}}</p>
+			 			<p class="textOfStdDetails" editable-text="view.student.mobile" e-name="mobile">{{view.student.mobile}}</p>
+			 			
+			 			<p class="textOfStdDetails" editable-text="view.student.mobile_Parent" e-name="mobile_Parent">{{view.student.mobile_Parent}}</p>
+			 		</div>
+			 		<div class="col-md-6 col-sm-6">
+			 			<p class="textOfStdDetails" editable-text="view.student.locality" e-name="locality">{{view.student.locality}}</p>
+			 			<p class="textOfStdDetails" editable-text="view.student.city" e-name="city">{{view.student.city}}</p>
+			 			<p class="textOfStdDetails" editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states">{{view.student.state}}</p>
+			 			<button style="width:30%;margin:auto;display:block;font-size:13px;" class="btn btn-default">View In Maps</button>
+			 		</div>
+			 	</div>
 			</div>
 		
 			<div id='progress'></div>
