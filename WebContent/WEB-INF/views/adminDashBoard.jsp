@@ -19,12 +19,9 @@ var batchNos=[];
 var adminName='<%=name%>';
 
 </script>
-
-<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-
+	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 	<title>Admin DashBoard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,11 +45,13 @@ var adminName='<%=name%>';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
 	<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>-->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
-	   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/adminDashBoard.css"/>"/>
-	   <style>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/adminDashBoard.css"/>"/>
+	
+	<style>
 	   
-	   #skitt-toggle-button{
-	   float:right !important;
+	   #skitt-toggle-button
+	   {
+	   	float:right !important;
 	   }
         .navbar-default .navbar-nav>.active> a, 
 			.navbar-default .navbar-nav>.active> a:focus, 
@@ -66,123 +65,110 @@ var adminName='<%=name%>';
         }
 
     </style>
-        <style>
-			output { 
-			  position: relative;
-			  background-image: linear-gradient(#444444, #999999);
-			  width: 28px; 
-			  height: 20px; 
-			  text-align: center; 
-			  color: white; 
-			  border-radius: 10px; 
-			  display: inline-block; 
-			  font: bold 10px/5px Georgia;
-			  /*bottom: 120%;
-			  left: 0;*/
-			  margin-left: 2% !important;
-			}
-/*output:after { 
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-top: 10px solid #999999;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  top: 100%;
-  left: 50%;
-  /*margin-left: -5px;*/
-  margin-top: -1px;
-}*/
-
-
-		</style>
-        <style>
-			#chat,#chat:after,.chatbox
-			{
-				transition:all .4s ease-in-out
-			}
-			#chat,#close-chat,.minim-button,.maxi-button,.chat-text
-			{
-				font-weight:700;
-				cursor:pointer;
-				font-family:Arial,sans-serif;
-				text-align:center;
-				height:20px;
-				line-height:20px;
-			}
-			#chat,#close-chat,.chatbox
-			{
-				border:1px solid #A8A8A8;
-			}
-			#chat:after,#chat:before
-			{
-				position:absolute;
-				border-style:solid;
-				content:"";
-			}
-			.chatbox
-			{
-				position:fixed;
-				bottom:0;
-				right:20px;
-				margin:0 0 -450px;
-				background-color:#00a69c;
-				border-color:#00a69c;
-				border-bottom:none;
-				border-top-left-radius:5px;
-				border-top-right-radius:5px;
-				padding:28px 2px 0px 2px; 
-				z-index:100000
+	<style>
+		output 
+		{ 
+		  position: relative;
+		  background-image: linear-gradient(#444444, #999999);
+		  width: 28px; 
+		  height: 20px; 
+		  text-align: center; 
+		  color: white; 
+		  border-radius: 10px; 
+		  display: inline-block; 
+		  font: bold 10px/5px Georgia;
+		  /*bottom: 120%;
+		  left: 0;*/
+		  margin-left: 2% !important;
+		}
+	</style>
+	<style>
+		
+		#chat,#chat:after,.chatbox
+		{
+			transition:all .4s ease-in-out
+		}
+		#chat,#close-chat,.minim-button,.maxi-button,.chat-text
+		{
+			font-weight:700;
+			cursor:pointer;
+			font-family:Arial,sans-serif;
+			text-align:center;
+			height:20px;
+			line-height:20px;
+		}
+		#chat,#close-chat,.chatbox
+		{
+			border:1px solid #A8A8A8;
+		}
+		#chat:after,#chat:before
+		{
+			position:absolute;
+			border-style:solid;
+			content:"";
+		}
+		.chatbox
+		{
+			position:fixed;
+			bottom:0;
+			right:20px;
+			margin:0 0 -450px;
+			background-color:#00a69c;
+			border-color:#00a69c;
+			border-bottom:none;
+			border-top-left-radius:5px;
+			border-top-right-radius:5px;
+			padding:28px 2px 0px 2px; 
+			z-index:100000
+		}
+		.dropdown-submenu 
+		{
+    		position: relative;
+		}
+		.dropdown-submenu>.dropdown-menu 
+		{
+			    top: 0;
+			    left: 100%;
+			    margin-top: -6px;
+			    margin-left: -1px;
+			    -webkit-border-radius: 0 6px 6px 6px;
+			    -moz-border-radius: 0 6px 6px;
+			    border-radius: 0 6px 6px 6px;
 			}
 			
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu>.dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
-}
-
-.dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-}
-
-.dropdown-submenu>a:after {
-    display: block;
-    content: " ";
-    float: right;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
-    margin-top: 5px;
-    margin-right: -10px;
-}
-
-.dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
-}
-
-.dropdown-submenu.pull-left {
-    float: none;
-}
-
-.dropdown-submenu.pull-left>.dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
-}
+			.dropdown-submenu:hover>.dropdown-menu {
+			    display: block;
+			}
+			
+			.dropdown-submenu>a:after {
+			    display: block;
+			    content: " ";
+			    float: right;
+			    width: 0;
+			    height: 0;
+			    border-color: transparent;
+			    border-style: solid;
+			    border-width: 5px 0 5px 5px;
+			    border-left-color: #ccc;
+			    margin-top: 5px;
+			    margin-right: -10px;
+			}
+			
+			.dropdown-submenu:hover>a:after {
+			    border-left-color: #fff;
+			}
+			
+			.dropdown-submenu.pull-left {
+			    float: none;
+			}
+			
+			.dropdown-submenu.pull-left>.dropdown-menu {
+			    left: -100%;
+			    margin-left: 10px;
+			    -webkit-border-radius: 6px 0 6px 6px;
+			    -moz-border-radius: 6px 0 6px 6px;
+			    border-radius: 6px 0 6px 6px;
+			}
 			#close-chat
 			{
 				position:absolute;
@@ -418,39 +404,10 @@ $(document).ready( function(){
 </script>	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
-
-
-<script>  
-   /*function employeeController($scope,$http) {  
-      var url = "http://localhost:8080/CareerVidhya_Operations8.0/viewAll";  
-     
-      $http.get(url).success( function(response) {  
-         $scope.employees = response;  
-      });  
-   }  */
-  
-</script>	
+	
 </head>
+
 <body ng-app="App" ng-controller="viewController as view">
-	<!-- Entire div-->
-<!-- <div class="container-fluid other">
-
-	header	
-	<div class="container-fluid">
-		<div class="row firdiv">
-			<div class="col-md-6 col-sm-6 col-xs-6">
-				<i class="fa fa-refresh fa-spin fa-3x fa-fw" style="float:left;display:none;" id="ajaxPageLoader"></i><br>
-				<br>
-			</div>
-			<div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:20px;margin-left:0px !important">
-			  <ul style="float:right;color:#000;cursor:pointer">
-			  
-			</ul>
-			</div>
-		</div>
-	</div>-->
-	<!--header end-->
-
 
 <!-- navbar start-->
 
@@ -467,51 +424,38 @@ $(document).ready( function(){
 	      <!--<a href="student_index.html" class="navbar-brand"><img class="logo" src="images/cvcorpLogo.png"></a>-->
 	    </div>
 	    <div class="collapse navbar-collapse" style="width:100% !important" id="myNavbar">
-	      <ul class="nav navbar-nav" style="float:right;">
-	        <li class="active"><a href="#" onclick="displayDiv('welcome')" style="font-size: 12px !important;"><!--<i class="fa fa-home" aria-hidden="true"></i>--> HOME</a></li>
-	        
-	        <li class="dropdown" style="font-size: 12px !important;">
-				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> STUDENT'S<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					
-				<!--  	<c:forEach items="${batches }" var="b">
+	     <ul style="float:left;">
+	     	<li><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="float:left;display:none;color:#4e4e4e;" id="ajaxPageLoader"></i></li>
+	     </ul>
+	     <ul class="nav navbar-nav" style="float:right;">
+		        <li class="active">
+		        	<a href="#" onclick="displayDiv('welcome')" style="font-size: 12px !important;"><!--<i class="fa fa-home" aria-hidden="true"></i>--> HOME</a>
+		        </li>
+		        <li class="dropdown" style="font-size: 12px !important;">
+					<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> STUDENT'S<span class="caret"></span></a>
+					<ul class="dropdown-menu">
 					<li>
-					
- 				<a style="cursor:pointer;" onclick="sendData('viewBatch/',${b.getBatchNumber()},'stArea',-1); displayDiv('stArea')">
-					BATCH ${b.getBatchNumber()}</a>
-					
-	
-	     	        <a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestBatchStudents(${b.getBatchNumber()})">
-					BATCH ${b.getBatchNumber()}</a>
-					
-					
-					
+						<a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> View Students</a>
 					</li>
-					
-					</c:forEach>
-					-->
-					
-					
-					<li>
-				<!--  	<a style="cursor:pointer;" onclick="sendData('viewAll','','stArea',-1); displayDiv('stArea')">View All Students</a>-->
-					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()" style="font-size: 12px !important;"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> View Students</a>
-					</li>
-					<li><a href="#" onclick="displayDiv('regForm')" style="font-size: 12px !important;"><!-- <i class="fa fa-user" aria-hidden="true"></i> --> Register a New Student</a></li>
-					<!-- <li><a style="cursor:pointer;" ng-click="viewAll();">View All Students</a></li>-->
-					<li><a href="#" onclick="displayDiv('uploadFile')" style="font-size: 12px !important;"><!-- <i class="fa fa-upload" aria-hidden="true"></i> --> Upload Assignment File</a></li>
-				   <li><a onclick="displayDiv('takeAttendance');verifyPresents();" style="font-size: 12px !important;"><!-- <i class="fa fa-male" aria-hidden="true"></i> --> Take Attendance</a></li>
+				<li>
+					<a href="#" onclick="displayDiv('regForm')" style="font-size: 12px !important;"><!-- <i class="fa fa-user" aria-hidden="true"></i> --> Register a New Student</a>
+				</li>
+				<li>
+					<a href="#" onclick="displayDiv('uploadFile')" style="font-size: 12px !important;"><!-- <i class="fa fa-upload" aria-hidden="true"></i> --> Upload Assignment File</a>
+				</li>
+				<li><a onclick="displayDiv('takeAttendance');verifyPresents();" style="font-size: 12px !important;"><!-- <i class="fa fa-male" aria-hidden="true"></i> --> Take Attendance</a></li>
 				</ul>
 			</li>
-			<!-- Multiple choice menu begin-->
+		<!-- Multiple choice menu begin-->
 		
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 12px !important;"><!-- <i class="fa fa-check-square" aria-hidden="true"></i> --> MULTICHOICE<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('pushQuestion')"> Push a New Question To DB</a></li>
-					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('createQuestion')"> Create a New QP</a></li>
-					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="sendData('getQuestionPapers/','Multiple','listQPapers',-1); displayDiv('qpapers')" > View QP's</a></li>			
-				</ul>
-			</li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 12px !important;"><!-- <i class="fa fa-check-square" aria-hidden="true"></i> --> MULTICHOICE<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('pushQuestion')"> Push a New Question To DB</a></li>
+				<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('createQuestion')"> Create a New QP</a></li>
+				<li><a style="cursor:pointer;font-size: 12px !important;" onclick="sendData('getQuestionPapers/','Multiple','listQPapers',-1); displayDiv('qpapers')" > View QP's</a></li>			
+			</ul>
+		</li>
 		
 			<!-- Multiple choice menu end-->
 			
@@ -584,7 +528,7 @@ $(document).ready( function(){
 			<li><a onclick="displayDiv('addNotification')" style="font-size: 12px !important;"> Post a New Notification</a></li>
 			</ul>
 			</li>
-			<li style="float:right !important;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i style="padding:1%;border:1px solid #4e4e4e;" class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+			<li style="float:right !important;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i style="padding:14%;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
 			   <ul class="dropdown-menu">
 			   		<li><span class="welocmeName" style="color:#000 !important;font-size: 12px !important;">Welcome <span style="letter-spacing:1px;font-family:'Cherry Swash';font-weight:600;font-size:12px;"><i><%=name %></i></span></li>
 					<li><span class="welcomeDate" id="welDate"></span></li>
@@ -593,22 +537,14 @@ $(document).ready( function(){
 				</ul>
 			</li>
 	      </ul>
-	      <!-- <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
-	        <li><a href="#"></span><i class="fa fa-key" aria-hidden="true"></i> Change Password</a></li>
-	      </ul> -->
 	    </div>
 	  </div>
 	</nav>
 </div>
 
-
 <!-- navbar end-->
 	
-	
-	
-	
-	<!--Notification Response -->
+<!--Notification Response -->
 	
   
   <div id="success" style="position:fixed;text-align:center !important;z-index:1;color:#fff;right:0%;top:0%;border:1px solid #00a69c !important;background-color:green !important;display:none;opacity:1 !important;">
@@ -722,89 +658,6 @@ $(document).ready( function(){
 	
 <!-- Welcome Page end-->
 	
-	
-
-<!-- <div class="container-fluid">
-
-	<div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu" ng-model="batchWise">
-          <li ng-repeat="ba in batchsList" ><a href="#">{{ba}}</a></li>
-        </ul>
-      </div><br>
-      <div class="container-fluid">
-      	<div class="row">
-      		<div class="col-md-1">SearchStudent</div>
-      		<div class="form-group col-md-2">      			
-				<select class="form-control" ng-model="yop" style="height:30px !important;">
-				    <option disabled selected>YOP</option>
-				    <option ng-repeat="yr in years">{{yr}}</option>
-				 </select>
-			</div>
-			<div class="form-group col-md-2">      			
-				<select class="form-control" ng-model="per" style="height:30px !important;">
-				    <option disabled selected>Percentage</option>
-				    <option ng-repeat="perc in percentages">{{perc}}</option>
-				 </select>
-			</div>
-			<div class="form-group col-md-2">      			
-				<select class="form-control" style="height:30px !important;">
-				    <option disabled selected>Graduation</option>
-				    <option value="btech">B.Tech</option>
-					<option value="bsc">B.Sc</option>
-					<option value="mca">MCA</option>
-					<option value="mba">MBA</option>
-				 </select>
-			</div>
-			<div class="form-group col-md-2">      			
-				<select class="form-control" ng-model="branch" style="height:30px !important;">
-				    <option disabled selected>Branch</option>
-				    <option ng-repeat="bat in branches">{{bat}}</option>
-				 </select>
-			</div>
-			<div class="col-md-1">SortBY</div>
-			<div class="form-group col-md-2">      			
-				<select class="form-control" style="height:30px !important;">
-				    <option disabled selected>Percentage</option>
-				    <option value="60%">60%</option>
-					<option value="70%">70%</option>
-					<option value="80%">80%</option>
-					<option value="90%">90%</option>
-				 </select>
-			</div>
-      	</div>
-      </div>
-	<table class="table table-border">
-		<tr>
-			<th>BatchNo</th>
-			<th>FullName</th>
-			<th>MobileNumber</th>
-			<th>Email</th>
-			<th>FeePaid</th>
-			<th>TotalFee</th>
-			<th>Graduation YOP</th>
-			<th>Percentage(10+12+UG)</th>
-			<th colspan="2">ViewMore</th>
-			<th>Resume</th>
-		</tr>
-		<tr ng-repeat="std in stdData.studentsList | filter:{'graduationYOP':yop,'aggregate':per,'graduationBranch':branch}">
-			<td>{{std.batchNumber}}</td>
-			<td>{{std.fullName}}</td>
-			<td>{{std.mobile}}</td>
-			<td>{{std.email}}</td>
-			<td>{{std.feePaid}}</td>
-			<td>{{std.feeTotal}}</td>
-			<td>{{std.graduationYOP}}</td>
-			<td>{{std.aggregate}}</td>
-			<td>{{std.graduationBranch}}</td>
-			<td>{{std.email}}</td>
-			<td>{{std.email}}</td>
-			
-		</tr>
-	</table>
-</div>-->
-
 
 <!-- Take attendance Page begin-->	
 
@@ -1353,18 +1206,6 @@ $(document).ready( function(){
 			                    <i class="fa fa-bars" style="margin-right:-10%;margin-top: 3%; float:right;" aria-hidden="true"></i>
                    			</div>
                    		</div>
-                       <!-- <span class="selectBoxClass1" style="float:left;">SSC</span>
-                       
-                       <span>
-                           <select ng-model="sscFilter" style="width:15%;float:left;">
-                               	<option value="" selected="selected">All</option>
-								<option value='90'>>90</option>
-								<option value='80'>>80</option>
-								<option value='70'>>70</option>
-								<option value='60'>>60</option>
-								<option value='50'>>50</option>
-                           </select>
-                       </span> -->
                    </div>
                </div>
            </div>
@@ -1795,549 +1636,10 @@ $(document).ready( function(){
 	        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 	        </div>
 	    </div>
-    
-		
-		
-		
-		
-		 <!--<br><br><br>
-			<div style="position:sticky;top:0;position: -webkit-sticky;">
-			<div class="panel-group" id="accordion" style="margin-top:5%;">
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h4 class="panel-title panelHeadTextData">
-                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse1">Personal Details</a>
-                   </h4>
-                 </div>
-                 <div id="collapse1" class="panel-collapse collapse">
-                   <div class="panel-body">
-                   		<table class="table">
-                   			<thead>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FullName</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.fullName}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
-                   				</tr>
-                   			</thead>
-                   		</table>
-                   </div>
-                 </div>
-               </div>
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h4 class="panel-title panelHeadTextData">
-                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse2">Education Details</a>
-                   </h4>
-                 </div>
-                 <div id="collapse2" class="panel-collapse collapse">
-                   <div class="panel-body">
-                   		<table class="table" style="border:0px solid #fff !important;">
-                   			<thead>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-users" aria-hidden="true"></i> Batch</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.batchNumber}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> YOP</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationYOP}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-graduation-cap" aria-hidden="true"></i> gType</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationType}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> Branch</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationBranch}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-university" aria-hidden="true"></i> College</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationCollege}}</td>
-                   				</tr>
-                   				<tr>
-                   					<th colspan="2" class="theadTextDataClass"><i class="fa fa-percent" aria-hidden="true"></i> Percentages</th>
-                   					<th colspan="2" class="theadTextDataClass"><i class="fa fa-percent" aria-hidden="true"></i> MathScores</th>
-              						<tr>
-	              						<th class="theadTextDataClass">10th</th>
-	              						<th class="theadTextDataClass">12th</th>
-	              						<th class="theadTextDataClass"> Grad </th>
-	              						<th class="theadTextDataClass"> Aggre </th>
-	              						<th class="theadTextDataClass">10th</th>
-	              						<th class="theadTextDataClass">12th</th>
-              						</tr>
-                   					<tr>
-                   						<td class="theadTextDataClass"> {{view.student.sscPercentage}}</td>
-                   						<td class="theadTextDataClass"> {{view.student.interPercentage}}</td>
-                   						<td class="theadTextDataClass"> {{view.student.graduationPercentage}}</td>
-                   						<td class="theadTextDataClass"> {{(view.student.sscPercentage+view.student.interPercentage+view.student.graduationPercentage)/3}}</td>
-                   						<td class="theadTextDataClass">80</td>
-                   						<td class="theadTextDataClass">90</td>
-                   					</tr>
-                   				</tr>
-                   			</thead>
-                   		</table>
-                   	</div>
-                 </div>
-               </div>
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h4 class="panel-title panelHeadTextData">
-                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse3">Fee Details</a>
-                   </h4>
-                 </div>
-                 <div id="collapse3" class="panel-collapse collapse">
-                   <div class="panel-body">
-                   		<table class="table">
-                   			<thead>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> TotalFee</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.feeTotal}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeePaid</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.feePaid}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeeDue</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{(view.student.feeTotal-view.student.feePaid)}}</td>
-                   				</tr>
-                   			</thead>
-                   		</table>
-                   	</div>
-                 </div>
-               </div>
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h4 class="panel-title panelHeadTextData">
-                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse4">Address</a>
-                   </h4>
-                 </div>
-                 <div id="collapse4" class="panel-collapse collapse">
-                   <div class="panel-body">
-                   	<table class="table">
-                   			<thead>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FullName</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.fullName}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
-                   				</tr>
-                   				<tr>
-                   					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
-                   					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
-                   				</tr>
-                   			</thead>
-                   		</table>
-                   </div>
-                 </div>
-               </div>
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h4 class="panel-title panelHeadTextData">
-                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse5">Progress</a>
-                   </h4>
-                 </div>
-                 <div id="collapse5" class="panel-collapse collapse">
-                   <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                 </div>
-               </div>
-             </div>
-             </div>
-		</div> -->
 	</div>
 </div>
-
-<br><br>
-<br><br>
-<br><br>
-<div class="row">
-	<div class="col-md-1">
-		<p>
-			<i class="fa fa-refresh filterIconClass" aria-hidden="true"></i>
-			<i ng-click="view.displayD('filterDiv')" title="Search Student" class="fa fa-filter filterIconClass" aria-hidden="true"></i>
-			<p style="font-size:11px !important;margin-left:-2%;">{{fstudentsList.length}} / {{view.studentsList.length}}</p>
-		</p>
-	</div>
-	<div class="col-md-10" style="padding-left:0% !important;">
-		<div id="filterDiv" class='container-fluid' style="">
-			<div class='form-group col-md-2 col-sm-2'>
-				<input type='text' style="margin-left: 3.5%;" placeholder='Student Name' ng-model="studentName" class='form-control inputFieldClass'>
-				<i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="yearOfPass" class="form-control inputFieldClass">
-				<option value="" selected="selected">Year Of Passing</option>
-				<option value='2019'>2019</option>
-				<option value='2018'>2018</option>
-				<option value='2017'>2017</option><option value='2016'>2016</option>
-				<option value='2015'>2015</option><option value='2014'>2014</option>
-				<option value='2013'>2013</option><option value='2012'>2012</option>
-				</select><i class="fa fa-times" ng-click='yearOfPass=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="batchNumber" class="form-control inputFieldClass">
-				<option value="" selected="selected">All Batches</option>
-				<c:forEach items="${batches }" var="b">
-				<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
-				</c:forEach>
-				</select><i class="fa fa-times" ng-click='batchNumber=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="branchName" class='form-control inputFieldClass'>
-					<option value="" selected>Branch</option>
-				 	<optgroup label="B Tech or M Tech Branches">
-					  <option value="CSE">CSE</option>
-					  <option value="IT">IT</option>
-					  <option value="ECE">ECE</option>
-					  <option value="EEE">EEE</option>
-					  <option value="MECH">MECH</option>
-					  <option value="CIVIL">CIVIL</option>
-					  <option value="Aeronautical">Aeronautical</option>
-					  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
-					  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
-					  <option value="other">Any other</option>
-					  </optgroup>
-					  
-					  <optgroup label="Any other">
-					   <option value="Other">Any Other</option>
-					  </optgroup>
-					  
-					  <optgroup label="Degree groups">
-					  <option value="BSC Computers">BSC Computers</option>
-					  <option value="BSC General">BSC General</option>
-					  <option value="BCom">BCom</option>
-					   <option value="BA">BA</option>
-					   <option value="Other">Any Other</option>
-					  </optgroup>
-				</select>
-				<i class="fa fa-times" ng-click='branchName=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="graduationType" class='form-control inputFieldClass'>
-					<option value='' selected="selected">Garduation Type</option>
-					<option value='Btech'>BTech</option><option value='Mtech'>MTech</option><option value='MCA'>MCA</option><option value='MBA'>MBA</option>
-					<option value='Degree'>Degree</option><option value='Others'>Others</option>
-				</select>
-				<i class="fa fa-times" ng-click='graduationType=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="fee" class='form-control inputFieldClass'>
-					<option selected="selected" value="-1">Fee</option>
-					<option value="1">Paid</option>
-					<option value="0">Not Paid</option>
-					<option value="0.5">Partially Paid</option>
-				</select>
-				<i class="fa fa-times" ng-click='fee=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-			</div>
-			<div class='form-group col-md-2 col-sm-2'>
-				<select ng-model="genderI" class='form-control inputFieldClass'>
-				<option value="" selected="selected">Gender</option>
-				<option value='male'>Male</option><option value='female'>Female</option></select>
-				<i class="fa fa-times" ng-click='genderI=""' style="color:#ff6666;float:right" aria-hidden="true"></i>
-			</div>
-			<div class='col-md-2 col-sm-2'>
-				<p class="rangeInputText">Aggregation</p>
-				<input ng-model="aggregate" class="rangeInputClass" type='range' id='' name='rangeInput' min='0' max='100' value='0' oninput='amount.value=rangeInput.value'>
-				<output name='amount' id='amount' for='rangeInput'>0</output>
-				<i class="fa fa-times" ng-click='aggregate=0' style="color:#ff6666;" aria-hidden="true"></i>
-				
-			</div>
-			<div class='col-md-2 col-sm-2'>
-				<p class="rangeInputText">SSC</p>
-				<input ng-model="SSC" type='range' class="rangeInputClass" id='' name='rangeInput1' min='0' max='100' value='0' oninput='amount1.value=rangeInput1.value'>
-				<output name='amount1' id='amount1' for='rangeInput1'>0</output>
-				<i class="fa fa-times" ng-click='SSC=0' style="color:#ff6666;" aria-hidden="true"></i>
-				
-			</div>	
-			<div class='col-md-2 col-sm-2'>
-				<p class="rangeInputText">Inter</p>
-				<input ng-model="inter" type='range' class="rangeInputClass" id='' name='rangeInput2' min='0' max='100' value='0' oninput='amount2.value=rangeInput2.value'>
-				<output name='amount2' id='amount2' for='rangeInput2'>0</output>
-				<i class="fa fa-times" ng-click='inter=0' style="color:#ff6666;" aria-hidden="true"></i>
-				
-			</div>
-			<div class='col-md-2 col-sm-2'>
-				<p class="rangeInputText">Degree</p>
-				<input ng-model="degree" type='range' class="rangeInputClass" id='' name='rangeInput3' min='0' max='100' value='0' oninput='amount3.value=rangeInput3.value'>
-				<output name='amount3' id='amount3' for='rangeInput3'>0</output>
-				<i class="fa fa-times" ng-click='degree=0' style="color:#ff6666;" aria-hidden="true"></i>
-			</div>
-			<div class="col-md-2 col-sm-2">
-				<button ng-click="view.resetFilters()" class="btn btn-default resetBtnsInSearch">Reset</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-1 col-sm-0"></div>
 </div>
-<hr class="htLineStdClass">
-
-
-<div id="innerStArea">
-
-<div class='container-fluid'><div class='row'>
-
-<div class='col-md-8 col-sm-8' style='height:430px;overflow-y:scroll;'> 
- 		<table class='table table-bordered' style='border: 1px solid #ddd !important;'>
- 		<thead style="position: -webkit-sticky !important;position: sticky !important;top: 0 !important;z-index: 1;"> 
- 		<tr><th class='thText'><div class='checkbox'><label style='font-weight:600 !important;'><input ng-model="checkAll" type='checkbox' ng-click='selectAll()' style='height:15px;width:15px;'>All</label></div></th><th class='thText'>B No</th><th class='thText'>FullName</th><th class='thText'>FeePaid</th> 
- 		<th class='thText'>TotalFee</th><th class='thText'>G YOP</th><th class='thText'>Percentage<br>(10+12+UG)</th>
- 		<!-- <th class='thText' colspan='2'>View More</th> 
- 		<th class='thText'>Resume</th> --></tr> 
- 		</thead> 
- 		
- 		
- 		
- 		<tbody>
- 		
- 		<tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
- 		<td style="width:6% !important;"><div class='checkbox'><label><input ng-click="view.checkStudent(t,$event)" type='checkbox' style='height:15px;width:15px;margin-left:-17% !important;'></label></div></td>
- 		<td class='tdText' style='padding-top:1% !important;'>
- 		
- 		<span ng-if=" t.feeTotal-t.feePaid <= 0">{{t.batchNumber}}</span>
- 		<span ng-if="t.feeTotal-t.feePaid > 0" style="background-color:red;padding:15% !important;color:white; border-radius:50%;">{{t.batchNumber}}</span>
- 		
- 		</td>
- 		<td class='tdText' style="text-align: left !important;width:30% !important">{{t.fullName}} <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" style="padding-left:1%;" aria-hidden="true"></i></td>
- 		
- 		<td class='tdText'><span>{{t.feePaid}}<i class='fa fa-plus-square' ng-click='view.showhide("paidUFee_"+t.email)' aria-hidden='true'></i></span>
- 		
- 	   <span id='{{"paidUFee_"+t.email}}' style='display:none'><input class='form-control' type='number' style='border:1px solid #00a69c !important;' placeholder='Add fee' id='{{t.email+"Fee"}}'/> <i class='fa fa-plus-square' ng-click='view.updateFee(t)' aria-hidden='true'></i></span></td>
- 		<td class='tdText'><span id='{{"feeUpdate_"+t.email}}'>{{t.feeTotal}}<i style='cursor:pointer;' ng-click='view.showhide("totalUFee_"+t.email)' class='fa fa-pencil-square' aria-hidden='true'></i></span>
- 		<span style="display:none" id='{{"totalUFee_"+t.email}}'><input type='number' id='{{"totalFee_"+t.email}}' value='20000'><i style='cursor:pointer;color:66ffff' ng-click='view.updateTotalFee(t.email)' class='fa fa-pencil-square' aria-hidden='true'></i>
- 		</span></td>
- 		<td class='tdText'>{{t.graduationYOP}}</td>
- 		<td class='tdText'>({{t.sscPercentage}}+{{t.interPercentage}}+{{t.graduationPercentage}})<br>{{view.convertToInt(t.aggregate)}}</td>
- 		<!-- <td style='font-size:12px !important;'> <i ng-click='view.studentDetails(t)' class="fa fa-address-card-o" aria-hidden="true"></i></td>
- 		<td style='font-size:12px !important;'><i class="fa fa-tasks" ng-click='view.fetchReport(t.email)' aria-hidden="true"></i></td>
- 		<td style='font-size:12px !important;'><a href='downloadResume/"+t.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a></td> -->
- 		</tr>
- 	
- <!-- 
- 	<tr><td colspan='10'><div id='{{"V"+t.email}}' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
- 			
- 			
- 			<div class'row' style='margin:1% !important;'>
- 			<h3 style='color:#ff6666;text-align:center !important;'>More details</h3>
- 				<div class='col-md-6 col-sm-6'>
- 					<div class='row' style='margin:1% !important;'>
- 						<div class='col-md-6 col-sm-6'>
-				 			<p style='padding-top:1% !important;font-weight:600;'>Parent Name<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Parent Mobile<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>HouseNo<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Locality or street<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>City or District<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>State<span style='float:right;'>:</span></p>
-				 		</div>
-				 		<div class='col-md-6 col-sm-6'>
-				 			<p>{{t.parentName}}</p>
-				 			<p>{{t.mobile_Parent}}</p>
-				 			<p>{{t.houseNo}}</p>
-				 			<p>{{t.locality}}</p>
-				 			<p>{{t.city}}</p>
-				 			<p>{{t.state}}</p>
-				 		</div>
-				 	</div>
-				 </div>
-	 			<div class='col-md-6 col-sm-6'>
-	 				<div class='row'>
-	 					<div class='col-md-6 col-sm-6'>
-				 			<p style='font-weight:600;padding-top:1% !important;'>Gender<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>SSC Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Inter Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Graduation Percentage<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Graduation Type<span style='float:right;'>:</span></p>
-				 			<p style='font-weight:600;'>Graduation College<span style='float:right;'>:</span></p>
-				 		</div>
-				 		<div class='col-md-6 col-sm-6'>
-				 			<p>{{t.gender}}</p>
-				 			<p>{{t.sscPercentage}}</p>
-				 			<p>{{t.interPercentage}}</p>
-				 			<p>{{t.graduationPercentage}}</p>
-				 			<p>{{t.graduationType}}</p>
-				 			<p>{{t.graduationCollege}}</p>
-				 		</div>
-				 	</div>
-				 </div>
-			</div>
-			</div>
-			
-			
-			
-			</td>
-			</tr>
-			 -->
- 		</tbody>
-	</table>
-		</div>
-	<div class="col-md-4 col-sm-4" style='height:430px;overflow-y:scroll;'>
-		<div class="row fixedStdDetailsHeading">
-			<div class="col-md-8">
-				<h4>{{view.student.fullName}} <i class="fa fa-pencil-square-o" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" style="padding-left:1% !mportant" aria-hidden="true"></i> </h4>
-			</div>
-			<div class="col-md-4">
-				<i ng-click='view.studentDetails(view.student)' class="fa fa-address-card-o" aria-hidden="true"></i>
-				<i class="fa fa-tasks" ng-click='view.fetchReport(view.student.email)' aria-hidden="true"></i>
-				<a href='downloadResume/"+view.student.email+"/any' target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-		<form editable-form name="editableForm" onaftersave="saveStudent()">
-			
-		<div id='viewMore_Student' class='container-fluid' style='display:none;width:96%;background-color:#fff;margin:auto;border-radius:10px;'>
- 			
- 			<span ng-show="editableForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-          Save
-        </button>
-        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-          Cancel
-        </button>
-      </span>
- 			
- 			
- 				<h5 class="stdHeadTextClass">Personal-details</h5>
- 				<div class='col-md-12 col-sm-12 detailsBoxClass'>
- 					<div class="row">
- 						<div class="col-md-6">
- 							<p class="textOfStdDetails" style="float:left;" editable-text="view.student.fullName" e-name="fullName"><i class="fa fa-user" aria-hidden="true"></i> Name :  {{view.student.fullName}}</p> 
-		 					<p class="textOfStdDetails" editable-text="view.student.parentName" e-name="parentName"><i class="fa fa-user" aria-hidden="true"></i> ParentName : {{view.student.parentName}}</p>
-		 			
- 						</div>
- 						<div class="col-md-6">
- 							<p class="textOfStdDetails"><i class="fa fa-btc" aria-hidden="true"></i> Batch Number : <span class="batchNumClassForStdDet">{{view.student.batchNumber}}</span></p>
- 							<p class="textOfStdDetails" editable-select="view.student.gender" e-name="gender" e-ng-options="s.value as s.text for s in genders"><i class="fa fa-user-circle" aria-hidden="true"></i> Gender : {{view.student.gender}}</p>
-		 					<p class="textOfStdDetails" editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy"><i class="fa fa-calendar" aria-hidden="true"></i> DOB : {{ (view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
- 						</div>
- 					</div>
-		 		</div><br>
-				<h5 class="stdHeadTextClass">Education-details</h5>
-	 			<div class='col-md-12 col-sm-12 detailsBoxClass'>
-	 				<div class='row'>
-				 		<div class='col-md-12 col-sm-12'>
-				 			<p class="textOfStdDetails col-md-6" editable-text="view.student.graduationYOP" e-name="graduationYOP"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> YOP : {{view.student.graduationYOP}}</p>
-				 			<p class="textOfStdDetails col-md-6" editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches"><i class="fa fa-building-o" aria-hidden="true"></i> Branch : {{view.student.graduationBranch}}</p>	
-				 			<p class="textOfStdDetails col-md-6" editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes"><i class="fa fa-graduation-cap" aria-hidden="true"></i> GType : {{view.student.graduationType}}</p>
-				 			<p class="textOfStdDetails col-md-6" editable-text="view.student.graduationCollege" e-name="graduationCollege"><i class="fa fa-university" aria-hidden="true"></i> College : {{view.student.graduationCollege}}</p>
-				 		</div>
-				 	</div>
-				 	<div class="row">
-				 		<div class="col-md-12 col-sm-12">
-				 			<div style="border:1px solid #00a69c;border-radius:10px;padding:1% 2% 1% 2%;width:100%;">
-				 				<p class="textOfStdDetails">
-				 					<div class="progress">
-					    				<div  editable-text="view.student.sscPercentage" e-name="sscPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.sscPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.sscPercentage}}%;">
-					      					SSC : {{view.student.sscPercentage}}%
-					    				</div>
-					 				</div>
-				 				</p>
-				 				<p class="textOfStdDetails">
-				 					<div class="progress">
-					    				<div editable-text="view.student.interPercentage" e-name="interPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.interPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.interPercentage}}%;">
-					      					Inter : {{view.student.interPercentage}}%
-					    				</div>
-					 				</div>
-				 				</p>
-				 				<p class="textOfStdDetails">
-				 					<div class="progress">
-					    				<div editable-text="view.student.graduationPercentage" e-name="graduationPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.graduationPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.graduationPercentage}}%;">
-					      					Degree : {{view.student.graduationPercentage}}%
-					    				</div>
-					 				</div>
-				 				</p>
-				 				<p class="textOfStdDetails">
-				 					<div class="progress">
-					    				<div editable-text="view.student.aggregate" e-name="aggregate" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.aggregate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.aggregate}}%;">
-					      					Aggregation : {{view.student.aggregate}}%
-					    				</div>
-					 				</div>
-				 				</p>
-				 			</div>
-				 		</div>
-				 	</div>
-				 </div>
-				 <br>
-				 <h5 class="stdHeadTextClass">Contact-details</h5>
-				 <div class="col-md-12 col-sm-12 detailsBoxClass">
-		 			<p class="textOfStdDetails col-md-12 col-sm-12" editable-text="view.student.email" e-name="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email : {{view.student.email}}</p>
-		 			<p class="textOfStdDetails col-md-6 col-sm-12" editable-text="view.student.mobile" e-name="mobile"><i class="fa fa-mobile" aria-hidden="true"></i> S Mobile : {{view.student.mobile}}</p>
-		 			
-		 			<p class="textOfStdDetails col-md-6 col-sm-12" editable-text="view.student.mobile_Parent" e-name="mobile_Parent"><i class="fa fa-mobile" aria-hidden="true"></i> P Mobile :{{view.student.mobile_Parent}}</p>
-		 			<h5 class="stdHeadTextClass"><i class="fa fa-address-card" aria-hidden="true"></i> Address</h5>
-		 			<div class="col-md-8 detailsBoxClass">
-			 			<p class="textOfStdDetails" editable-text="view.student.locality" e-name="locality">{{view.student.locality}}</p>
-			 			<p class="textOfStdDetails" editable-text="view.student.city" e-name="city">{{view.student.city}}</p>
-			 			<p class="textOfStdDetails" editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states">{{view.student.state}}</p>
-		 			</div>
-		 			<div class="col-md-4">
-		 				<button style="width:8%;margin:auto;display:block;font-size:13px;" class="btn btn-default">View In Maps</button>
-		 			</div>
-			 	</div>
-			</div>
-		</form>
-		</div>
-		</div>
-		</div>
-		
-		
-		
-		
-		</div></div>
- 		
- 		
- 		
-
-
 </div>
-
-
-
-
-
 
 <!-- <div class='container-fluid' style='width:30%;position:fixed;right:0;bottom:0 !important;z-index:10;'><div class='row'>
 <div class='col-md-6'><button class='btn btn-default saveBtnsInSearch' style='float:left !important;' data-toggle="modal" data-target="#myModalMail">Send Mail</button></div>
