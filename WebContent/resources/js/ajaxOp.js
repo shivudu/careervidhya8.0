@@ -16,12 +16,8 @@ var mailsList=[];
 $(document).ready(function(){
 
 	var dwelDate = new Date();
-	document.getElementById("welDate").innerHTML = dwelDate.toDateString();
+	//document.getElementById("welDate").innerHTML = dwelDate.toDateString();
 });
-
-
-
-
 
 
 // Flah Message Script

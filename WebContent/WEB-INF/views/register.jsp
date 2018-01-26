@@ -46,7 +46,23 @@
 
 	
 <!-- student details form begin-->
-	<h3 class="control" style="text-align:center;color:#00a69c">Student Registration Form</h3>
+<div class="container-fluid">
+	<div style="padding:0% 5% 0% 3.3%;">
+		<div class="row">
+			<div class="col-md-2"><h1 class="stdHeadhOne">Register Student</h1></div>
+			<div class="col-md-10"></div>
+		</div>
+        <div style="border-bottom: 1px solid #dbdbdb !important;height: 12px;margin-left:2%;"></div>
+	</div>
+	<div class="row" style="padding:0% 5% 0% 3.3%;border:1px solid red;height:300px;">
+		<div class="col-md-12">
+			<h3 class="addFormHeadClass">Add Student</h3>
+		</div>
+	</div>
+</div>
+
+<br><br><br><br>
+<h3 class="control" style="text-align:center;color:#00a69c">Student Registration Form</h3>
 <div id="regForm" style="border:1px solid gray">
 	<div class="row" >
 		<form id='registration' action="registerStudent" method="get" class="form-horizontal">

@@ -1,4 +1,4 @@
-var app=angular.module("App",["xeditable", "ui.bootstrap"]);
+var app=angular.module("App",["xeditable", "ui.bootstrap","angularUtils.directives.dirPagination"]);
 
 app.controller("viewController",viewController);
 
@@ -12,9 +12,6 @@ app.run(['editableOptions', function(editableOptions) {
 
 function viewController($http, appUrl,$scope)
 {
-
-	
-	
 	var currentScope=this;
 	
 	currentScope.filteredData=[];
@@ -23,6 +20,7 @@ function viewController($http, appUrl,$scope)
 	$scope.aggregate=0;
 	$scope.inter=0;
 	$scope.SSC=0;
+	$scope.pageValues=20;
 	this.requestAllStudents=function(){
 		$('#ajaxPageLoader').show();
 	$http.get(appUrl+"/viewAll").then(function(response){
@@ -33,6 +31,14 @@ function viewController($http, appUrl,$scope)
 	});
 	};
 	
+	//karnakar written code start
+	
+	$scope.sort=function(keyname){
+		$scope.sortKey=keyname;
+		$scope.reverse=!$scope.reverse;
+		//console.log('Sort fun called');
+	}
+	//karnakar written code end
 	
 	
 	this.requestBatchStudents=function(batchNumber){
@@ -97,6 +103,7 @@ function viewController($http, appUrl,$scope)
 			    		 currentScope.filteredData.splice(index,1);
 			    	}
 			
+			    
 		
 	
 			
@@ -152,6 +159,10 @@ function viewController($http, appUrl,$scope)
 		
 		return $scope.SSC<=st.sscPercentage;
 	};
+	/*$scope.yearOfPassFilter=fucntion(st)
+	{
+		return $scope.yearOfPass==st.graduationYOP;
+	}*/
 	
 	$scope.interFilter=function(st)
 	{

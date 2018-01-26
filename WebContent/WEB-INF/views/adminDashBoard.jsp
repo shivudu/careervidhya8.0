@@ -34,13 +34,20 @@ var adminName='<%=name%>';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/ajaxOp.js"/>"></script>
 	<script src="<c:url value="/resources/js/AngularApp.js"/>"></script>
+	<script src="<c:url value="/resources/js/dirPagination.js"/>"></script>
+	<script src="<c:url value="/resources/js/multiSelector.js"/>"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" type="text/css">
 	
 	<script src="<c:url value="/resources/js/xeditable.js"/>"></script>
+	<!-- <script src="<c:url value="/resources/js/multiSelectBox.js"/>"></script> -->
 	
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/xeditable.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/multiSelector.css"/>"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
+	<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 	   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/adminDashBoard.css"/>"/>
 	   <style>
 	   
@@ -51,10 +58,11 @@ var adminName='<%=name%>';
 			.navbar-default .navbar-nav>.active> a:focus, 
 			.navbar-default .navbar-nav>.active> a:hover
         {
-            color:white !important;
+            color:#444444 !important;
             text-transform:uppercase !important;
+            text-shadow: 0 1px 0 #ffffff !important;
             font-size:12px !important;
-            background-color:#ff6666 !important;
+            /*background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f3), to(#e8e9ed)) !important;*/
         }
 
     </style>
@@ -425,31 +433,22 @@ $(document).ready( function(){
 </head>
 <body ng-app="App" ng-controller="viewController as view">
 	<!-- Entire div-->
-<div class="container-fluid other">
+<!-- <div class="container-fluid other">
 
-	<!-- header-->	
+	header	
 	<div class="container-fluid">
 		<div class="row firdiv">
 			<div class="col-md-6 col-sm-6 col-xs-6">
 				<i class="fa fa-refresh fa-spin fa-3x fa-fw" style="float:left;display:none;" id="ajaxPageLoader"></i><br>
-				<span class="welocmeName" style="color:#000 !important">Welcome <span style="letter-spacing:1px;font-family:'Cherry Swash';font-weight:600;font-size:18px;"><i><%=name %></i></span>
-				<i style="margin-left:1%;" class="fa fa-calendar" aria-hidden="true"></i> <span class="welcomeDate" id="welDate"></span> </span><br>
+				<br>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:20px;margin-left:0px !important">
-			  <ul style="float:right;color:#000;cursor:pointer"><li class="dropdown">
-			  <a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i class="fa fa-user" aria-hidden="true"></i>Profile<span class="caret"></span></a>
-			   <ul class="dropdown-menu">
-			
-				<li><a onclick="displayDiv('changePassword')" style="float:right;color:#000;cursor:pointer">&nbsp<i style="color:#000;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a>
-				</li><li>
-				<a href="Logout" style="float:right;color:#000"><i style="color:#000;marggin-right:1%;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a>	
-			</li>
-			</ul>
-			</li>
+			  <ul style="float:right;color:#000;cursor:pointer">
+			  
 			</ul>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<!--header end-->
 
 
@@ -467,12 +466,12 @@ $(document).ready( function(){
 	      </button>
 	      <!--<a href="student_index.html" class="navbar-brand"><img class="logo" src="images/cvcorpLogo.png"></a>-->
 	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+	    <div class="collapse navbar-collapse" style="width:100% !important" id="myNavbar">
+	      <ul class="nav navbar-nav" style="float:right;">
+	        <li class="active"><a href="#" onclick="displayDiv('welcome')" style="font-size: 12px !important;"><!--<i class="fa fa-home" aria-hidden="true"></i>--> HOME</a></li>
 	        
-	        <li class="dropdown">
-				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i> Student's<span class="caret"></span></a>
+	        <li class="dropdown" style="font-size: 12px !important;">
+				<a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> STUDENT'S<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					
 				<!--  	<c:forEach items="${batches }" var="b">
@@ -495,22 +494,22 @@ $(document).ready( function(){
 					
 					<li>
 				<!--  	<a style="cursor:pointer;" onclick="sendData('viewAll','','stArea',-1); displayDiv('stArea')">View All Students</a>-->
-					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()"><i class="fa fa-users" aria-hidden="true"></i> View Students</a>
+					<a style="cursor:pointer;" onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()" style="font-size: 12px !important;"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> View Students</a>
 					</li>
-					<li><a href="#" onclick="displayDiv('regForm')"><i class="fa fa-user" aria-hidden="true"></i> Register a New Student</a></li>
+					<li><a href="#" onclick="displayDiv('regForm')" style="font-size: 12px !important;"><!-- <i class="fa fa-user" aria-hidden="true"></i> --> Register a New Student</a></li>
 					<!-- <li><a style="cursor:pointer;" ng-click="viewAll();">View All Students</a></li>-->
-					<li><a href="#" onclick="displayDiv('uploadFile')"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment File</a></li>
-				   <li><a onclick="displayDiv('takeAttendance');verifyPresents();"><i class="fa fa-male" aria-hidden="true"></i> Take Attendance</a></li>
+					<li><a href="#" onclick="displayDiv('uploadFile')" style="font-size: 12px !important;"><!-- <i class="fa fa-upload" aria-hidden="true"></i> --> Upload Assignment File</a></li>
+				   <li><a onclick="displayDiv('takeAttendance');verifyPresents();" style="font-size: 12px !important;"><!-- <i class="fa fa-male" aria-hidden="true"></i> --> Take Attendance</a></li>
 				</ul>
 			</li>
 			<!-- Multiple choice menu begin-->
 		
 			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-check-square" aria-hidden="true"></i> MultiChoice Questions<span class="caret"></span></a>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 12px !important;"><!-- <i class="fa fa-check-square" aria-hidden="true"></i> --> MULTICHOICE<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a style="cursor:pointer" onclick="displayDiv('pushQuestion')"> Push a New Question To DB</a></li>
-					<li><a style="cursor:pointer" onclick="displayDiv('createQuestion')"> Create a New QP</a></li>
-					<li><a style="cursor:pointer" onclick="sendData('getQuestionPapers/','Multiple','listQPapers',-1); displayDiv('qpapers')" > View QP's</a></li>			
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('pushQuestion')"> Push a New Question To DB</a></li>
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('createQuestion')"> Create a New QP</a></li>
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="sendData('getQuestionPapers/','Multiple','listQPapers',-1); displayDiv('qpapers')" > View QP's</a></li>			
 				</ul>
 			</li>
 		
@@ -519,11 +518,11 @@ $(document).ready( function(){
 			<!-- QA menu begin-->
 		
 			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Theoretical Questions<span class="caret"></span></a>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 12px !important;"><!-- <i class="fa fa-question-circle" aria-hidden="true"></i> --> THEORETICAL<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-					<li><a style="cursor:pointer" onclick="displayDiv('QApushQuestion')"> Push a New Question To DB</a></li>
-					<li><a style="cursor:pointer" onclick="displayDiv('QAcreateQuestion')"> Create a New QP</a></li>
-					<li><a style="cursor:pointer" onclick="sendData('getQuestionPapers/','QA','listQAQPapers',-1); displayDiv('QAqpapers')"> View QP's</a></li>
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('QApushQuestion')"> Push a New Question To DB</a></li>
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('QAcreateQuestion')"> Create a New QP</a></li>
+					<li><a style="cursor:pointer;font-size: 12px !important;" onclick="sendData('getQuestionPapers/','QA','listQAQPapers',-1); displayDiv('QAqpapers')"> View QP's</a></li>
 				</ul>
 			</li>
 				
@@ -531,25 +530,25 @@ $(document).ready( function(){
 			
 			<!-- Mail Students begin-->
 		
-			<li class="dropdown">
+			<!-- <li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Mail To Students<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 			<li><a style="cursor:pointer" onclick="displayDiv('mailToBatch')">Mail To Batches</a></li>
 			<li><a style="cursor:pointer" onclick="displayDiv('mailToStudent')"> Mail To Single Student or Others</a></li>
 			
 			</ul>
-			</li>
+			</li> -->
 				
 		<!-- Mail Students end-->
 		<!-- View syllabus begin-->
 			
 			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i><i class="fa fa-book" aria-hidden="true"></i> View Syllabus<span class="caret"></span></a>
+			<a class="dropdown-toggle" data-toggle="dropdown" style="font-size: 12px !important;"><!-- <i class="fa fa-book" aria-hidden="true"></i><i class="fa fa-book" aria-hidden="true"></i> --> SYLLABUS<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-			<li><a style="cursor:pointer" onclick="displayDiv('aptiSyllabus')">Aptitude & Reasoning</a></li>
-			<li><a style="cursor:pointer" onclick="displayDiv('javaSyllabus')">Technical</a></li>
-			<li><a style="cursor:pointer" onclick="displayDiv('commSyllabus')">Communication</a></li>
-			<li><a style="cursor:pointer" onclick="displayDiv('linuxSyllabus')">Linux & Database</a></li>
+			<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('aptiSyllabus')">Aptitude & Reasoning</a></li>
+			<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('javaSyllabus')">Technical</a></li>
+			<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('commSyllabus')">Communication</a></li>
+			<li><a style="cursor:pointer;font-size: 12px !important;" onclick="displayDiv('linuxSyllabus')">Linux & Database</a></li>
 			</ul>
 			</li>	
 			
@@ -559,11 +558,11 @@ $(document).ready( function(){
 		
 			<li class="dropdown">
 			
-			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i> Batches<span class="caret"></span></a>
+			<a class="dropdown-toggle" data-toggle="dropdown" style="font-size: 12px !important;"><!-- <i class="fa fa-users" aria-hidden="true"></i> --> BATCHES<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-			<li><a onclick="displayDiv('addBatch')"> Enroll a New Batch </a></li>
-			<li><a onclick="displayDiv('viewBatches')"> View All Batches and Info</a></li>
-			 <li><a href="#" onclick="displayDiv('welcome')"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Batch-Progress</a></li>
+			<li><a onclick="displayDiv('addBatch')" style="font-size: 12px !important;"> Enroll a New Batch </a></li>
+			<li><a onclick="displayDiv('viewBatches')" style="font-size: 12px !important;"> View All Batches and Info</a></li>
+			 <li><a href="#" onclick="displayDiv('welcome')" style="font-size: 12px !important;"><!-- <i class="fa fa-hourglass-start" aria-hidden="true"></i> --> Batch-Progress</a></li>
 			</ul>
 			
 			</li>
@@ -577,17 +576,22 @@ $(document).ready( function(){
 		<!-- batch progress end--> 
 		
 		
-		<li class="dropdown">
+			<li class="dropdown">
 			
-			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o" aria-hidden="true"></i> Student Notifications<span class="caret"></span></a>
+			<a class="dropdown-toggle" data-toggle="dropdown" style="font-size: 12px !important;"><!-- <i class="fa fa-flag-o" aria-hidden="true"></i> --> NOTIFICATIONS<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-			<li><a onclick="displayDiv('viewNotifications')"> View All Posted Notifications</a></li>
-			<li><a onclick="displayDiv('addNotification')"> Post a New Notification</a></li>
+			<li><a onclick="displayDiv('viewNotifications')" style="font-size: 12px !important;"> View All Posted Notifications</a></li>
+			<li><a onclick="displayDiv('addNotification')" style="font-size: 12px !important;"> Post a New Notification</a></li>
 			</ul>
-			
-			
 			</li>
-			
+			<li style="float:right !important;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i style="padding:1%;border:1px solid #4e4e4e;" class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+			   <ul class="dropdown-menu">
+			   		<li><span class="welocmeName" style="color:#000 !important;font-size: 12px !important;">Welcome <span style="letter-spacing:1px;font-family:'Cherry Swash';font-weight:600;font-size:12px;"><i><%=name %></i></span></li>
+					<li><span class="welcomeDate" id="welDate"></span></li>
+			   		<li><a onclick="displayDiv('changePassword')" style="float:right;color:#000;cursor:pointer;font-size: 12px !important;">&nbsp<i style="color:#000;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></li>
+			   		<li><a href="Logout" style="float:right;color:#000"><i style="color:#000;marggin-right:1%;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+				</ul>
+			</li>
 	      </ul>
 	      <!-- <ul class="nav navbar-nav navbar-right">
 	        <li><a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
@@ -1255,7 +1259,741 @@ $(document).ready( function(){
 <!-- student view div begin-->    
 
 <div id="stArea" style="display:none;border-radius:5px;">
+<div class="container-fluid">
+	<div style="padding:0% 5% 0% 3.3%;">
+		<div class="row">
+			<div class="col-md-2"><h1 class="stdHeadhOne">Student Details</h1></div>
+			<div class="col-md-10"><p class="resultNumClass">{{fstudentsList.length}} / {{view.studentsList.length}}</p></div>
+		</div>
+        <div style="border-bottom: 1px solid #dbdbdb !important;height: 12px;margin-left:2%;"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row" style="padding:1% 0% 0% 2.5%;">
+				<div class="col-md-3">
+	                <div class="input-group">
+	                    <input type="text" ng-model="studentName" class="form-control inputFirstBox" name="allfields" placeholder="Search Student">
+	                    <span class="input-group-addon search-btn"><i class="fa fa-search" aria-hidden="true"></i></span>
+	                    <!--<span class="input-group-addon search-btn"><i class="fa fa-question" aria-hidden="true"></i></span>-->
+	                </div>
+	            </div>
+	            <div class="col-md-3"><button class="advancedSearchBtn" data-toggle="modal" data-target="#myModalAdv">Advanced Search <i class="fa fa-search-plus" style="margin-left: 5% !important;" aria-hidden="true"></i></button></div>
+                <div class="col-md-2 theadTextDataClass" style="text-align:right;"></div>
+                <div class="col-md-2"><button class="dropbtn" style="width:80%;float:right;" ng-click="view.resetFilters()"><i class="fa fa-tag" style="" aria-hidden="true"></i> Reset</button></div>
+                <div class="col-md-2 dropdown dropdownClass">
+				  <button class="dropbtn" style="width:99%;"><i class="fa fa-bars" style="" aria-hidden="true"></i> Actions</button>
+				  <div class="dropdown-content">
+				    <a data-toggle="modal" data-target="#myModalMail">Send Mail</a>
+				    <a data-toggle="modal" data-target="#myModal">Save To Excel</a>
+				  </div>
+            </div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row" style="padding:1% 0% 0% 2.5%;">
+               <div class="col-md-12">
+                   <div class="searchFieldsClass" style="height: 38px;">
+                   		<div class="row">
+                   			<div class="col-md-1"><p class="selectBoxClass1">YOP</p></div>
+                   			<div class="col-md-2">
+                   				<!-- <div ng-dropdown-multiselect="" options="example14data" selected-model="example14model" checkboxes="true" extra-settings="example14settings"></div> -->
+                   				<select ng-model="yearOfPass" id="multi-select-demoyop" multiple="multiple" style="width:15%;float:left;">
+									<option value='2019'>2019</option>
+									<option value='2018'>2018</option>
+									<option value='2017'>2017</option><option value='2016'>2016</option>
+									<option value='2015'>2015</option><option value='2014'>2014</option>
+									<option value='2013'>2013</option><option value='2012'>2012</option>
+		                        </select>
+                   			</div>
+                   			<div class="col-md-1"><p class="selectBoxClass1">Batches</p></div>
+                   			<div class="col-md-2">
+	                   			<select ng-model="batchNumber" id="multi-select-demobatch" multiple="multiple" style="width:15%;float:left;">
+									<c:forEach items="${batches }" var="b">
+									<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
+									</c:forEach>
+		                         </select>	
+	                   		</div>
+                   			<div class="col-md-1"><p class="selectBoxClass1">Branch</p></div>
+                   			<div class="col-md-2">
+                   				<select ng-model="branchName" style="width:15%;float:left;" id="multi-select-demobranch" multiple="multiple">
+                            	   <optgroup label="B Tech or M Tech Branches">
+									  <option value="CSE">CSE</option>
+									  <option value="IT">IT</option>
+									  <option value="ECE">ECE</option>
+									  <option value="EEE">EEE</option>
+									  <option value="MECH">MECH</option>
+									  <option value="CIVIL">CIVIL</option>
+									  <option value="Aeronautical">Aero</option>
+									  <option value="Electronics & Instrumentation Engineering">EIE</option>
+									  <option value="Mechatronics Engineering">ME</option>
+									  <option value="other">Any other</option>
+									  </optgroup>
+									  
+									  <optgroup label="Any other">
+									   <option value="Other">Any Other</option>
+									  </optgroup>
+									  
+									  <optgroup label="Degree groups">
+									  <option value="BSC Computers">BSC(Comp)</option>
+									  <option value="BSC General">BSC(Gen)</option>
+									  <option value="BCom">BCom</option>
+									   <option value="BA">BA</option>
+									   <option value="Other">Any Other</option>
+									  </optgroup>
+	                           		</select>
+	                           </div>
+                   			<div class="col-md-1"><p class="selectBoxClass1" style="padding-left:1px !important;">GradType</p></div>
+                   			<div class="col-md-2">
+                   				<select ng-model="graduationType" id="multi-select-demotype" multiple="multiple" style="width:15%;">
+									<option value='Btech'>BTech</option><option value='Mtech'>MTech</option><option value='MCA'>MCA</option><option value='MBA'>MBA</option>
+									<option value='Degree'>Degree</option><option value='Others'>Others</option>
+			                    </select>
+			                    <i class="fa fa-bars" style="margin-right:-10%;margin-top: 3%; float:right;" aria-hidden="true"></i>
+                   			</div>
+                   		</div>
+                       <!-- <span class="selectBoxClass1" style="float:left;">SSC</span>
+                       
+                       <span>
+                           <select ng-model="sscFilter" style="width:15%;float:left;">
+                               	<option value="" selected="selected">All</option>
+								<option value='90'>>90</option>
+								<option value='80'>>80</option>
+								<option value='70'>>70</option>
+								<option value='60'>>60</option>
+								<option value='50'>>50</option>
+                           </select>
+                       </span> -->
+                   </div>
+               </div>
+           </div>
+           	<!-- Modal -->
+		  	<div class="modal fade" id="myModalAdv" role="dialog" style="top:2% !important;">
+		        <div class="modal-dialog modal-lg">
+		        
+		          <!-- Modal content-->
+		          <div class="modal-content"  style="margin-top:7%;margin-left:-10%;border-radius:0px !important;border:5px solid #000;">
+		            <div class="modal-header">
+		              <button type="button" class="close" data-dismiss="modal">&times;</button>
+		              <h4 class="modal-title" style="font-size: 20px !important;font-family: Segoe UI Semibold;font-weight: normal;">Advanced Search</h4>
+		            </div>
+		            <div class="modal-body">
+		              <p>Select Search Criteria</p>
+		            </div>
+		            <div class="modal-footer" style="margin-top:-2% !important;background-color: #f3f4f9;">
+		              <div class="row" style="border:1px solid #e5e5e5 !important;">
+                   			<div class="col-md-6 modelTableClass" style="pading:1%;">
+                   				<table style="width:100%">
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">SSC Percentage :</p></td>
+                   						<td>
+                   							<select ng-model="sscPercentage" id="multi-select-demoSscForModel" multiple="multiple" style="width:15%;">
+												<option value='90'>90</option><option value='80'>80</option><option value='70'>70</option>
+												<option value='60'>60</option>
+						                    </select>
+                   						</td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Inter Percentage :</p></td>
+                   						<td>
+	                   						<select ng-model="interPercentage" id="multi-select-demoInterForModel" multiple="multiple" style="width:15%;">
+						                        <option value='' selected="selected">All</option>
+												<option value='90'>90</option><option value='80'>80</option><option value='70'>70</option>
+												<option value='60'>60</option>
+						                    </select>
+						                </td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Degree Percentage :</p></td>
+                   						<td>
+                   							<select ng-model="graduationPercentage" id="multi-select-demoDegreeForModel" multiple="multiple" style="width:15%;">
+						                        <option value='' selected="selected">All</option>
+												<option value='90'>90</option><option value='80'>80</option><option value='70'>70</option>
+												<option value='60'>60</option>
+						                    </select>
+                   						</td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Aggregation Percentage :</p></td>
+                   						<td>
+                   							<select ng-model="aggregation" id="multi-select-demoAggreForModel" multiple="multiple" style="width:15%;">
+						                        <option value='' selected="selected">All</option>
+												<option value='90'>90</option><option value='80'>80</option><option value='70'>70</option>
+												<option value='60'>60</option>
+						                    </select>
+                   						</td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Fee :</p></td>
+                   						<td>
+                   							<select ng-model="feePaid" id="multi-select-FeeForModel" multiple="multiple" style="width:15%;">
+						                        <option value='' selected="selected">All</option>
+												<option value='feepaid'>FeePaid</option>
+												<option value='notpaid'>NotPaid</option>
+											</select>
+                   						</td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">State :</p></td>
+                   						<td>
+                   							<select ng-model="state" id="multi-select-StateForModel" multiple="multiple" style="width:15%;">
+						                        <option value='' selected="selected">All</option>
+												<option value='ts'>Telangana</option>
+												<option value='ap'>AndraPradesh</option>
+						                    </select>
+                   						</td>
+                   					</tr>
+                   					<tr>
+                   						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Gender :</p></td>
+                   						<td>
+                   							<select ng-model="gender" style="width:66%;font-size:12px;font-family: Segoe UI Semibold;">
+			                   					<option value='' selected disabled>Select Gender</option>
+												<option value='male'>Male</option>
+												<option value='female'>Femail</option>
+						                    </select>
+                   						</td>
+                   					</tr>
+                   				</table>
+                   			</div>
+                   			<div class="col-md-6 modelTableClass" style="pading:1%;">
+                   			<table style="width:100%">
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Email :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Student Email' ng-model="emaiId" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">StudentMobile :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Student Mobile' ng-model="snumber" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Parent Name :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Parent Name' ng-model="pname" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">City :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='City Name' ng-model="cityname" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">DOB :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='yyyy-mm-dd' ng-model="dobDate" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">GraduationCity :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='GraduationCity Name' ng-model="gradCityName" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   				<tr>
+                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">College Name :</p></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='College Name' ng-model="collegename" class='form-control inputFieldClass'></td>
+                   				</tr>
+                   			</table>
+                    	</div>
+		              </div>
+		              <div class="row" style="margin-top:1%;">
+		              	<div class="col-md-4"></div>
+		              	<div class="col-md-2">
+		              		<button class="modelSearchBtn">Search</button>
+		              	</div>
+		              	<div class="col-md-2">
+		               		<button class="modelCancleBtn">Cancle</button>
+		              	</div>
+		              	<div class="col-md-4"></div>
+		              </div>
+		            </div>
+		          </div>
+		          
+		        </div>
+		      </div>
+		      
+		      <!-- Modal -->
+		  	<div class="modal fade" id="myModalProfile" role="dialog" style="top:2% !important;">
+		        <div class="modal-dialog modal-lg">
+		        
+		          <!-- Modal content-->
+		          <div class="modal-content"  style="margin-top:7%;margin-left:-10%;border-radius:0px !important;border:5px solid #000;">
+		            <div class="modal-header">
+		              <button type="button" class="close" data-dismiss="modal">&times;</button>
+		              <h4 class="modal-title" style="font-size: 20px !important;font-family: Segoe UI Semibold;font-weight: normal;">{{view.student.fullName}}</h4>
+		            </div>
+		            <div class="modal-body">
+		              <p>Complete Details of student</p>
+		            </div>
+		            <div class="modal-footer" style="margin-top:-2% !important;padding:0px 0px 0px -5px !important">
+		              <div class="row" style="height:360px;">
+		                  <div class="col-md-4"></div>
+		                  <div class="col-md-8"></div>
+		              </div>
+		            </div>
+		          </div>
+		          
+		        </div>
+		      </div>
+           <div class="row" style="padding:0% 0% 0% 2.5%;">
+               <div class="col-md-12">
+                   <table class="table table-bordered tableNewClass">
+                       <thead class="theadBackClass">
+                           <tr>
+                               <th rowspan="2"class="theadTextDataClass" style="width:2%;">
+                               <input ng-model="checkAll" type='checkbox' ng-click='selectAll()' type="checkbox"/></th>
+                               <th rowspan="2"class="theadTextDataClass" style="width:15%;cursor:pointer" ng-click="sort('fullName')">Name
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='fullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('batchNumber')">Batch
+								<span class="glyphicon sort-icon" ng-show="sortKey=='batchNumber'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>	                               	
+                               </th>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationYOP')">YOP
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationYOP'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('feePaid')">Fee
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='feePaid'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationBranch')">Branch
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationBranch'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th colspan="4" class="theadTextDataClass">Percentages</th>
+                               <th colspan="2" class="theadTextDataClass">Math Scores</th>
+                               <th colspan="3" class="theadTextDataClass">Progress</th>
+                               <th colspan="2" class="theadTextDataClass">Attendance</th>
+                           </tr>
+                           <tr class="theadBackClass">
+                               <th class="theadTextDataClass" style="border-right: 1px solid #ddd !important;cursor:pointer" ng-click="sort('sscPercentage')">10th
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='sscPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('interPercentage')">12th
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='interPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationPercentage')">G
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('aggregate')">A
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='aggregate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>
+                               <th class="theadTextDataClass">10th</th>
+                               <th class="theadTextDataClass">12th</th>
+                               <th class="theadTextDataClass">Apti</th>
+                               <th class="theadTextDataClass">Java</th>
+                               <th class="theadTextDataClass">Com</th>
+                               <th class="theadTextDataClass">%</th>
+                               <th class="theadTextDataClass">%</th>
+                           </tr>
+                       </thead>
+                       <tbody dir-paginate="t in ( fstudentsList= (view.studentsList |itemsPerPage:pageValues | filter:studentName:yearOfPass:graduationType:branchName:genderI:batchNumber | orderBy:sortKey:reverse | filter: { graduationYOP:yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
+                           <tr>
+                               <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
+                               <td class="theadTextDataClass"><p style="float:left;" ng-if=" t.feeTotal-t.feePaid <= 0" class="feeNotification1"></p><p style="float:left;" ng-if="t.feeTotal-t.feePaid > 0" class="feeNotification2"></p><p ng-click='view.studentDetails(t)' style="text-transform:lowercase;text-align:left !important;cursor:pointer;">{{t.fullName}}</p></td>
+                               <td class="theadTextDataClass">{{t.batchNumber}}</td>
+                               <td class="theadTextDataClass">{{t.graduationYOP}}</td>
+                               <td class="theadTextDataClass">{{t.feePaid}}</td>
+                               <td class="theadTextDataClass">{{t.graduationBranch}}</td>
+                               <td class="theadTextDataClass">{{t.sscPercentage}}</td>
+                               <td class="theadTextDataClass">{{t.interPercentage}}</td>
+                               <td class="theadTextDataClass">{{t.graduationPercentage}}</td>
+                               <td class="theadTextDataClass">{{view.convertToInt(t.aggregate)}}</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">$80</td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+           <div class="row">
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-2"><p class="pageShowClass">Show</p></div>
+						<div class="col-md-3">
+							<select ng-model="pageValues" class="pagerShowSelectClass">
+								<option value="20" selected>20</option>
+								<option value="40">40</option>
+								<option value="60">60</option>
+								<option value="80">80</option>
+								<option value="100">100</option>
+								<option value="120">120</option>
+								<option value="140">140</option>
+							</select>
+						</div>
+						<div class="col-md-7"><p class="showOutOfResult">1-{{pageValues}} of {{view.studentsList.length}}</p></div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<dir-pagination-controls class="paginationStyleClass" max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-10">
+					<h4 class="stdHeadhOne">{{view.student.fullName}}</h4>
+				</div>
+				<div class="col-md-2">
+					<a data-toggle="tab" ng-click='view.fetchReport(view.student.email)' href="#progressbar"><button class="profileBtnStd"><i class="fa fa-user-circle" aria-hidden="true"></i></button></a>
+				</div>
+			</div>
+			<!-- <div style="border-bottom: 1px solid #dbdbdb !important;height: 5px;margin-top:-1%;"></div> -->
+			<div class="nav nav-tabs scrollmenu">
+             <a data-toggle="tab" href="#personal" active style="margin:0px !important">Personal</a>
+             <a data-toggle="tab" href="#eduaction" style="margin:0px !important">Education</a>
+             <a data-toggle="tab" href="#fee" style="margin:0px !important">Fee</a>
+             <a data-toggle="tab" href="#address" style="margin:0px !important">Addr</a>
+             <a data-toggle="tab" style="margin:0px !important" onclick="myFunction()">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+           </div>
+			<div class="tab-content">
+	        <div id="personal" class="tab-pane fade in active">
+	          <table class="table">
+       			<thead>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FullName</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.fullName}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
+       				</tr>
+       			</thead>
+       		</table>
+	        </div>
+	        <div id="eduaction" class="tab-pane fade">
+	          	<table class="table" style="border:0px solid #fff !important;">
+                   			<thead>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-users" aria-hidden="true"></i> Batch</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.batchNumber}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> YOP</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationYOP}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-graduation-cap" aria-hidden="true"></i> gType</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationType}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> Branch</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationBranch}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-university" aria-hidden="true"></i> College</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationCollege}}</td>
+                   				</tr>
+                   				<tr>
+                   					<th colspan="2" class="theadTextDataClass" style="text-align:center">% Percentages</th>
+                   					<th colspan="2" class="theadTextDataClass" style="text-align:center">% MathScores</th>
+              						<tr>
+	              						<th class="theadTextDataClass">10th</th>
+	              						<th class="theadTextDataClass">12th</th>
+	              						<th class="theadTextDataClass"> Grad </th>
+	              						<th class="theadTextDataClass"> Aggre </th>
+	              						<th class="theadTextDataClass">10th</th>
+	              						<th class="theadTextDataClass">12th</th>
+              						</tr>
+                   					<tr>
+                   						<td class="theadTextDataClass"> {{view.student.sscPercentage}}</td>
+                   						<td class="theadTextDataClass"> {{view.student.interPercentage}}</td>
+                   						<td class="theadTextDataClass"> {{view.student.graduationPercentage}}</td>
+                   						<td class="theadTextDataClass"> 90</td>
+                   						<td class="theadTextDataClass">80</td>
+                   						<td class="theadTextDataClass">90</td>
+                   					</tr>
+                   				</tr>
+                   			</thead>
+                   		</table>
+	        </div>
+	        <div id="fee" class="tab-pane fade">
+	          <table class="table">
+       			<thead>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> TotalFee</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.feeTotal}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeePaid</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.feePaid}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeeDue</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{(view.student.feeTotal-view.student.feePaid)}}</td>
+       				</tr>
+       			</thead>
+       		</table>
+	        </div>
+	        <div id="address" class="tab-pane fade">
+	            <table class="table">
+       			<thead>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> H.No</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.locality}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
+       				</tr>
+       			</thead>
+       		</table>
+	        </div>
+	        <div id="progressbar" class="tab-pane fade">
+	          <div id='progress'></div>
+			 	<div class='container-fluid' id='ChartProgress' style='width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
+			 	
+			 	<div class='row'>
+			 	<span id='ChartAError' style='color:#d00d0d;font-size:20px;'></span>
+			 	<canvas id='ChartA'  style='display:none;width:100%;height: auto;'></canvas>
+			 	</div>
+			 	<div class='row'>
+			 	<span id='ChartMError' style='color:#d00d0d;font-size:20px;'></span>
+			 	<canvas id='ChartM'  style='display:none;width:100%;height: auto;'></canvas> 	</div>
+			 	</div>
+	        </div>
+	    
+	        <div id="placement" class="tab-pane fade">
+	        <h3>Placement</h3>
+	        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	        </div>
+	    </div>
+    
+		
+		
+		
+		
+		 <!--<br><br><br>
+			<div style="position:sticky;top:0;position: -webkit-sticky;">
+			<div class="panel-group" id="accordion" style="margin-top:5%;">
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title panelHeadTextData">
+                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse1">Personal Details</a>
+                   </h4>
+                 </div>
+                 <div id="collapse1" class="panel-collapse collapse">
+                   <div class="panel-body">
+                   		<table class="table">
+                   			<thead>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FullName</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.fullName}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
+                   				</tr>
+                   			</thead>
+                   		</table>
+                   </div>
+                 </div>
+               </div>
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title panelHeadTextData">
+                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse2">Education Details</a>
+                   </h4>
+                 </div>
+                 <div id="collapse2" class="panel-collapse collapse">
+                   <div class="panel-body">
+                   		<table class="table" style="border:0px solid #fff !important;">
+                   			<thead>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-users" aria-hidden="true"></i> Batch</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.batchNumber}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> YOP</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationYOP}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-graduation-cap" aria-hidden="true"></i> gType</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationType}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> Branch</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationBranch}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-university" aria-hidden="true"></i> College</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.graduationCollege}}</td>
+                   				</tr>
+                   				<tr>
+                   					<th colspan="2" class="theadTextDataClass"><i class="fa fa-percent" aria-hidden="true"></i> Percentages</th>
+                   					<th colspan="2" class="theadTextDataClass"><i class="fa fa-percent" aria-hidden="true"></i> MathScores</th>
+              						<tr>
+	              						<th class="theadTextDataClass">10th</th>
+	              						<th class="theadTextDataClass">12th</th>
+	              						<th class="theadTextDataClass"> Grad </th>
+	              						<th class="theadTextDataClass"> Aggre </th>
+	              						<th class="theadTextDataClass">10th</th>
+	              						<th class="theadTextDataClass">12th</th>
+              						</tr>
+                   					<tr>
+                   						<td class="theadTextDataClass"> {{view.student.sscPercentage}}</td>
+                   						<td class="theadTextDataClass"> {{view.student.interPercentage}}</td>
+                   						<td class="theadTextDataClass"> {{view.student.graduationPercentage}}</td>
+                   						<td class="theadTextDataClass"> {{(view.student.sscPercentage+view.student.interPercentage+view.student.graduationPercentage)/3}}</td>
+                   						<td class="theadTextDataClass">80</td>
+                   						<td class="theadTextDataClass">90</td>
+                   					</tr>
+                   				</tr>
+                   			</thead>
+                   		</table>
+                   	</div>
+                 </div>
+               </div>
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title panelHeadTextData">
+                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse3">Fee Details</a>
+                   </h4>
+                 </div>
+                 <div id="collapse3" class="panel-collapse collapse">
+                   <div class="panel-body">
+                   		<table class="table">
+                   			<thead>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> TotalFee</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.feeTotal}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeePaid</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.feePaid}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FeeDue</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{(view.student.feeTotal-view.student.feePaid)}}</td>
+                   				</tr>
+                   			</thead>
+                   		</table>
+                   	</div>
+                 </div>
+               </div>
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title panelHeadTextData">
+                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse4">Address</a>
+                   </h4>
+                 </div>
+                 <div id="collapse4" class="panel-collapse collapse">
+                   <div class="panel-body">
+                   	<table class="table">
+                   			<thead>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> FullName</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.fullName}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> ParentName</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.parentName}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Gender</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.gender}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-calendar" aria-hidden="true"></i> DOB</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.dob}}</td>
+                   				</tr>
+                   				<tr>
+                   					<td class="theadTextDataClassForDetails"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email</td>
+                   					<td style="color:#444444 !important">:</td>
+                   					<td class="theadTextDataClassForDetails"> {{view.student.email}}</td>
+                   				</tr>
+                   			</thead>
+                   		</table>
+                   </div>
+                 </div>
+               </div>
+               <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title panelHeadTextData">
+                     <a data-toggle="collapse" class="hoverColorChange" data-parent="#accordion" href="#collapse5">Progress</a>
+                   </h4>
+                 </div>
+                 <div id="collapse5" class="panel-collapse collapse">
+                   <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                 </div>
+               </div>
+             </div>
+             </div>
+		</div> -->
+	</div>
+</div>
 
+<br><br>
+<br><br>
+<br><br>
 <div class="row">
 	<div class="col-md-1">
 		<p>
@@ -1267,7 +2005,7 @@ $(document).ready( function(){
 	<div class="col-md-10" style="padding-left:0% !important;">
 		<div id="filterDiv" class='container-fluid' style="">
 			<div class='form-group col-md-2 col-sm-2'>
-				<input type='text'  placeholder='Student Name' ng-model="studentName" class='form-control inputFieldClass'>
+				<input type='text' style="margin-left: 3.5%;" placeholder='Student Name' ng-model="studentName" class='form-control inputFieldClass'>
 				<i ng-click='studentName=""' class="fa fa-times" style="color:#ff6666;float:right;" aria-hidden="true"></i>
 			</div>
 			<div class='form-group col-md-2 col-sm-2'>
@@ -1282,7 +2020,7 @@ $(document).ready( function(){
 			</div>
 			<div class='form-group col-md-2 col-sm-2'>
 				<select ng-model="batchNumber" class="form-control inputFieldClass">
-				<option value="" selected="selected">All Branches</option>
+				<option value="" selected="selected">All Batches</option>
 				<c:forEach items="${batches }" var="b">
 				<option value='${b.getBatchNumber() }'>${b.getBatchNumber() }</option>
 				</c:forEach>
@@ -1290,31 +2028,31 @@ $(document).ready( function(){
 			</div>
 			<div class='form-group col-md-2 col-sm-2'>
 				<select ng-model="branchName" class='form-control inputFieldClass'>
-				<option value="" selected>Branch</option>
-				 <optgroup label="B Tech or M Tech Branches">
-				  <option value="CSE">CSE</option>
-				  <option value="IT">IT</option>
-				  <option value="ECE">ECE</option>
-				  <option value="EEE">EEE</option>
-				  <option value="MECH">MECH</option>
-				  <option value="CIVIL">CIVIL</option>
-				  <option value="Aeronautical">Aeronautical</option>
-				  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
-				  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
-				  <option value="other">Any other</option>
-				  </optgroup>
-				  
-				  <optgroup label="Any other">
-				   <option value="Other">Any Other</option>
-				  </optgroup>
-				  
-				  <optgroup label="Degree groups">
-				  <option value="BSC Computers">BSC Computers</option>
-				  <option value="BSC General">BSC General</option>
-				  <option value="BCom">BCom</option>
-				   <option value="BA">BA</option>
-				   <option value="Other">Any Other</option>
-				  </optgroup>
+					<option value="" selected>Branch</option>
+				 	<optgroup label="B Tech or M Tech Branches">
+					  <option value="CSE">CSE</option>
+					  <option value="IT">IT</option>
+					  <option value="ECE">ECE</option>
+					  <option value="EEE">EEE</option>
+					  <option value="MECH">MECH</option>
+					  <option value="CIVIL">CIVIL</option>
+					  <option value="Aeronautical">Aeronautical</option>
+					  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
+					  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
+					  <option value="other">Any other</option>
+					  </optgroup>
+					  
+					  <optgroup label="Any other">
+					   <option value="Other">Any Other</option>
+					  </optgroup>
+					  
+					  <optgroup label="Degree groups">
+					  <option value="BSC Computers">BSC Computers</option>
+					  <option value="BSC General">BSC General</option>
+					  <option value="BCom">BCom</option>
+					   <option value="BA">BA</option>
+					   <option value="Other">Any Other</option>
+					  </optgroup>
 				</select>
 				<i class="fa fa-times" ng-click='branchName=""' style="color:#ff6666;float:right;" aria-hidden="true"></i>
 			</div>
@@ -1393,9 +2131,9 @@ $(document).ready( function(){
  		
  		
  		
- 		<tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationYOP: yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
+ 		<tbody>
  		
- 		<tr>
+ 		<tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { fullName: studentName, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
  		<td style="width:6% !important;"><div class='checkbox'><label><input ng-click="view.checkStudent(t,$event)" type='checkbox' style='height:15px;width:15px;margin-left:-17% !important;'></label></div></td>
  		<td class='tdText' style='padding-top:1% !important;'>
  		
@@ -1502,7 +2240,7 @@ $(document).ready( function(){
       </span>
  			
  			
- 			<h5 style='color:#ff6666;text-align:left;'>Personal-details</h5>
+ 				<h5 class="stdHeadTextClass">Personal-details</h5>
  				<div class='col-md-12 col-sm-12 detailsBoxClass'>
  					<div class="row">
  						<div class="col-md-6">
@@ -1516,48 +2254,44 @@ $(document).ready( function(){
 		 					<p class="textOfStdDetails" editable-bsdate="view.student.dob" e-is-open="opened.$data" e-name="dob" e-datepicker-popup="dd-MMMM-yyyy"><i class="fa fa-calendar" aria-hidden="true"></i> DOB : {{ (view.student.dob | date:"dd/MM/yyyy") || 'empty'}}</p>
  						</div>
  					</div>
-		 		</div>
-				 
-				 
-		
-				 
-				<h5 style='color:#ff6666;text-align:left'>Education-details</h5>
+		 		</div><br>
+				<h5 class="stdHeadTextClass">Education-details</h5>
 	 			<div class='col-md-12 col-sm-12 detailsBoxClass'>
 	 				<div class='row'>
 				 		<div class='col-md-12 col-sm-12'>
-				 			<p class="textOfStdDetails" editable-text="view.student.graduationYOP" e-name="graduationYOP">{{view.student.graduationYOP}}</p>
-				 			<p class="textOfStdDetails" editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches">{{view.student.graduationBranch}}</p>	
-				 			<p class="textOfStdDetails" editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes">{{view.student.graduationType}}</p>
-				 			<p class="textOfStdDetails" editable-text="view.student.graduationCollege" e-name="graduationCollege">{{view.student.graduationCollege}}</p>
+				 			<p class="textOfStdDetails col-md-6" editable-text="view.student.graduationYOP" e-name="graduationYOP"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> YOP : {{view.student.graduationYOP}}</p>
+				 			<p class="textOfStdDetails col-md-6" editable-select="view.student.graduationBranch" e-name="graduationBranch" e-ng-options="s.value as s.text for s in graduationBranches"><i class="fa fa-building-o" aria-hidden="true"></i> Branch : {{view.student.graduationBranch}}</p>	
+				 			<p class="textOfStdDetails col-md-6" editable-select="view.student.graduationType" e-name="graduationType" e-ng-options="s.value as s.text for s in graduationTypes"><i class="fa fa-graduation-cap" aria-hidden="true"></i> GType : {{view.student.graduationType}}</p>
+				 			<p class="textOfStdDetails col-md-6" editable-text="view.student.graduationCollege" e-name="graduationCollege"><i class="fa fa-university" aria-hidden="true"></i> College : {{view.student.graduationCollege}}</p>
 				 		</div>
 				 	</div>
 				 	<div class="row">
 				 		<div class="col-md-12 col-sm-12">
-				 			<div style="border:1px solid #00a69c;border-radius:10px;padding:1%;width:100%;">
+				 			<div style="border:1px solid #00a69c;border-radius:10px;padding:1% 2% 1% 2%;width:100%;">
 				 				<p class="textOfStdDetails">
 				 					<div class="progress">
-					    				<div  editable-text="view.student.sscPercentage" e-name="sscPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.sscPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.sscPercentage}}%;">
+					    				<div  editable-text="view.student.sscPercentage" e-name="sscPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.sscPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.sscPercentage}}%;">
 					      					SSC : {{view.student.sscPercentage}}%
 					    				</div>
 					 				</div>
 				 				</p>
 				 				<p class="textOfStdDetails">
 				 					<div class="progress">
-					    				<div editable-text="view.student.interPercentage" e-name="interPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.interPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.interPercentage}}%;">
+					    				<div editable-text="view.student.interPercentage" e-name="interPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.interPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.interPercentage}}%;">
 					      					Inter : {{view.student.interPercentage}}%
 					    				</div>
 					 				</div>
 				 				</p>
 				 				<p class="textOfStdDetails">
 				 					<div class="progress">
-					    				<div editable-text="view.student.graduationPercentage" e-name="graduationPercentage" class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.graduationPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.graduationPercentage}}%;">
+					    				<div editable-text="view.student.graduationPercentage" e-name="graduationPercentage" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.graduationPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.graduationPercentage}}%;">
 					      					Degree : {{view.student.graduationPercentage}}%
 					    				</div>
 					 				</div>
 				 				</p>
 				 				<p class="textOfStdDetails">
 				 					<div class="progress">
-					    				<div editable-text="view.student.aggregate" e-name="aggregate"  class="progress-bar progress-bar-striped active textOfStdDetails" role="progressbar" aria-valuenow="{{view.student.aggregate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.aggregate}}%;">
+					    				<div editable-text="view.student.aggregate" e-name="aggregate" class="progress-bar progress-bar-striped active textOfStdDetails progressBarClass" role="progressbar" aria-valuenow="{{view.student.aggregate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{view.student.aggregate}}%;">
 					      					Aggregation : {{view.student.aggregate}}%
 					    				</div>
 					 				</div>
@@ -1566,38 +2300,24 @@ $(document).ready( function(){
 				 		</div>
 				 	</div>
 				 </div>
-				 
-				 <h5 style='color:#ff6666;text-align:left;'>Contact-details</h5>
+				 <br>
+				 <h5 class="stdHeadTextClass">Contact-details</h5>
 				 <div class="col-md-12 col-sm-12 detailsBoxClass">
-	 				<div class='col-md-6 col-sm-12'>
-			 			<p class="textOfStdDetails" editable-text="view.student.email" e-name="email">{{view.student.email}}</p>
-			 			<p class="textOfStdDetails" editable-text="view.student.mobile" e-name="mobile">{{view.student.mobile}}</p>
-			 			
-			 			<p class="textOfStdDetails" editable-text="view.student.mobile_Parent" e-name="mobile_Parent">{{view.student.mobile_Parent}}</p>
-			 		</div>
-			 		<div class="col-md-6 col-sm-6">
+		 			<p class="textOfStdDetails col-md-12 col-sm-12" editable-text="view.student.email" e-name="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email : {{view.student.email}}</p>
+		 			<p class="textOfStdDetails col-md-6 col-sm-12" editable-text="view.student.mobile" e-name="mobile"><i class="fa fa-mobile" aria-hidden="true"></i> S Mobile : {{view.student.mobile}}</p>
+		 			
+		 			<p class="textOfStdDetails col-md-6 col-sm-12" editable-text="view.student.mobile_Parent" e-name="mobile_Parent"><i class="fa fa-mobile" aria-hidden="true"></i> P Mobile :{{view.student.mobile_Parent}}</p>
+		 			<h5 class="stdHeadTextClass"><i class="fa fa-address-card" aria-hidden="true"></i> Address</h5>
+		 			<div class="col-md-8 detailsBoxClass">
 			 			<p class="textOfStdDetails" editable-text="view.student.locality" e-name="locality">{{view.student.locality}}</p>
 			 			<p class="textOfStdDetails" editable-text="view.student.city" e-name="city">{{view.student.city}}</p>
 			 			<p class="textOfStdDetails" editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states">{{view.student.state}}</p>
-			 			<button style="width:30%;margin:auto;display:block;font-size:13px;" class="btn btn-default">View In Maps</button>
-			 		</div>
+		 			</div>
+		 			<div class="col-md-4">
+		 				<button style="width:8%;margin:auto;display:block;font-size:13px;" class="btn btn-default">View In Maps</button>
+		 			</div>
 			 	</div>
 			</div>
-		
-			<div id='progress'></div>
- 	<div class='container-fluid' id='ChartProgress' style='width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
- 	
- 	<div class='row'>
- 	<span id='ChartAError' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='ChartA'  style='display:none;width:100%;height: auto;'></canvas>
- 	</div>
- 	<div class='row'>
- 	<span id='ChartMError' style='color:#d00d0d;font-size:20px;'></span>
- 	<canvas id='ChartM'  style='display:none;width:100%;height: auto;'></canvas> 	</div>
- 	</div>
-			
-			
-			
 		</form>
 		</div>
 		</div>
@@ -1619,10 +2339,10 @@ $(document).ready( function(){
 
 
 
-<div class='container-fluid' style='width:30%;position:fixed;right:0;bottom:0 !important;z-index:10;'><div class='row'>
+<!-- <div class='container-fluid' style='width:30%;position:fixed;right:0;bottom:0 !important;z-index:10;'><div class='row'>
 <div class='col-md-6'><button class='btn btn-default saveBtnsInSearch' style='float:left !important;' data-toggle="modal" data-target="#myModalMail">Send Mail</button></div>
 <div class='col-md-6'><button class='btn btn-default saveBtnsInSearch'  data-toggle="modal" data-target="#myModal" style='float:right !important;'>Save To Excel</button></div>
-</div></div><br>
+</div></div><br> -->
 
 </div>
 
@@ -2909,4 +3629,1662 @@ $(function() {
  .trigger('change');
 });
 </script>
+<script>
+function myFunction() {
+    var url="/WebContent/WEB-INF/views/stdProfilePage.html";
+    var myWindow = window.open(url);
+    //myWindow.resizeTo(1440,1000);
+}
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	$('#multi-select-demotype').multiselect();
+    	$('#multi-select-demobranch').multiselect();
+    	$('#multi-select-demobatch').multiselect();
+    	$('#multi-select-demoyop').multiselect();
+        $('#multi-select-demoSscForModel').multiselect();
+        $('#multi-select-demoInterForModel').multiselect();
+        $('#multi-select-demoDegreeForModel').multiselect();
+        $('#multi-select-demoAggreForModel').multiselect();
+        
+        $('#multi-select-FeeForModel').multiselect();
+        $('#multi-select-StateForModel').multiselect();
+
+    });
+</script>
+
+<script>
+/**
+ * Bootstrap Multiselect (https://github.com/davidstutz/bootstrap-multiselect)
+ * 
+ * Apache License, Version 2.0:
+ * Copyright (c) 2012 - 2015 David Stutz
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a
+ * copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ * 
+ * BSD 3-Clause License:
+ * Copyright (c) 2012 - 2015 David Stutz
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *    - Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *    - Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *    - Neither the name of David Stutz nor the names of its contributors may be
+ *      used to endorse or promote products derived from this software without
+ *      specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+!function ($) {
+    "use strict";// jshint ;_;
+
+    if (typeof ko !== 'undefined' && ko.bindingHandlers && !ko.bindingHandlers.multiselect) {
+        ko.bindingHandlers.multiselect = {
+            after: ['options', 'value', 'selectedOptions', 'enable', 'disable'],
+
+            init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+                var $element = $(element);
+                var config = ko.toJS(valueAccessor());
+
+                $element.multiselect(config);
+
+                if (allBindings.has('options')) {
+                    var options = allBindings.get('options');
+                    if (ko.isObservable(options)) {
+                        ko.computed({
+                            read: function() {
+                                options();
+                                setTimeout(function() {
+                                    var ms = $element.data('multiselect');
+                                    if (ms)
+                                        ms.updateOriginalOptions();//Not sure how beneficial this is.
+                                    $element.multiselect('rebuild');
+                                }, 1);
+                            },
+                            disposeWhenNodeIsRemoved: element
+                        });
+                    }
+                }
+
+                //value and selectedOptions are two-way, so these will be triggered even by our own actions.
+                //It needs some way to tell if they are triggered because of us or because of outside change.
+                //It doesn't loop but it's a waste of processing.
+                if (allBindings.has('value')) {
+                    var value = allBindings.get('value');
+                    if (ko.isObservable(value)) {
+                        ko.computed({
+                            read: function() {
+                                value();
+                                setTimeout(function() {
+                                    $element.multiselect('refresh');
+                                }, 1);
+                            },
+                            disposeWhenNodeIsRemoved: element
+                        }).extend({ rateLimit: 100, notifyWhenChangesStop: true });
+                    }
+                }
+
+                //Switched from arrayChange subscription to general subscription using 'refresh'.
+                //Not sure performance is any better using 'select' and 'deselect'.
+                if (allBindings.has('selectedOptions')) {
+                    var selectedOptions = allBindings.get('selectedOptions');
+                    if (ko.isObservable(selectedOptions)) {
+                        ko.computed({
+                            read: function() {
+                                selectedOptions();
+                                setTimeout(function() {
+                                    $element.multiselect('refresh');
+                                }, 1);
+                            },
+                            disposeWhenNodeIsRemoved: element
+                        }).extend({ rateLimit: 100, notifyWhenChangesStop: true });
+                    }
+                }
+
+                var setEnabled = function (enable) {
+                    setTimeout(function () {
+                        if (enable)
+                            $element.multiselect('enable');
+                        else
+                            $element.multiselect('disable');
+                    });
+                };
+
+                if (allBindings.has('enable')) {
+                    var enable = allBindings.get('enable');
+                    if (ko.isObservable(enable)) {
+                        ko.computed({
+                            read: function () {
+                                setEnabled(enable());
+                            },
+                            disposeWhenNodeIsRemoved: element
+                        }).extend({ rateLimit: 100, notifyWhenChangesStop: true });
+                    } else {
+                        setEnabled(enable);
+                    }
+                }
+
+                if (allBindings.has('disable')) {
+                    var disable = allBindings.get('disable');
+                    if (ko.isObservable(disable)) {
+                        ko.computed({
+                            read: function () {
+                                setEnabled(!disable());
+                            },
+                            disposeWhenNodeIsRemoved: element
+                        }).extend({ rateLimit: 100, notifyWhenChangesStop: true });
+                    } else {
+                        setEnabled(!disable);
+                    }
+                }
+
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                    $element.multiselect('destroy');
+                });
+            },
+
+            update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+                var $element = $(element);
+                var config = ko.toJS(valueAccessor());
+
+                $element.multiselect('setOptions', config);
+                $element.multiselect('rebuild');
+            }
+        };
+    }
+
+    function forEach(array, callback) {
+        for (var index = 0; index < array.length; ++index) {
+            callback(array[index], index);
+        }
+    }
+
+    /**
+     * Constructor to create a new multiselect using the given select.
+     *
+     * @param {jQuery} select
+     * @param {Object} options
+     * @returns {Multiselect}
+     */
+    function Multiselect(select, options) {
+
+        this.$select = $(select);
+        
+        // Placeholder via data attributes
+        if (this.$select.attr("data-placeholder")) {
+            options.nonSelectedText = this.$select.data("placeholder");
+        }
+        
+        this.options = this.mergeOptions($.extend({}, options, this.$select.data()));
+
+        // Initialization.
+        // We have to clone to create a new reference.
+        this.originalOptions = this.$select.clone()[0].options;
+        this.query = '';
+        this.searchTimeout = null;
+        this.lastToggledInput = null;
+
+        this.options.multiple = this.$select.attr('multiple') === "multiple";
+        this.options.onChange = $.proxy(this.options.onChange, this);
+        this.options.onDropdownShow = $.proxy(this.options.onDropdownShow, this);
+        this.options.onDropdownHide = $.proxy(this.options.onDropdownHide, this);
+        this.options.onDropdownShown = $.proxy(this.options.onDropdownShown, this);
+        this.options.onDropdownHidden = $.proxy(this.options.onDropdownHidden, this);
+        this.options.onInitialized = $.proxy(this.options.onInitialized, this);
+        
+        // Build select all if enabled.
+        this.buildContainer();
+        this.buildButton();
+        this.buildDropdown();
+        this.buildSelectAll();
+        this.buildDropdownOptions();
+        this.buildFilter();
+
+        this.updateButtonText();
+        this.updateSelectAll(true);
+
+        if (this.options.disableIfEmpty && $('option', this.$select).length <= 0) {
+            this.disable();
+        }
+        
+        this.$select.hide().after(this.$container);
+        this.options.onInitialized(this.$select, this.$container);
+    }
+
+    Multiselect.prototype = {
+
+        defaults: {
+            /**
+             * Default text function will either print 'None selected' in case no
+             * option is selected or a list of the selected options up to a length
+             * of 3 selected options.
+             * 
+             * @param {jQuery} options
+             * @param {jQuery} select
+             * @returns {String}
+             */
+            buttonText: function(options, select) {
+                if (this.disabledText.length > 0 
+                        && (this.disableIfEmpty || select.prop('disabled')) 
+                        && options.length == 0) {
+                    
+                    return this.disabledText;
+                }
+                else if (options.length === 0) {
+                    return this.nonSelectedText;
+                }
+                else if (this.allSelectedText 
+                        && options.length === $('option', $(select)).length 
+                        && $('option', $(select)).length !== 1 
+                        && this.multiple) {
+
+                    if (this.selectAllNumber) {
+                        return this.allSelectedText + ' (' + options.length + ')';
+                    }
+                    else {
+                        return this.allSelectedText;
+                    }
+                }
+                else if (options.length > this.numberDisplayed) {
+                    return options.length + ' ' + this.nSelectedText;
+                }
+                else {
+                    var selected = '';
+                    var delimiter = this.delimiterText;
+                    
+                    options.each(function() {
+                        var label = ($(this).attr('label') !== undefined) ? $(this).attr('label') : $(this).text();
+                        selected += label + delimiter;
+                    });
+                    
+                    return selected.substr(0, selected.length - 2);
+                }
+            },
+            /**
+             * Updates the title of the button similar to the buttonText function.
+             * 
+             * @param {jQuery} options
+             * @param {jQuery} select
+             * @returns {@exp;selected@call;substr}
+             */
+            buttonTitle: function(options, select) {
+                if (options.length === 0) {
+                    return this.nonSelectedText;
+                }
+                else {
+                    var selected = '';
+                    var delimiter = this.delimiterText;
+                    
+                    options.each(function () {
+                        var label = ($(this).attr('label') !== undefined) ? $(this).attr('label') : $(this).text();
+                        selected += label + delimiter;
+                    });
+                    return selected.substr(0, selected.length - 2);
+                }
+            },
+            /**
+             * Create a label.
+             *
+             * @param {jQuery} element
+             * @returns {String}
+             */
+            optionLabel: function(element){
+                return $(element).attr('label') || $(element).text();
+            },
+            /**
+             * Create a class.
+             *
+             * @param {jQuery} element
+             * @returns {String}
+             */
+            optionClass: function(element) {
+                return $(element).attr('class') || '';
+            },
+            /**
+             * Triggered on change of the multiselect.
+             * 
+             * Not triggered when selecting/deselecting options manually.
+             * 
+             * @param {jQuery} option
+             * @param {Boolean} checked
+             */
+            onChange : function(option, checked) {
+
+            },
+            /**
+             * Triggered when the dropdown is shown.
+             *
+             * @param {jQuery} event
+             */
+            onDropdownShow: function(event) {
+
+            },
+            /**
+             * Triggered when the dropdown is hidden.
+             *
+             * @param {jQuery} event
+             */
+            onDropdownHide: function(event) {
+
+            },
+            /**
+             * Triggered after the dropdown is shown.
+             * 
+             * @param {jQuery} event
+             */
+            onDropdownShown: function(event) {
+                
+            },
+            /**
+             * Triggered after the dropdown is hidden.
+             * 
+             * @param {jQuery} event
+             */
+            onDropdownHidden: function(event) {
+                
+            },
+            /**
+             * Triggered on select all.
+             */
+            onSelectAll: function(checked) {
+                
+            },
+            /**
+             * Triggered after initializing.
+             *
+             * @param {jQuery} $select
+             * @param {jQuery} $container
+             */
+            onInitialized: function($select, $container) {
+
+            },
+            enableHTML: false,
+            buttonClass: 'btn btn-default',
+            inheritClass: false,
+            buttonWidth: 'auto',
+            buttonContainer: '<div class="btn-group" />',
+            dropRight: false,
+            dropUp: false,
+            selectedClass: 'active',
+            // Maximum height of the dropdown menu.
+            // If maximum height is exceeded a scrollbar will be displayed.
+            maxHeight: false,
+            checkboxName: false,
+            includeSelectAllOption: false,
+            includeSelectAllIfMoreThan: 0,
+            selectAllText: ' Select all',
+            selectAllValue: 'multiselect-all',
+            selectAllName: false,
+            selectAllNumber: true,
+            selectAllJustVisible: true,
+            enableFiltering: false,
+            enableCaseInsensitiveFiltering: false,
+            enableFullValueFiltering: false,
+            enableClickableOptGroups: false,
+            enableCollapsibelOptGroups: false,
+            filterPlaceholder: 'Search',
+            // possible options: 'text', 'value', 'both'
+            filterBehavior: 'text',
+            includeFilterClearBtn: true,
+            preventInputChangeEvent: false,
+            nonSelectedText: 'All',
+            nSelectedText: 'selected',
+            allSelectedText: 'All selected',
+            numberDisplayed: 3,
+            disableIfEmpty: false,
+            disabledText: '',
+            delimiterText: ', ',
+            templates: {
+                button: '<button type="button" style="font-family: Segoe UI,Trebuchet MS,Sans-Serif;align-items: center;border-color: rgb(169, 169, 169) !important;margin-left: -16px !important;white-space: pre;-webkit-rtl-ordering: logical;color: black;background-color: white;border-width: 1px;border-style: solid;border-color: initial;border-image: initial;display:block !important;border-radius:0px !important;font-size:12px;padding: 2px 0px 2px 2px;" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret" style="margin-left: 94px;margin-right: 2px;"></b></button>',
+                ul: '<ul class="multiselect-container dropdown-menu" style="height:150px;overflow-y:scroll;font-size:12px !important;border-radius:0px !important;font-family: Segoe UI,Trebuchet MS,Sans-Serif;"></ul>',
+                filter: '<li class="multiselect-item filter"  style="font-family: Segoe UI,Trebuchet MS,Sans-Serif;"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
+                li: '<li  style="font-family: Segoe UI,Trebuchet MS,Sans-Serif;"><a tabindex="0"><label  style="padding: 3px 0px 3px 28px !important;font-family: Segoe UI,Trebuchet MS,Sans-Serif !important;font-weight:normal !important;"></label></a></li>',
+                divider: '<li class="multiselect-item divider"></li>',
+                liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+            }
+        },
+
+        constructor: Multiselect,
+
+        /**
+         * 
+         * Builds the container of the multiselect.
+         */
+        buildContainer: function() {
+            this.$container = $(this.options.buttonContainer);
+            this.$container.on('show.bs.dropdown', this.options.onDropdownShow);
+            this.$container.on('hide.bs.dropdown', this.options.onDropdownHide);
+            this.$container.on('shown.bs.dropdown', this.options.onDropdownShown);
+            this.$container.on('hidden.bs.dropdown', this.options.onDropdownHidden);
+        },
+
+        /**
+         * Builds the button of the multiselect.
+         */
+        buildButton: function() {
+            this.$button = $(this.options.templates.button).addClass(this.options.buttonClass);
+            if (this.$select.attr('class') && this.options.inheritClass) {
+                this.$button.addClass(this.$select.attr('class'));
+            }
+            // Adopt active state.
+            if (this.$select.prop('disabled')) {
+                this.disable();
+            }
+            else {
+                this.enable();
+            }
+
+            // Manually add button width if set.
+            if (this.options.buttonWidth && this.options.buttonWidth !== 'auto') {
+                this.$button.css({
+                    'width' : this.options.buttonWidth,
+                    'overflow' : 'hidden',
+                    'text-overflow' : 'ellipsis'
+                });
+                this.$container.css({
+                    'width': this.options.buttonWidth
+                });
+            }
+
+            // Keep the tab index from the select.
+            var tabindex = this.$select.attr('tabindex');
+            if (tabindex) {
+                this.$button.attr('tabindex', tabindex);
+            }
+
+            this.$container.prepend(this.$button);
+        },
+
+        /**
+         * Builds the ul representing the dropdown menu.
+         */
+        buildDropdown: function() {
+
+            // Build ul.
+            this.$ul = $(this.options.templates.ul);
+
+            if (this.options.dropRight) {
+                this.$ul.addClass('pull-right');
+            }
+
+            // Set max height of dropdown menu to activate auto scrollbar.
+            if (this.options.maxHeight) {
+                // TODO: Add a class for this option to move the css declarations.
+                this.$ul.css({
+                    'max-height': this.options.maxHeight + 'px',
+                    'overflow-y': 'auto',
+                    'overflow-x': 'hidden'
+                });
+            }
+            
+            if (this.options.dropUp) {
+                
+                var height = Math.min(this.options.maxHeight, $('option[data-role!="divider"]', this.$select).length*26 + $('option[data-role="divider"]', this.$select).length*19 + (this.options.includeSelectAllOption ? 26 : 0) + (this.options.enableFiltering || this.options.enableCaseInsensitiveFiltering ? 44 : 0));
+                var moveCalc = height + 34;
+                
+                this.$ul.css({
+                    'max-height': height + 'px',
+                    'overflow-y': 'auto',
+                    'overflow-x': 'hidden',
+                    'margin-top': "-" + moveCalc + 'px'
+                });
+            }
+            
+            this.$container.append(this.$ul);
+        },
+
+        /**
+         * Build the dropdown options and binds all nessecary events.
+         * 
+         * Uses createDivider and createOptionValue to create the necessary options.
+         */
+        buildDropdownOptions: function() {
+
+            this.$select.children().each($.proxy(function(index, element) {
+
+                var $element = $(element);
+                // Support optgroups and options without a group simultaneously.
+                var tag = $element.prop('tagName')
+                    .toLowerCase();
+            
+                if ($element.prop('value') === this.options.selectAllValue) {
+                    return;
+                }
+
+                if (tag === 'optgroup') {
+                    this.createOptgroup(element);
+                }
+                else if (tag === 'option') {
+
+                    if ($element.data('role') === 'divider') {
+                        this.createDivider();
+                    }
+                    else {
+                        this.createOptionValue(element);
+                    }
+
+                }
+
+                // Other illegal tags will be ignored.
+            }, this));
+
+            // Bind the change event on the dropdown elements.
+            $('li input', this.$ul).on('change', $.proxy(function(event) {
+                var $target = $(event.target);
+
+                var checked = $target.prop('checked') || false;
+                var isSelectAllOption = $target.val() === this.options.selectAllValue;
+
+                // Apply or unapply the configured selected class.
+                if (this.options.selectedClass) {
+                    if (checked) {
+                        $target.closest('li')
+                            .addClass(this.options.selectedClass);
+                    }
+                    else {
+                        $target.closest('li')
+                            .removeClass(this.options.selectedClass);
+                    }
+                }
+
+                // Get the corresponding option.
+                var value = $target.val();
+                var $option = this.getOptionByValue(value);
+
+                var $optionsNotThis = $('option', this.$select).not($option);
+                var $checkboxesNotThis = $('input', this.$container).not($target);
+
+                if (isSelectAllOption) {
+                    if (checked) {
+                        this.selectAll(this.options.selectAllJustVisible);
+                    }
+                    else {
+                        this.deselectAll(this.options.selectAllJustVisible);
+                    }
+                }
+                else {
+                    if (checked) {
+                        $option.prop('selected', true);
+
+                        if (this.options.multiple) {
+                            // Simply select additional option.
+                            $option.prop('selected', true);
+                        }
+                        else {
+                            // Unselect all other options and corresponding checkboxes.
+                            if (this.options.selectedClass) {
+                                $($checkboxesNotThis).closest('li').removeClass(this.options.selectedClass);
+                            }
+
+                            $($checkboxesNotThis).prop('checked', false);
+                            $optionsNotThis.prop('selected', false);
+
+                            // It's a single selection, so close.
+                            this.$button.click();
+                        }
+
+                        if (this.options.selectedClass === "active") {
+                            $optionsNotThis.closest("a").css("outline", "");
+                        }
+                    }
+                    else {
+                        // Unselect option.
+                        $option.prop('selected', false);
+                    }
+                    
+                    // To prevent select all from firing onChange: #575
+                    this.options.onChange($option, checked);
+                }
+
+                this.$select.change();
+
+                this.updateButtonText();
+                this.updateSelectAll();
+
+                if(this.options.preventInputChangeEvent) {
+                    return false;
+                }
+            }, this));
+
+            $('li a', this.$ul).on('mousedown', function(e) {
+                if (e.shiftKey) {
+                    // Prevent selecting text by Shift+click
+                    return false;
+                }
+            });
+        
+            $('li a', this.$ul).on('touchstart click', $.proxy(function(event) {
+                event.stopPropagation();
+
+                var $target = $(event.target);
+                
+                if (event.shiftKey && this.options.multiple) {
+                    if($target.is("label")){ // Handles checkbox selection manually (see https://github.com/davidstutz/bootstrap-multiselect/issues/431)
+                        event.preventDefault();
+                        $target = $target.find("input");
+                        $target.prop("checked", !$target.prop("checked"));
+                    }
+                    var checked = $target.prop('checked') || false;
+
+                    if (this.lastToggledInput !== null && this.lastToggledInput !== $target) { // Make sure we actually have a range
+                        var from = $target.closest("li").index();
+                        var to = this.lastToggledInput.closest("li").index();
+                        
+                        if (from > to) { // Swap the indices
+                            var tmp = to;
+                            to = from;
+                            from = tmp;
+                        }
+                        
+                        // Make sure we grab all elements since slice excludes the last index
+                        ++to;
+                        
+                        // Change the checkboxes and underlying options
+                        var range = this.$ul.find("li").slice(from, to).find("input");
+                        
+                        range.prop('checked', checked);
+                        
+                        if (this.options.selectedClass) {
+                            range.closest('li')
+                                .toggleClass(this.options.selectedClass, checked);
+                        }
+                        
+                        for (var i = 0, j = range.length; i < j; i++) {
+                            var $checkbox = $(range[i]);
+
+                            var $option = this.getOptionByValue($checkbox.val());
+
+                            $option.prop('selected', checked);
+                        }                   
+                    }
+                    
+                    // Trigger the select "change" event
+                    $target.trigger("change");
+                }
+                
+                // Remembers last clicked option
+                if($target.is("input") && !$target.closest("li").is(".multiselect-item")){
+                    this.lastToggledInput = $target;
+                }
+
+                $target.blur();
+            }, this));
+
+            // Keyboard support.
+            this.$container.off('keydown.multiselect').on('keydown.multiselect', $.proxy(function(event) {
+                if ($('input[type="text"]', this.$container).is(':focus')) {
+                    return;
+                }
+
+                if (event.keyCode === 9 && this.$container.hasClass('open')) {
+                    this.$button.click();
+                }
+                else {
+                    var $items = $(this.$container).find("li:not(.divider):not(.disabled) a").filter(":visible");
+
+                    if (!$items.length) {
+                        return;
+                    }
+
+                    var index = $items.index($items.filter(':focus'));
+
+                    // Navigation up.
+                    if (event.keyCode === 38 && index > 0) {
+                        index--;
+                    }
+                    // Navigate down.
+                    else if (event.keyCode === 40 && index < $items.length - 1) {
+                        index++;
+                    }
+                    else if (!~index) {
+                        index = 0;
+                    }
+
+                    var $current = $items.eq(index);
+                    $current.focus();
+
+                    if (event.keyCode === 32 || event.keyCode === 13) {
+                        var $checkbox = $current.find('input');
+
+                        $checkbox.prop("checked", !$checkbox.prop("checked"));
+                        $checkbox.change();
+                    }
+
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            }, this));
+
+            if(this.options.enableClickableOptGroups && this.options.multiple) {
+                $('li.multiselect-group', this.$ul).on('click', $.proxy(function(event) {
+                    event.stopPropagation();
+                    console.log('test');
+                    var group = $(event.target).parent();
+
+                    // Search all option in optgroup
+                    var $options = group.nextUntil('li.multiselect-group');
+                    var $visibleOptions = $options.filter(":visible:not(.disabled)");
+
+                    // check or uncheck items
+                    var allChecked = true;
+                    var optionInputs = $visibleOptions.find('input');
+                    var values = [];
+                    
+                    optionInputs.each(function() {
+                        allChecked = allChecked && $(this).prop('checked');
+                        values.push($(this).val());
+                    });
+
+                    if (!allChecked) {
+                        this.select(values, false);
+                    }
+                    else {
+                        this.deselect(values, false);
+                    }
+                    
+                    this.options.onChange(optionInputs, !allChecked);
+               }, this));
+            }
+
+            if (this.options.enableCollapsibleOptGroups && this.options.multiple) {
+                $("li.multiselect-group input", this.$ul).off();
+                $("li.multiselect-group", this.$ul).siblings().not("li.multiselect-group, li.multiselect-all", this.$ul).each( function () {
+                    $(this).toggleClass('hidden', true);
+                });
+                
+                $("li.multiselect-group", this.$ul).on("click", $.proxy(function(group) {
+                    group.stopPropagation();
+                }, this));
+                
+                $("li.multiselect-group > a > b", this.$ul).on("click", $.proxy(function(t) {
+                    t.stopPropagation();
+                    var n = $(t.target).closest('li');
+                    var r = n.nextUntil("li.multiselect-group");
+                    var i = true;
+                    
+                    r.each(function() {
+                        i = i && $(this).hasClass('hidden');
+                    });
+                    
+                    r.toggleClass('hidden', !i);
+                }, this));
+                
+                $("li.multiselect-group > a > input", this.$ul).on("change", $.proxy(function(t) {
+                    t.stopPropagation();
+                    var n = $(t.target).closest('li');
+                    var r = n.nextUntil("li.multiselect-group", ':not(.disabled)');
+                    var s = r.find("input");
+                    
+                    var i = true;
+                    s.each(function() {
+                        i = i && $(this).prop("checked");
+                    });
+                    
+                    s.prop("checked", !i).trigger("change");
+                }, this));
+                
+                // Set the initial selection state of the groups.
+                $('li.multiselect-group', this.$ul).each(function() {
+                    var r = $(this).nextUntil("li.multiselect-group", ':not(.disabled)');
+                    var s = r.find("input");
+                    
+                    var i = true;
+                    s.each(function() {
+                        i = i && $(this).prop("checked");
+                    });
+                    
+                    $(this).find('input').prop("checked", i);
+                });
+                
+                // Update the group checkbox based on new selections among the
+                // corresponding children.
+                $("li input", this.$ul).on("change", $.proxy(function(t) {
+                    t.stopPropagation();
+                    var n = $(t.target).closest('li');
+                    var r1 = n.prevUntil("li.multiselect-group", ':not(.disabled)');
+                    var r2 = n.nextUntil("li.multiselect-group", ':not(.disabled)');
+                    var s1 = r1.find("input");
+                    var s2 = r2.find("input");
+                    
+                    var i = $(t.target).prop('checked');
+                    s1.each(function() {
+                        i = i && $(this).prop("checked");
+                    });
+                    
+                    s2.each(function() {
+                        i = i && $(this).prop("checked");
+                    });
+                    
+                    n.prevAll('.multiselect-group').find('input').prop('checked', i);
+                }, this));
+                
+                $("li.multiselect-all", this.$ul).css('background', '#f3f3f3').css('border-bottom', '1px solid #eaeaea');
+                $("li.multiselect-group > a, li.multiselect-all > a > label.checkbox", this.$ul).css('padding', '3px 20px 3px 35px');
+                $("li.multiselect-group > a > input", this.$ul).css('margin', '4px 0px 5px -20px');
+            }
+        },
+
+        /**
+         * Create an option using the given select option.
+         *
+         * @param {jQuery} element
+         */
+        createOptionValue: function(element) {
+            var $element = $(element);
+            if ($element.is(':selected')) {
+                $element.prop('selected', true);
+            }
+
+            // Support the label attribute on options.
+            var label = this.options.optionLabel(element);
+            var classes = this.options.optionClass(element);
+            var value = $element.val();
+            var inputType = this.options.multiple ? "checkbox" : "radio";
+
+            var $li = $(this.options.templates.li);
+            var $label = $('label', $li);
+            $label.addClass(inputType);
+            $li.addClass(classes);
+
+            if (this.options.enableHTML) {
+                $label.html(" " + label);
+            }
+            else {
+                $label.text(" " + label);
+            }
+        
+            var $checkbox = $('<input/>').attr('type', inputType);
+
+            if (this.options.checkboxName) {
+                $checkbox.attr('name', this.options.checkboxName);
+            }
+            $label.prepend($checkbox);
+
+            var selected = $element.prop('selected') || false;
+            $checkbox.val(value);
+
+            if (value === this.options.selectAllValue) {
+                $li.addClass("multiselect-item multiselect-all");
+                $checkbox.parent().parent()
+                    .addClass('multiselect-all');
+            }
+
+            $label.attr('title', $element.attr('title'));
+
+            this.$ul.append($li);
+
+            if ($element.is(':disabled')) {
+                $checkbox.attr('disabled', 'disabled')
+                    .prop('disabled', true)
+                    .closest('a')
+                    .attr("tabindex", "-1")
+                    .closest('li')
+                    .addClass('disabled');
+            }
+
+            $checkbox.prop('checked', selected);
+
+            if (selected && this.options.selectedClass) {
+                $checkbox.closest('li')
+                    .addClass(this.options.selectedClass);
+            }
+        },
+
+        /**
+         * Creates a divider using the given select option.
+         *
+         * @param {jQuery} element
+         */
+        createDivider: function(element) {
+            var $divider = $(this.options.templates.divider);
+            this.$ul.append($divider);
+        },
+
+        /**
+         * Creates an optgroup.
+         *
+         * @param {jQuery} group
+         */
+        createOptgroup: function(group) {            
+            if (this.options.enableCollapsibleOptGroups && this.options.multiple) {
+                var label = $(group).attr("label");
+                var value = $(group).attr("value");
+                var r = $('<li class="multiselect-item multiselect-group"><a href="javascript:void(0);"><input type="checkbox" value="' + value + '"/><b> ' + label + '<b class="caret"></b></b></a></li>');
+
+                if (this.options.enableClickableOptGroups) {
+                    r.addClass("multiselect-group-clickable")
+                }
+                this.$ul.append(r);
+                if ($(group).is(":disabled")) {
+                    r.addClass("disabled")
+                }
+                $("option", group).each($.proxy(function($, group) {
+                    this.createOptionValue(group)
+                }, this))
+            }
+            else {
+                var groupName = $(group).prop('label');
+
+                // Add a header for the group.
+                var $li = $(this.options.templates.liGroup);
+
+                if (this.options.enableHTML) {
+                    $('label', $li).html(groupName);
+                }
+                else {
+                    $('label', $li).text(groupName);
+                }
+
+                if (this.options.enableClickableOptGroups) {
+                    $li.addClass('multiselect-group-clickable');
+                }
+
+                this.$ul.append($li);
+
+                if ($(group).is(':disabled')) {
+                    $li.addClass('disabled');
+                }
+
+                // Add the options of the group.
+                $('option', group).each($.proxy(function(index, element) {
+                    this.createOptionValue(element);
+                }, this));
+            }
+        },
+
+        /**
+         * Build the select all.
+         * 
+         * Checks if a select all has already been created.
+         */
+        buildSelectAll: function() {
+            if (typeof this.options.selectAllValue === 'number') {
+                this.options.selectAllValue = this.options.selectAllValue.toString();
+            }
+            
+            var alreadyHasSelectAll = this.hasSelectAll();
+
+            if (!alreadyHasSelectAll && this.options.includeSelectAllOption && this.options.multiple
+                    && $('option', this.$select).length > this.options.includeSelectAllIfMoreThan) {
+
+                // Check whether to add a divider after the select all.
+                if (this.options.includeSelectAllDivider) {
+                    this.$ul.prepend($(this.options.templates.divider));
+                }
+
+                var $li = $(this.options.templates.li);
+                $('label', $li).addClass("checkbox");
+                
+                if (this.options.enableHTML) {
+                    $('label', $li).html(" " + this.options.selectAllText);
+                }
+                else {
+                    $('label', $li).text(" " + this.options.selectAllText);
+                }
+                
+                if (this.options.selectAllName) {
+                    $('label', $li).prepend('<input type="checkbox" name="' + this.options.selectAllName + '" />');
+                }
+                else {
+                    $('label', $li).prepend('<input type="checkbox" />');
+                }
+                
+                var $checkbox = $('input', $li);
+                $checkbox.val(this.options.selectAllValue);
+
+                $li.addClass("multiselect-item multiselect-all");
+                $checkbox.parent().parent()
+                    .addClass('multiselect-all');
+
+                this.$ul.prepend($li);
+
+                $checkbox.prop('checked', false);
+            }
+        },
+
+        /**
+         * Builds the filter.
+         */
+        buildFilter: function() {
+
+            // Build filter if filtering OR case insensitive filtering is enabled and the number of options exceeds (or equals) enableFilterLength.
+            if (this.options.enableFiltering || this.options.enableCaseInsensitiveFiltering) {
+                var enableFilterLength = Math.max(this.options.enableFiltering, this.options.enableCaseInsensitiveFiltering);
+
+                if (this.$select.find('option').length >= enableFilterLength) {
+
+                    this.$filter = $(this.options.templates.filter);
+                    $('input', this.$filter).attr('placeholder', this.options.filterPlaceholder);
+                    
+                    // Adds optional filter clear button
+                    if(this.options.includeFilterClearBtn){
+                        var clearBtn = $(this.options.templates.filterClearBtn);
+                        clearBtn.on('click', $.proxy(function(event){
+                            clearTimeout(this.searchTimeout);
+                            this.$filter.find('.multiselect-search').val('');
+                            $('li', this.$ul).show().removeClass("filter-hidden");
+                            this.updateSelectAll();
+                        }, this));
+                        this.$filter.find('.input-group').append(clearBtn);
+                    }
+                    
+                    this.$ul.prepend(this.$filter);
+
+                    this.$filter.val(this.query).on('click', function(event) {
+                        event.stopPropagation();
+                    }).on('input keydown', $.proxy(function(event) {
+                        // Cancel enter key default behaviour
+                        if (event.which === 13) {
+                          event.preventDefault();
+                        }
+                        
+                        // This is useful to catch "keydown" events after the browser has updated the control.
+                        clearTimeout(this.searchTimeout);
+
+                        this.searchTimeout = this.asyncFunction($.proxy(function() {
+
+                            if (this.query !== event.target.value) {
+                                this.query = event.target.value;
+
+                                var currentGroup, currentGroupVisible;
+                                $.each($('li', this.$ul), $.proxy(function(index, element) {
+                                    var value = $('input', element).length > 0 ? $('input', element).val() : "";
+                                    var text = $('label', element).text();
+
+                                    var filterCandidate = '';
+                                    if ((this.options.filterBehavior === 'text')) {
+                                        filterCandidate = text;
+                                    }
+                                    else if ((this.options.filterBehavior === 'value')) {
+                                        filterCandidate = value;
+                                    }
+                                    else if (this.options.filterBehavior === 'both') {
+                                        filterCandidate = text + '\n' + value;
+                                    }
+
+                                    if (value !== this.options.selectAllValue && text) {
+
+                                        // By default lets assume that element is not
+                                        // interesting for this search.
+                                        var showElement = false;
+
+                                        if (this.options.enableCaseInsensitiveFiltering) {
+                                            filterCandidate = filterCandidate.toLowerCase();
+                                            this.query = this.query.toLowerCase();
+                                        }
+
+                                        if (this.options.enableFullValueFiltering && this.options.filterBehavior !== 'both') {
+                                            var valueToMatch = filterCandidate.trim().substring(0, this.query.length);
+                                            if (this.query.indexOf(valueToMatch) > -1) {
+                                                showElement = true;
+                                            }
+                                        }
+                                        else if (filterCandidate.indexOf(this.query) > -1) {
+                                            showElement = true;
+                                        }
+
+                                        // Toggle current element (group or group item) according to showElement boolean.
+                                        $(element).toggle(showElement).toggleClass('filter-hidden', !showElement);
+                                        
+                                        // Differentiate groups and group items.
+                                        if ($(element).hasClass('multiselect-group')) {
+                                            // Remember group status.
+                                            currentGroup = element;
+                                            currentGroupVisible = showElement;
+                                        }
+                                        else {
+                                            // Show group name when at least one of its items is visible.
+                                            if (showElement) {
+                                                $(currentGroup).show().removeClass('filter-hidden');
+                                            }
+                                            
+                                            // Show all group items when group name satisfies filter.
+                                            if (!showElement && currentGroupVisible) {
+                                                $(element).show().removeClass('filter-hidden');
+                                            }
+                                        }
+                                    }
+                                }, this));
+                            }
+
+                            this.updateSelectAll();
+                        }, this), 300, this);
+                    }, this));
+                }
+            }
+        },
+
+        /**
+         * Unbinds the whole plugin.
+         */
+        destroy: function() {
+            this.$container.remove();
+            this.$select.show();
+            this.$select.data('multiselect', null);
+        },
+
+        /**
+         * Refreshs the multiselect based on the selected options of the select.
+         */
+        refresh: function () {
+            var inputs = $.map($('li input', this.$ul), $);
+            
+            $('option', this.$select).each($.proxy(function (index, element) {
+                var $elem = $(element);
+                var value = $elem.val();
+                var $input;
+                for (var i = inputs.length; 0 < i--; /**/) {
+                    if (value !== ($input = inputs[i]).val())
+                        continue; // wrong li
+
+                    if ($elem.is(':selected')) {
+                        $input.prop('checked', true);
+
+                        if (this.options.selectedClass) {
+                            $input.closest('li')
+                                .addClass(this.options.selectedClass);
+                        }
+                    }
+                    else {
+                        $input.prop('checked', false);
+
+                        if (this.options.selectedClass) {
+                            $input.closest('li')
+                                .removeClass(this.options.selectedClass);
+                        }
+                    }
+
+                    if ($elem.is(":disabled")) {
+                        $input.attr('disabled', 'disabled')
+                            .prop('disabled', true)
+                            .closest('li')
+                            .addClass('disabled');
+                    }
+                    else {
+                        $input.prop('disabled', false)
+                            .closest('li')
+                            .removeClass('disabled');
+                    }
+                    break; // assumes unique values
+                }
+            }, this));
+
+            this.updateButtonText();
+            this.updateSelectAll();
+        },
+
+        /**
+         * Select all options of the given values.
+         * 
+         * If triggerOnChange is set to true, the on change event is triggered if
+         * and only if one value is passed.
+         * 
+         * @param {Array} selectValues
+         * @param {Boolean} triggerOnChange
+         */
+        select: function(selectValues, triggerOnChange) {
+            if(!$.isArray(selectValues)) {
+                selectValues = [selectValues];
+            }
+
+            for (var i = 0; i < selectValues.length; i++) {
+                var value = selectValues[i];
+
+                if (value === null || value === undefined) {
+                    continue;
+                }
+
+                var $option = this.getOptionByValue(value);
+                var $checkbox = this.getInputByValue(value);
+
+                if($option === undefined || $checkbox === undefined) {
+                    continue;
+                }
+                
+                if (!this.options.multiple) {
+                    this.deselectAll(false);
+                }
+                
+                if (this.options.selectedClass) {
+                    $checkbox.closest('li')
+                        .addClass(this.options.selectedClass);
+                }
+
+                $checkbox.prop('checked', true);
+                $option.prop('selected', true);
+                
+                if (triggerOnChange) {
+                    this.options.onChange($option, true);
+                }
+            }
+
+            this.updateButtonText();
+            this.updateSelectAll();
+        },
+
+        /**
+         * Clears all selected items.
+         */
+        clearSelection: function () {
+            this.deselectAll(false);
+            this.updateButtonText();
+            this.updateSelectAll();
+        },
+
+        /**
+         * Deselects all options of the given values.
+         * 
+         * If triggerOnChange is set to true, the on change event is triggered, if
+         * and only if one value is passed.
+         * 
+         * @param {Array} deselectValues
+         * @param {Boolean} triggerOnChange
+         */
+        deselect: function(deselectValues, triggerOnChange) {
+            if(!$.isArray(deselectValues)) {
+                deselectValues = [deselectValues];
+            }
+
+            for (var i = 0; i < deselectValues.length; i++) {
+                var value = deselectValues[i];
+
+                if (value === null || value === undefined) {
+                    continue;
+                }
+
+                var $option = this.getOptionByValue(value);
+                var $checkbox = this.getInputByValue(value);
+
+                if($option === undefined || $checkbox === undefined) {
+                    continue;
+                }
+
+                if (this.options.selectedClass) {
+                    $checkbox.closest('li')
+                        .removeClass(this.options.selectedClass);
+                }
+
+                $checkbox.prop('checked', false);
+                $option.prop('selected', false);
+                
+                if (triggerOnChange) {
+                    this.options.onChange($option, false);
+                }
+            }
+
+            this.updateButtonText();
+            this.updateSelectAll();
+        },
+        
+        /**
+         * Selects all enabled & visible options.
+         *
+         * If justVisible is true or not specified, only visible options are selected.
+         *
+         * @param {Boolean} justVisible
+         * @param {Boolean} triggerOnSelectAll
+         */
+        selectAll: function (justVisible, triggerOnSelectAll) {
+            justVisible = (this.options.enableCollapsibleOptGroups && this.options.multiple) ? false : justVisible;
+            
+            var justVisible = typeof justVisible === 'undefined' ? true : justVisible;
+            var allCheckboxes = $("li input[type='checkbox']:enabled", this.$ul);
+            var visibleCheckboxes = allCheckboxes.filter(":visible");
+            var allCheckboxesCount = allCheckboxes.length;
+            var visibleCheckboxesCount = visibleCheckboxes.length;
+            
+            if(justVisible) {
+                visibleCheckboxes.prop('checked', true);
+                $("li:not(.divider):not(.disabled)", this.$ul).filter(":visible").addClass(this.options.selectedClass);
+            }
+            else {
+                allCheckboxes.prop('checked', true);
+                $("li:not(.divider):not(.disabled)", this.$ul).addClass(this.options.selectedClass);
+            }
+                
+            if (allCheckboxesCount === visibleCheckboxesCount || justVisible === false) {
+                $("option:not([data-role='divider']):enabled", this.$select).prop('selected', true);
+            }
+            else {
+                var values = visibleCheckboxes.map(function() {
+                    return $(this).val();
+                }).get();
+                
+                $("option:enabled", this.$select).filter(function(index) {
+                    return $.inArray($(this).val(), values) !== -1;
+                }).prop('selected', true);
+            }
+            
+            if (triggerOnSelectAll) {
+                this.options.onSelectAll();
+            }
+        },
+
+        /**
+         * Deselects all options.
+         * 
+         * If justVisible is true or not specified, only visible options are deselected.
+         * 
+         * @param {Boolean} justVisible
+         */
+        deselectAll: function (justVisible) {
+            justVisible = (this.options.enableCollapsibleOptGroups && this.options.multiple) ? false : justVisible;
+            justVisible = typeof justVisible === 'undefined' ? true : justVisible;
+            
+            if(justVisible) {              
+                var visibleCheckboxes = $("li input[type='checkbox']:not(:disabled)", this.$ul).filter(":visible");
+                visibleCheckboxes.prop('checked', false);
+                
+                var values = visibleCheckboxes.map(function() {
+                    return $(this).val();
+                }).get();
+                
+                $("option:enabled", this.$select).filter(function(index) {
+                    return $.inArray($(this).val(), values) !== -1;
+                }).prop('selected', false);
+                
+                if (this.options.selectedClass) {
+                    $("li:not(.divider):not(.disabled)", this.$ul).filter(":visible").removeClass(this.options.selectedClass);
+                }
+            }
+            else {
+                $("li input[type='checkbox']:enabled", this.$ul).prop('checked', false);
+                $("option:enabled", this.$select).prop('selected', false);
+                
+                if (this.options.selectedClass) {
+                    $("li:not(.divider):not(.disabled)", this.$ul).removeClass(this.options.selectedClass);
+                }
+            }
+        },
+
+        /**
+         * Rebuild the plugin.
+         * 
+         * Rebuilds the dropdown, the filter and the select all option.
+         */
+        rebuild: function() {
+            this.$ul.html('');
+
+            // Important to distinguish between radios and checkboxes.
+            this.options.multiple = this.$select.attr('multiple') === "multiple";
+
+            this.buildSelectAll();
+            this.buildDropdownOptions();
+            this.buildFilter();
+
+            this.updateButtonText();
+            this.updateSelectAll(true);
+            
+            if (this.options.disableIfEmpty && $('option', this.$select).length <= 0) {
+                this.disable();
+            }
+            else {
+                this.enable();
+            }
+            
+            if (this.options.dropRight) {
+                this.$ul.addClass('pull-right');
+            }
+        },
+
+        /**
+         * The provided data will be used to build the dropdown.
+         */
+        dataprovider: function(dataprovider) {
+            
+            var groupCounter = 0;
+            var $select = this.$select.empty();
+            
+            $.each(dataprovider, function (index, option) {
+                var $tag;
+                
+                if ($.isArray(option.children)) { // create optiongroup tag
+                    groupCounter++;
+                    
+                    $tag = $('<optgroup/>').attr({
+                        label: option.label || 'Group ' + groupCounter,
+                        disabled: !!option.disabled
+                    });
+                    
+                    forEach(option.children, function(subOption) { // add children option tags
+                        $tag.append($('<option/>').attr({
+                            value: subOption.value,
+                            label: subOption.label || subOption.value,
+                            title: subOption.title,
+                            selected: !!subOption.selected,
+                            disabled: !!subOption.disabled
+                        }));
+                    });
+                }
+                else {
+                    $tag = $('<option/>').attr({
+                        value: option.value,
+                        label: option.label || option.value,
+                        title: option.title,
+                        class: option.class,
+                        selected: !!option.selected,
+                        disabled: !!option.disabled
+                    });
+                    $tag.text(option.label || option.value);
+                }
+                
+                $select.append($tag);
+            });
+            
+            this.rebuild();
+        },
+
+        /**
+         * Enable the multiselect.
+         */
+        enable: function() {
+            this.$select.prop('disabled', false);
+            this.$button.prop('disabled', false)
+                .removeClass('disabled');
+        },
+
+        /**
+         * Disable the multiselect.
+         */
+        disable: function() {
+            this.$select.prop('disabled', true);
+            this.$button.prop('disabled', true)
+                .addClass('disabled');
+        },
+
+        /**
+         * Set the options.
+         *
+         * @param {Array} options
+         */
+        setOptions: function(options) {
+            this.options = this.mergeOptions(options);
+        },
+
+        /**
+         * Merges the given options with the default options.
+         *
+         * @param {Array} options
+         * @returns {Array}
+         */
+        mergeOptions: function(options) {
+            return $.extend(true, {}, this.defaults, this.options, options);
+        },
+
+        /**
+         * Checks whether a select all checkbox is present.
+         *
+         * @returns {Boolean}
+         */
+        hasSelectAll: function() {
+            return $('li.multiselect-all', this.$ul).length > 0;
+        },
+
+        /**
+         * Updates the select all checkbox based on the currently displayed and selected checkboxes.
+         */
+        updateSelectAll: function(notTriggerOnSelectAll) {
+            if (this.hasSelectAll()) {
+                var allBoxes = $("li:not(.multiselect-item):not(.filter-hidden) input:enabled", this.$ul);
+                var allBoxesLength = allBoxes.length;
+                var checkedBoxesLength = allBoxes.filter(":checked").length;
+                var selectAllLi  = $("li.multiselect-all", this.$ul);
+                var selectAllInput = selectAllLi.find("input");
+                
+                if (checkedBoxesLength > 0 && checkedBoxesLength === allBoxesLength) {
+                    selectAllInput.prop("checked", true);
+                    selectAllLi.addClass(this.options.selectedClass);
+                    this.options.onSelectAll(true);
+                }
+                else {
+                    selectAllInput.prop("checked", false);
+                    selectAllLi.removeClass(this.options.selectedClass);
+                    if (checkedBoxesLength === 0) {
+                        if (!notTriggerOnSelectAll) {
+                            this.options.onSelectAll(false);
+                        }
+                    }
+                }
+            }
+        },
+
+        /**
+         * Update the button text and its title based on the currently selected options.
+         */
+        updateButtonText: function() {
+            var options = this.getSelected();
+            
+            // First update the displayed button text.
+            if (this.options.enableHTML) {
+                $('.multiselect .multiselect-selected-text', this.$container).html(this.options.buttonText(options, this.$select));
+            }
+            else {
+                $('.multiselect .multiselect-selected-text', this.$container).text(this.options.buttonText(options, this.$select));
+            }
+            
+            // Now update the title attribute of the button.
+            $('.multiselect', this.$container).attr('title', this.options.buttonTitle(options, this.$select));
+        },
+
+        /**
+         * Get all selected options.
+         *
+         * @returns {jQUery}
+         */
+        getSelected: function() {
+            return $('option', this.$select).filter(":selected");
+        },
+
+        /**
+         * Gets a select option by its value.
+         *
+         * @param {String} value
+         * @returns {jQuery}
+         */
+        getOptionByValue: function (value) {
+
+            var options = $('option', this.$select);
+            var valueToCompare = value.toString();
+
+            for (var i = 0; i < options.length; i = i + 1) {
+                var option = options[i];
+                if (option.value === valueToCompare) {
+                    return $(option);
+                }
+            }
+        },
+
+        /**
+         * Get the input (radio/checkbox) by its value.
+         *
+         * @param {String} value
+         * @returns {jQuery}
+         */
+        getInputByValue: function (value) {
+
+            var checkboxes = $('li input', this.$ul);
+            var valueToCompare = value.toString();
+
+            for (var i = 0; i < checkboxes.length; i = i + 1) {
+                var checkbox = checkboxes[i];
+                if (checkbox.value === valueToCompare) {
+                    return $(checkbox);
+                }
+            }
+        },
+
+        /**
+         * Used for knockout integration.
+         */
+        updateOriginalOptions: function() {
+            this.originalOptions = this.$select.clone()[0].options;
+        },
+
+        asyncFunction: function(callback, timeout, self) {
+            var args = Array.prototype.slice.call(arguments, 3);
+            return setTimeout(function() {
+                callback.apply(self || window, args);
+            }, timeout);
+        },
+
+        setAllSelectedText: function(allSelectedText) {
+            this.options.allSelectedText = allSelectedText;
+            this.updateButtonText();
+        }
+    };
+
+    $.fn.multiselect = function(option, parameter, extraOptions) {
+        return this.each(function() {
+            var data = $(this).data('multiselect');
+            var options = typeof option === 'object' && option;
+
+            // Initialize the multiselect.
+            if (!data) {
+                data = new Multiselect(this, options);
+                $(this).data('multiselect', data);
+            }
+
+            // Call multiselect method.
+            if (typeof option === 'string') {
+                data[option](parameter, extraOptions);
+                
+                if (option === 'destroy') {
+                    $(this).data('multiselect', false);
+                }
+            }
+        });
+    };
+
+    $.fn.multiselect.Constructor = Multiselect;
+
+    $(function() {
+        $("select[data-role=multiselect]").multiselect();
+    });
+
+}(window.jQuery);
+</script>
+
 </html>
