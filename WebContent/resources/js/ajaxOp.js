@@ -2637,3 +2637,24 @@ function qpResultsAnalysis()
 	}
 	
 	
+	
+	
+	
+	//Karnakar written code start
+
+	$(document).ready(function () {
+	    //$(document).on("scroll", onScroll);
+	    
+	    //smoothscroll
+	    $('#menu-center a[href^="#"]').on('click', function (e) {
+	        e.preventDefault();
+	        //$(document).off("scroll");
+	        
+	        $('a').each(function () {
+	            $(this).removeClass('active');
+	        })
+	        $(this).addClass('active');
+	    });
+	});
+	
+	//Karnakar written code end

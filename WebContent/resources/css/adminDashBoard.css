@@ -440,7 +440,7 @@ a{
 .navClass
 {
     width:100% !important;margin:auto;
-    background-color: #efefef !important; !important;
+    background-color: #efefef !important;
 }
 .navbar 
 {
@@ -461,6 +461,10 @@ a{
 .navbar-default .navbar-nav>li>a:hover {
     color: #999 !important;
     font-family: Segoe UI Semibold;
+}
+.navCollapseClass
+{
+	width:100% !important;margin-right:2% !important;	
 }
 .buttonCLass
 {
@@ -1268,13 +1272,20 @@ a{
 {
 	color:#ff6666;text-align:left;font-weight:600 !important
 }
-
-
-.stdHeadhOne
+.stdHeadhOneForMainHead
 {
     font-size: 24px;
     font-family: Segoe UI;
-    font-weight: normal;
+    font-weight: 600;
+    margin-top:10px !important;
+    color: #454545 !important;
+}
+
+.stdHeadhOne
+{
+    font-size: 18px;
+    font-family: Segoe UI;
+    font-weight: 600;
     color: #454545 !important;
 }
 .inputFirstBox
@@ -1350,12 +1361,20 @@ a{
     border-collapse: separate;
     empty-cells: show;
     border: 0;
+    
     max-width: 99.8%;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
     display: table;
+}
+#eduaction>.table>tr>td{
+	width:35% !important;
+}
+.subTableHeadingOfEd
+{
+	font-weight:600 !important;border-bottom:0px solid red !important;
 }
 .theadBackClass
 {
@@ -1383,7 +1402,8 @@ a{
     font-family: Segoe UI Semibold;
     vertical-align: middle !important;
     text-align:left !important;
-    width: 40% !imporatnt;
+    width: 40% !important;
+    text-transform:lowercase !important;
 }
 .panelHeadTextData
 {
@@ -1402,7 +1422,7 @@ a{
 .modal-backdrop, .modal-backdrop.fade.in {
     opacity: 0.8;
 }
-.feeNotification1
+.feeNotificationRed
 {
     height: 10px !important;
     width: 10px !important;
@@ -1413,11 +1433,33 @@ a{
     margin-right: 11px !important;
     margin-top: 3% !important;
 }
-.feeNotification2
+.feeNotificationGreen
 {
     height: 10px !important;
     width: 10px !important;
     background-color: green;
+    border-radius:50%;
+    margin-left: 1px !important;
+    float: left !important;
+    margin-right: 11px !important;
+    margin-top: 3% !important;
+}
+.feeNotificationDefault
+{
+    height: 10px !important;
+    width: 10px !important;
+    background-color: lightgray;
+    border-radius:50%;
+    margin-left: 1px !important;
+    float: left !important;
+    margin-right: 11px !important;
+    margin-top: 3% !important;
+}
+.feeNotificationYellow
+{
+    height: 10px !important;
+    width: 10px !important;
+    background-color: yellow;
     border-radius:50%;
     margin-left: 1px !important;
     float: left !important;
@@ -1440,7 +1482,7 @@ tr:nth-child(even) {
 	font-size:16px;
 	font-family: Segoe UI Semibold !important;
     font-weight: 600;
-    padding-top:2.5%;
+    padding-top:1.4% !important;
     text-align:left;
     color: #454545 !important;
 }
@@ -1521,38 +1563,64 @@ tr:nth-child(even) {
     border-right: 1px solid #c5c5c5 !important;
 }
 
+#menu-center>.active {
+    color: #77021d !important;
+    cursor: default;
+    background-color: #fff !important;
+    border: 1px solid #fff !important;
+}
+#menu-center>a:active {
+    color: #77021d !important;
+    cursor: default;
+    background-color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
 div.scrollmenu {
     padding: 3px;
     background-color: #77021d !important;
 }
 
-div.scrollmenu a {
+#menu-center>a {
     display: inline-block;
     color: #fff !important;
     text-align: center;
     border-radius:5px;
-    font-size:13px;
+    font-size:12px;
     font-family: Segoe UI Semibold;
-    padding: 6px;
+    padding: 3px;
+    margin:2px !important
     margin-right:10px !important;
-    border: 1px solid #77021d !important;
+    border: 1px solid #77021d;
     border-radius: 3px !important;
-    background-color:  #77021d !important;
+    background-color:  #77021d;
     /*box-shadow: inset 0px 1px 8px #dedede !important;*/
     text-decoration: none;
 }
 
-.scrollmenu a:active {
-    background-color: #450111 !important;
-    color: #4e4e4e !important;
-}
+
 div.scrollmenu a:hover {
+    color: #fff !important;
+    cursor: default;
     background-color: #450111 !important;
+    border: 1px solid #450111 !important;
 }
 .profileBtnStd
 {
-	background-color: #efefef !important;border:1px solid #efefef !important;border-radius:50%;padding:32%;margin-top: 54% !important;
-	margin-bottom:30% !important;
+	background-color: #efefef !important;border:1px solid #efefef !important;padding:1%;
+}
+.iconLinkClasses:hover
+{
+	color:#77021d !important;
+}
+.dropMultiSelectBtns
+{
+	font-size:12px !important;
+	padding:3px 6px;
+	width:100% !important;
+	background-color:#fff !important;
+	font-family: Segoe UI,Trebuchet MS,Sans-Serif !important;
+	border-radius:0px !important;
 }
 .tab-pane
 {
@@ -1731,5 +1799,8 @@ img {
     color: #565656 !important;
     padding: 2px !important;
     font-size:15px !important;
+}
+.nav-tabs>a.active {
+   background-color: #fff;
 }
 	

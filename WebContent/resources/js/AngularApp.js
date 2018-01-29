@@ -20,7 +20,7 @@ function viewController($http, appUrl,$scope)
 	$scope.aggregate=0;
 	$scope.inter=0;
 	$scope.SSC=0;
-	$scope.pageValues=20;
+	$scope.pageValues=10;
 	this.requestAllStudents=function(){
 		$('#ajaxPageLoader').show();
 	$http.get(appUrl+"/viewAll").then(function(response){
@@ -67,7 +67,7 @@ function viewController($http, appUrl,$scope)
 			currentScope.filteredData=[];
 		
 		console.log("test checkbox"+source);
-		 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		 var checkboxes = document.querySelectorAll('.tableNewClass input[type="checkbox"]');
 		    for (var i = 0; i < checkboxes.length; i++) {
 		    	if (checkboxes[i].checked != source)
 	        	{
@@ -102,11 +102,6 @@ function viewController($http, appUrl,$scope)
 			    	if(!element.checked)
 			    		 currentScope.filteredData.splice(index,1);
 			    	}
-			
-			    
-		
-	
-			
 			
 	};
 	
@@ -533,16 +528,42 @@ function viewController($http, appUrl,$scope)
 					
 				}
 			
-			
 		});
 		
 	};
 	
 	
-	this.studentDetails=function(student)
+	$scope.previousSelection=null;
+	this.studentDetails=function(student,$event)
 	{
+		if($scope.previousSelection!=null)
+			$scope.previousSelection.style.backgroundColor="#ffffff";
+		$scope.previousSelection=$event.currentTarget
+		console.log($event.currentTarget);
+		$event.currentTarget.style.backgroundColor="#b0dcd9";
 	  currentScope.student=student;
-	  document.getElementById('viewMore_Student').style.display="block";
+	 // document.getElementById('viewMore_Student').style.display="block";
 	}
-	
+
+
+	$scope.findDuration=function(joinDate){
+		console.log(joinDate);
+		
+		if(joinDate!=null && joinDate!="null"){
+		var one_day=1000*60*60*24;    // Convert both dates to milliseconds
+		var date1_ms = new Date(joinDate).getTime();   
+		var date2_ms = new Date().getTime();    // Calculate the difference in milliseconds  
+		
+		var difference_ms = date2_ms - date1_ms; 
+		
+		 console.log(Math.round(difference_ms/one_day));
+		 // Convert back to days and return   
+		 
+		return Math.round(difference_ms/one_day);
+		}
+		else{
+			console.log("Test");
+			return 'NA';
+		}
+	};
 }
