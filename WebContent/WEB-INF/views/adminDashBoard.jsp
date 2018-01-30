@@ -706,242 +706,319 @@ $(document).ready( function(){
 	
 <!-- student details form begin-->
 	
+<!-- style="margin-top: -2% !important;margin-left: -1.6%;margin-right: -1.6%;" -->
 	
-<div id="regForm" style="display:none;margin:0.5%;">
-	<div class="row">
-		<form id='registration' onsubmit="return false" class="form-horizontal">
-			<div class="col-md-6 col-sm-6 col-xs-12">
-			
-			<div class="form-group">
-				<h3 class="control" style="text-align:center;padding-bottom:3%;">PersonalDetails :</h3>
-				<label class="control-label col-sm-4" for="fullName">Enter FullName :</label>
-				<div class="col-sm-6">
-				<input type="text" name="fullName" class="form-control" id="fullName" placeholder="Enter Full Name" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-	  
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="email">Enter email :</label>
-				<div class="col-sm-6">
-				<input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="email">Enter DOB :</label>
-				<div class="col-sm-6">
-				<input type="date" name="dob" class="form-control" id="dob" placeholder="Enter Date of Birth" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-	  
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="gender">Gender :</label>
-				<div class="col-sm-6">
-				<label class="radio-inline"><input type="radio" value="male" checked name="gender">Male</label>
-				<label class="radio-inline"><input type="radio" value="female" name="gender">Female</label>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-	  
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="mobile">Enter mobile number :</label>
-				<div class="col-sm-6">
-				<input type="text" name="mobile" class="form-control" id="mobile" placeholder="Enter mobile number" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			  
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="mobile_Parent">Enter Emergency mobile :</label>
-				<div class="col-sm-6">
-				<input type="text" name="mobile_Parent" class="form-control" id="mobile_Parent" placeholder="Enter Emergency mobile number" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="parentName">Enter Emergency Contact Person :</label>
-				<div class="col-sm-6">
-				<input type="text" name="parentName" class="form-control" id="parentName" placeholder="Enter Emergency Contact Person" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="address">Addresss :</label>
-				<div class="col-sm-6 col-xs-12">
-			  		<textarea name="locality" style="height:40px !important" placeholder="Enter your address" class="form-control" rows="5"  id="locality" required></textarea>
-				</div>
-				<div class="col-sm-2"></div>
-	  		</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="parentName"></label>
-				<div class="col-sm-6">
-				<input style="margin-top:5px;" type="text" name="city" class="form-control" id="city" placeholder="Enter city" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="state"></label>
-				<div class="col-sm-6">
-				  <select name="state" class="form-control" style="height:32px !important;" id="state">
-				  <option value="" selected disabled>Select state</option>
-				  <option value="AndhraPradesh">Andhra Pradesh</option>
-				  <option value="Telangana">Telangana</option>
-				  <option value="Others">Others</option>
-				  </select>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6 col-sm-6 col-xs-12">
-			<div class="form-group">
-				  <h3 class="control" style="text-align:center;padding-bottom:3%;">Education Details :</h3>
-				  <label class="control-label col-sm-5" style="text-align:right;" for="sscPercentage">Enter SSC Percentage :</label>
-				<div class="col-sm-6">
-				  <input type="number" name="sscPercentage" class="form-control" id="sscPercentage" placeholder="Enter SSC Percentage" required>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-				  
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="interPercentage">Enter Inter Percentage :</label>
-				<div class="col-sm-6">
-				  <input type="number" name="interPercentage" class="form-control" id="interPercentage" placeholder="Enter Inter Percentage " required>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-				  
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationPercentage">Enter Graduation Percentage :</label>
-				<div class="col-sm-6">
-				  <input type="number" name="graduationPercentage" class="form-control" id="graduationPercentage" placeholder="Enter graduation percentage" required>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>	  
-				  
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationCollege">Enter Graduation College :</label>
-				<div class="col-sm-6">
-				  <input type="text" name="graduationCollege" class="form-control" id="graduationCollege" placeholder="Enter Graduation College" required>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationCollege">Enter College Location :</label>
-				<div class="col-sm-6">
-				  <input type="text" name="graduationCity" class="form-control" id="graduationCity" placeholder="Enter city" required>
-				</div>
-				<div class="col-sm-1"></div>
-			</div> 
-							  
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationYOP">Enter Graduation YOP:</label>
-				<div class="col-sm-6">
-				  <input type="number" name="graduationYOP" class="form-control" placeholder="Enter Graduation YOP" id="graduationYOP">
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-				
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationType">Enter Graduation Type :</label>
-				<div class="col-sm-6">
-				  <select name="graduationType" class="form-control" style="height:32px !important;" id="graduationType">
-				 <option value="BTech">BTech</option>
-				 <option value="MTech">MTech</option>
-				 <option value="MBA">MBA</option>
-				 <option value="MCA">MCA</option>
-				 <option value="Degree">Degree</option>
-				  <option value="Others">Others</option>
-				  </select>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>
-		  
-			<div class="form-group">
-				<label class="control-label col-sm-5" style="text-align:right;" for="graduationBranch">Enter Graduation Branch:</label>
-				<div class="col-sm-6">
-				  <select name="graduationBranch" style="height:32px !important;" class="form-control" id="graduationBranch">
-				  <optgroup label="B Tech or M Tech Branches">
-				  <option value="CSE">CSE</option>
-				  <option value="IT">IT</option>
-				  <option value="ECE">ECE</option>
-				  <option value="EEE">EEE</option>
-				  <option value="MECH">MECH</option>
-				  <option value="CIVIL">CIVIL</option>
-				  <option value="Aeronautical">Aeronautical</option>
-				  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
-				  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
-				  <option value="other">Any other</option>
-				  </optgroup>
-				  
-				  <optgroup label="Any other">
-				   <option value="Other">Any Other</option>
-				  </optgroup>
-				  
-				  <optgroup label="Degree groups">
-				  <option value="BSC Computers">BSC Computers</option>
-				  <option value="BSC General">BSC General</option>
-				  <option value="BCom">BCom</option>
-				   <option value="BA">BA</option>
-				   <option value="Other">Any Other</option>
-				  </optgroup>
-				  </select>
-				</div>
-				<div class="col-sm-1"></div>
-			</div>	
-			
-			<div class="form-group">
-				<h3 class="control" style="text-align:center;padding-bottom:3%;">Other Details :</h3>
-				<label class="control-label col-sm-4" style="text-align:right;" for="batchNumber">Enter Batch Number :</label>
-				<div class="col-sm-6">
-				<select name="batchNumber" style="height:32px !important;" class="form-control">
-				<c:forEach items="${batches }" var="b">
-				<option value="${b.getBatchNumber() }" selected>${b.getBatchNumber() }</option>
-				</c:forEach>
-				</select>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-	  
-			<div class="form-group">
-				<label class="control-label col-sm-4" style="text-align:right;" for="feePaid">Enter Fee Paid:</label>
-				<div class="col-sm-6">
-				<input type="number" name="feePaid" class="form-control" id="feePaid" placeholder="Enter Fee Paid" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-			
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" style="text-align:right;" for="feeTotal">Enter Total Fee:</label>
-				<div class="col-sm-6">
-				<input type="number" name="feeTotal" class="form-control" id="feeTotal" placeholder="Enter Fee Total" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>	
-			
-			
-			<div class="form-group">
-				<label class="control-label col-sm-4" style="text-align:right;" for="joinDate">joinDate:</label>
-				<div class="col-sm-6">
-				<input type="date" name="joinDate" class="form-control" id="joinDate" placeholder="YYYY/MM/DD" required>
-				</div>
-				<div class="col-sm-2"></div>
-			</div>
-		</div>
-	
-			<div class="form-group"> 
+<div id="regForm" style="display:none;">
+	<div class="container-fluid" style="padding:0px !important;margin-bottom:5%;margin-top:2%;">
+	<form id='registration' onsubmit="return false" class="form-horizontal">
+		<div class="row" style="margin:0px !important;">
+			<div class="col-md-2" style="background-color:#2F3D4D;height:370px;margin:0px !important;">
+				<div class="nav nav-tabs scrollmenuForReg" id="menu-centerForReg">
+	             <a data-toggle="tab" class="active regFomLinkClass" href="#personalForm">Personal</a><br>
+	             <a data-toggle="tab" class="regFomLinkClass" href="#eduactionForm">Education</a><br>
+	             <a data-toggle="tab" class="regFomLinkClass" href="#feeForm">Fee</a><br>
+	             <a data-toggle="tab" class="regFomLinkClass" href="#placementForm">Placement</a><br>
+	             <a data-toggle="tab" class="regFomLinkClass" href="#otherForm">Social Links</a>
+	       		 </div>
+       		 <div class="form-group" style="margin-top:50%;"> 
 				<div class="col-sm-12">
-				<input type="submit" onclick="sendData('registerStudent?','','',0); return false;" value="Register" class="btn btn-default" style="font-size:16px !important;color:#ff6666;border-radius:5px;border-color:#ff6666 !important;margin:auto !important;display:block !important;">
+					<input type="submit" onclick="sendData('registerStudent?','','',0); return false;" value="Register" class="btn btn-default regBtnNewStyleInOtherPlace">
 				</div>
 			</div>
+			</div>
+			<div class="col-md-10" style="margin: 0% !important;">
+					<div class="tab-content" style="margin-left: -1.4% !important;margin-top: -2% !important;margin-right: -1.6% !important;">
+						<div id="personalForm" class="tab-pane fade in active formTabsClassBack">
+			                <h3 class="addFormHeadClass">Personal Details</h3>
+			                <div class="row">
+		                       <div class="col-md-6">
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="fullname" class="labelClassRegStd">Full Name</label>
+		                                <input type="text" name="fullName" class="form-control formInputClassReg" id="fullName" placeholder="Enter Full Name" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="email" class="labelClassRegStd">Email</label>
+		                                <input type="email" name="email" class="form-control formInputClassReg" id="email" placeholder="Enter email" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="dob" class="labelClassRegStd">DateOfBirth</label>
+		                                <input type="date" name="dob" class="form-control formInputClassReg" id="dob" placeholder="Enter Date of Birth" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="email" class="labelClassRegStd">Gender</label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="male" checked name="gender">Male
+		                                </label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="female" name="gender">Female
+		                                </label>
+		                            </div>
+		                      
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="mobile" class="labelClassRegStd">Student Mobile</label>
+		                                <input type="text" name="mobile" class="form-control formInputClassReg" id="mobile" placeholder="Enter mobile number" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="mobile_Parent" class="labelClassRegStd">Parent Mobile</label>
+		                                <input type="text" name="mobile_Parent" class="form-control formInputClassReg" id="mobile_Parent" placeholder="Enter Emergency mobile number" required>
+		                            </div>
+		                       </div>
+		                       <div class="col-md-6">
+		                            
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="parentName" class="labelClassRegStd">Emergency Contact Person</label>
+		                                <input type="text" name="parentName" class="form-control formInputClassReg" id="parentName" placeholder="Enter Emergency Contact Person" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="locality" class="labelClassRegStd">Address</label>
+		                                <textarea name="locality" style="height:54px !important;padding: 3px 4px !important;" placeholder="Enter your address" class="form-control formInputClassReg" rows="5"  id="locality" required></textarea>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="city" class="labelClassRegStd">City</label>
+		                                <input type="text" name="city" class="form-control formInputClassReg" id="city" placeholder="Enter city" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="email" class="labelClassRegStd">State</label>
+		                                <select name="state" class="form-control formInputClassReg" style="height:32px !important;padding: 3px 4px !important;" id="state">
+										  <option value="" selected disabled>Select state</option>
+										  <option value="AndhraPradesh">Andhra Pradesh</option>
+										  <option value="Telangana">Telangana</option>
+										  <option value="Others">Others</option>
+										</select>
+		                            </div>
+		                        </div>
+				            </div>
+						</div>
+						
+						<div id="eduactionForm"  class="tab-pane fade formTabsClassBack">
+							<h3 class="addFormHeadClass">Education Details</h3>
+			                <div class="row">
+		                       <div class="col-md-6">
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="sscPercentage" class="labelClassRegStd">SSC Percentage</label>
+		                                <input type="number" name="sscPercentage" class="form-control formInputClassReg" id="sscPercentage" placeholder="Enter SSC Percentage" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="interPercentage" class="labelClassRegStd">Inter Percentage</label>
+		                                <input type="number" name="interPercentage" class="form-control formInputClassReg" id="interPercentage" placeholder="Enter Inter Percentage " required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="graduationPercentage" class="labelClassRegStd">Graduation Percentage</label>
+		                                <input type="number" name="graduationPercentage" class="form-control formInputClassReg" id="graduationPercentage" placeholder="Enter graduation percentage" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="math10th" class="labelClassRegStd">10Th Math Marks</label>
+		                                <input type="number" name="math10th" class="form-control formInputClassReg" id="math10th" placeholder="Enter 10th marks in maths" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="math12th" class="labelClassRegStd">Inter Math marks</label>
+		                                <input type="number" name="math12th" class="form-control formInputClassReg" id="math12th" placeholder="Enter inter marks in maths" required>
+		                            </div>
+		             
+		                            
+		                       </div>
+		                       <div class="col-md-6">
+		                       		<div class="form-group formGroupClassReg">
+		                                <label for="graduationCollege" class="labelClassRegStd">Graduation College Name</label>
+		                                <input type="text" name="graduationCollege" class="form-control formInputClassReg" id="graduationCollege" placeholder="Enter Graduation College" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="graduationCity" class="labelClassRegStd">College Location</label>
+		                                <input type="text" name="graduationCity" class="form-control formInputClassReg" id="graduationCity" placeholder="Enter city" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="graduationYOP" class="labelClassRegStd">Graduation YOP</label>
+		                                <input type="number" name="graduationYOP" class="form-control formInputClassReg" placeholder="Enter Graduation YOP" id="graduationYOP">
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="graduationType" class="labelClassRegStd">Graduation Type</label>
+		                                <select name="graduationType" class="form-control formInputClassReg" style="height:32px !important;padding: 3px 4px !important;" id="graduationType">
+										 <option value="BTech">BTech</option>
+										 <option value="MTech">MTech</option>
+										 <option value="MBA">MBA</option>
+										 <option value="MCA">MCA</option>
+										 <option value="Degree">Degree</option>
+										  <option value="Others">Others</option>
+										 </select>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="graduationBranch" class="labelClassRegStd">Garduation Branch</label>
+		                                <select name="graduationBranch" style="height:32px !important;padding: 3px 4px !important;" class="form-control formInputClassReg" id="graduationBranch">
+										  <optgroup label="B Tech or M Tech Branches">
+										  <option value="CSE">CSE</option>
+										  <option value="IT">IT</option>
+										  <option value="ECE">ECE</option>
+										  <option value="EEE">EEE</option>
+										  <option value="MECH">MECH</option>
+										  <option value="CIVIL">CIVIL</option>
+										  <option value="Aeronautical">Aeronautical</option>
+										  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
+										  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
+										  <option value="other">Any other</option>
+										  </optgroup>
+										  
+										  <optgroup label="Any other">
+										   <option value="Other">Any Other</option>
+										  </optgroup>
+										  
+										  <optgroup label="Degree groups">
+										  <option value="BSC Computers">BSC Computers</option>
+										  <option value="BSC General">BSC General</option>
+										  <option value="BCom">BCom</option>
+										   <option value="BA">BA</option>
+										   <option value="Other">Any Other</option>
+										  </optgroup>
+										  </select>
+		                            </div>
+		                        </div>
+				            </div>
+				         </div>
+						
+						<div id="feeForm"  class="tab-pane fade formTabsClassBack">
+							<h3 class="addFormHeadClass">Fee Details</h3>
+			                <div class="row">
+		                       <div class="col-md-6">
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="batchNumber" class="labelClassRegStd">Batch Number</label>
+		                                <select name="batchNumber" style="height:32px !important;padding: 3px 4px !important;" class="form-control formInputClassReg">
+											<c:forEach items="${batches }" var="b">
+											<option value="${b.getBatchNumber() }" selected>${b.getBatchNumber() }</option>
+											</c:forEach>
+										</select>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="feePaid" class="labelClassRegStd">FeePaid</label>
+		                                <input type="number" name="feePaid" class="form-control formInputClassReg" id="feePaid" placeholder="Enter Fee Paid" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="feeTotal" class="labelClassRegStd">TotalFee</label>
+		                                <input type="number" name="feeTotal" class="form-control formInputClassReg" id="feeTotal" placeholder="Enter Fee Total" required>
+		                            </div>
+		             				<div class="form-group formGroupClassReg">
+		                                <label for="email" class="labelClassRegStd">Free</label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="feeFreeyes" name="feefree">Yes
+		                                </label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="feeFreeno" checked name="feeFree">No
+		                                </label>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="joinDate" class="labelClassRegStd">Join Date</label>
+		                                <input type="date" name="joinDate" class="form-control formInputClassReg" id="joinDate" placeholder="YYYY/MM/DD" required>
+		                            </div>
+		                       </div>
+		                       <div class="col-md-6"></div>
+		             		</div>
+						</div>
+						
+						<div id="placementForm"  class="tab-pane fade formTabsClassBack">
+							<h3 class="addFormHeadClass">Placement Details</h3>
+			                <div class="row">
+		                       <div class="col-md-6">
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="placed" class="labelClassRegStd">Placed</label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="placedyes" name="placed">Yes
+		                                </label>
+		                                <label class="radio-inline labelClassRegStd">
+		                                <input type="radio" value="placedno" checked name="placed">No
+		                                </label>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="companyname" class="labelClassRegStd">Company Name</label>
+		                                <input type="text" name="companyname" class="form-control formInputClassReg" id="companyname" placeholder="Enter Company Name" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="companyurl" class="labelClassRegStd">Company URL</label>
+		                                <input type="text" name="companyurl" class="form-control formInputClassReg" id="companyurl" placeholder="Enter Company URL" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="salary" class="labelClassRegStd">Salary</label>
+		                                <input type="text" name="salary" class="form-control formInputClassReg" id="salary" placeholder="Enter salary in lakhs" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="designation" class="labelClassRegStd">Designation</label>
+		                                <input type="text" name="designation" class="form-control formInputClassReg" id="designation" placeholder="Enter designation" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="email" class="labelClassRegStd">Technology</label>
+		                                <select name="state" class="form-control formInputClassReg" style="height:32px !important;padding: 3px 4px !important;" id="state">
+										  <option value="" selected disabled>JAVA</option>
+										  <option value="AndhraPradesh">Testing</option>
+										  <option value="Telangana">UI-Dev</option>
+										  <option value="Others">Others</option>
+										</select>
+		                            </div>
+		                            
+		                        </div>
+		                        <div class="col-md-6">
+		                        	<div class="form-group formGroupClassReg">
+		                                <label for="contactperson" class="labelClassRegStd">Contact Person</label>
+		                                <input type="text" name="contactperson" class="form-control formInputClassReg" id="contactperson" placeholder="Enter Contact Person Name" required>
+		                            </div>
+		                             <div class="form-group formGroupClassReg">
+		                                <label for="companyurl" class="labelClassRegStd">Contact Person Email</label>
+		                                <input type="email" name="personemail" class="form-control formInputClassReg" id="personemail" placeholder="Enter Company Person Email" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="personmobile" class="labelClassRegStd">Contact Person Mobile</label>
+		                                <input type="number" name="personmobile" class="form-control formInputClassReg" id="personmobile" placeholder="Enter Contact Person Number" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="bond" class="labelClassRegStd">Bond</label>
+		                                <label class="radio-inline forradiocheckclass">
+		                                <input type="radio" value="bondyes" name="bond">Yes
+		                                </label>
+		                                <label class="radio-inline forradiocheckclass">
+		                                <input type="radio" value="bondno" checked name="bond">No
+		                                </label>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+			                            <label class="checkbox-inline forradiocheckclass">
+									      <input type="checkbox" value="certiyes" name="certificatesyes">Certificates
+									    </label>
+									    <label class="checkbox-inline forradiocheckclass">
+									      <input  type="checkbox" value="onlybond" name="onlybond">Only Bond
+									    </label>
+								    </div>
+								    <div class="form-group formGroupClassReg">
+		                                <label for="dateofwalkin" class="labelClassRegStd">Date of walkin</label>
+		                                <input type="date" name="dateofwalkin" class="form-control formInputClassReg" id="dateofwalkin" placeholder="yyyy/mm/dd" required>
+		                            </div>
+		                            <div class="form-group formGroupClassReg">
+		                                <label for="dateofjoin" class="labelClassRegStd">Date of join</label>
+		                                <input type="date" name="dateofjoin" class="form-control formInputClassReg" id="dateofjoin" placeholder="yyyy/mm/dd" required>
+		                            </div>
+		                       </div>
+		             		</div>
+						</div>
+						
+						<div id="otherForm"  class="tab-pane fade formTabsClassBack">
+							<h3 class="addFormHeadClass">Social Links</h3>
+			                <div class="row">
+	                       <div class="col-md-6">
+	                            <div class="form-group formGroupClassReg">
+	                                <label for="fblink" class="labelClassRegStd">Facebook Link</label>
+	                                <input type="text" name="fblink" class="form-control formInputClassReg" id="fblink" placeholder="Enter Facebook Link" required>
+	                            </div>
+	                            <div class="form-group formGroupClassReg">
+	                                <label for="linkedinlink" class="labelClassRegStd">Linkedin Link</label>
+	                                <input type="text" name="linkedinlink" class="form-control formInputClassReg" id="linkedinlink" placeholder="Enter Linkedin Link" required>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-6"></div>
+						</div>
+						<div class="form-group" style="margin-top:10%;"> 
+							<div class="col-sm-12">
+							<input type="submit" onclick="sendData('registerStudent?','','',0); return false;" value="Register" class="btn btn-default regBtnNewStyle">
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+		</div>
 		</form>
 	</div>
 </div>

@@ -1327,6 +1327,40 @@ a{
     background-color: #fff !important;
     border:1px solid #ccc !important;
 }
+.regBtnNewStyle
+{
+	border:1px solid #2F3D4D !important;
+	background-color:#2F3D4D !important;
+	color:#fff;
+	font-family: Segoe UI Semibold;
+	width:18% !important;
+	margin:auto !important;
+	display:block !important;
+}
+.regBtnNewStyleInOtherPlace
+{
+	border:1px solid #fff !important;
+	background-color:#fff !important;
+	color:#2F3D4D;
+	margin-top:10%;
+	font-family: Segoe UI Semibold;
+	width:90% !important;
+	margin:auto !important;
+	display:block !important;
+}
+.regBtnNewStyleInOtherPlace
+{
+	color:#2F3D4D !important;
+}
+.regBtnNewStyle:hover
+{
+	color:#fff !important;
+}
+.regFomLinkClass
+{
+	width:100% !important;border-radius: 0px !important;font-size:16px !important;text-align:left !important;
+	font-family: Segoe UI Semibold !important;
+}
 .advancedSearchBtn:hover
 {
     background-color: #f5f5f5 !important;
@@ -1575,12 +1609,6 @@ tr:nth-child(even) {
     background-color: #fff !important;
     border: 1px solid #fff !important;
 }
-
-div.scrollmenu {
-    padding: 3px;
-    background-color: #77021d !important;
-}
-
 #menu-center>a {
     display: inline-block;
     color: #fff !important;
@@ -1599,6 +1627,10 @@ div.scrollmenu {
 }
 
 
+div.scrollmenu {
+    padding: 3px;
+    background-color: #77021d !important;
+}
 div.scrollmenu a:hover {
     color: #fff !important;
     cursor: default;
@@ -1803,4 +1835,109 @@ img {
 .nav-tabs>a.active {
    background-color: #fff;
 }
-	
+
+#menu-centerForReg>.active {
+    color: #fff !important;
+    cursor: default;
+    border: 1px solid #fff !important;
+}
+#menu-centerForReg>a:active {
+    color: #fff !important;
+    cursor: default;
+    border: 1px solid #fff !important;
+}
+#menu-centerForReg>a {
+    display: inline-block;
+    color: #fff !important;
+    text-align: left;
+    border-radius:5px;
+    font-size:12px;
+    font-family: Segoe UI Semibold;
+    padding: 3px;
+    margin:2px !important;
+    border: 1px solid #2F3D4D;
+    background-color:  #2F3D4D;
+    /*box-shadow: inset 0px 1px 8px #dedede !important;*/
+    text-decoration: none;
+}
+
+
+div.scrollmenuForReg {
+    padding: 3px;
+    background-color: #2F3D4D !important;
+    border-bottom:none !important;
+}
+/*div.scrollmenuForReg a:hover {
+    color: #2F3D4D !important;
+    cursor: default;
+    background-color: #fff !important;
+    border: 1px solid #fff !important;
+}*/
+
+.stdHeadhOneForReg
+{
+    font-size: 24px !important;
+    font-family: Segoe UI !important;
+    font-weight: normal !important;
+    color: #454545 !important;
+}
+.addFormHeadClass
+{
+	width:100% !important;
+	border: 1px solid #2F3D4D !important;
+    font-size: 18px !important;
+    margin-left: 0px;
+    padding:5px;
+    padding-left:1% !important;
+    font-family: Segoe UI Semibold !important;
+    background-color: #2F3D4D !important;
+    color: white;
+}
+.subHeadsOfregClass
+{
+    width:100% !important;
+    font-size: 18px !important;
+    margin-left: 0px;
+    padding:5px;
+    padding-left:1% !important;
+    font-family: Segoe UI Semibold !important;
+    color: #454545 !important;
+    text-align: center;
+}
+.labelClassRegStd
+{
+    font-family: segoe ui semibold !important;
+    color: #676767 !important;
+    font-size: 12px !important;
+    margin-bottom: 5px;
+    font-weight: normal;
+    line-height: 18px;
+    
+}
+.forradiocheckclass
+{
+	font-family: segoe ui semibold !important;
+    color: #676767 !important;
+    font-size: 12px !important;
+}
+
+.formInputClassReg
+{
+    width: 97%;
+    height: 16px !important;
+    box-shadow: none !important;
+    border-radius: 2px;
+    padding: 13px 4px !important;
+    border-color: #C9C9C9 !important;
+    font-size:12px !important;
+}
+.formGroupClassReg
+{
+	margin-left:0px !important;
+	margin-right:0px !important;
+    margin-bottom:3px !important;
+}
+.formTabsClassBack
+{
+	height:370px;border:1px solid #dbdbdb;margin:-10px 0px 0px 0px;background-color: #f6f6f6;
+}
