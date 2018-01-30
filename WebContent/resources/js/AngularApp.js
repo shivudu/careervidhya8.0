@@ -2,7 +2,7 @@ var app=angular.module("App",["xeditable", "ui.bootstrap","angularUtils.directiv
 
 app.controller("viewController",viewController);
 
-app.constant("appUrl","http://localhost:8082/CareerVidhya_Operations8.0");
+app.constant("appUrl","http://localhost:8080/CareerVidhya_Operations8.0");
 
 app.run(['editableOptions', function(editableOptions) {
 	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -10,7 +10,7 @@ app.run(['editableOptions', function(editableOptions) {
 
 
 
-function viewController($http, appUrl,$scope)
+function viewController($http, appUrl,$scope, $window)
 {
 	var currentScope=this;
 	
@@ -148,6 +148,74 @@ function viewController($http, appUrl,$scope)
 	 
 	
 	// Filter Students Data
+	//Create Dynamic year according to current year
+	$scope.yearValues=[];
+	$scope.checkedYears=[];
+	
+	$scope.batches= $window.batchNos;
+	$scope.checkedBatches=[];
+	
+	
+	$scope.branchValues=["CSE&IT","ECE","EEE","MECH","CIVIL","BSC","BCOM","Others"];
+	$scope.checkedBranches=[];
+	
+	
+	$scope.Paid=true;
+	$scope.pPaid=true;
+	$scope.nPaid=true;
+	$scope.free=true;
+	
+	
+	(function(){
+		var year=new Date().getFullYear();
+		var i=0;
+		for(i=year+1;i>=year-4;i--)
+			{
+			$scope.yearValues.push(i);
+			$scope.checkedYears.push(i);
+			}
+		for(i=0;i<$scope.branchValues.length;i++)
+		{
+		$scope.checkedBranches.push($scope.branchValues[i]);
+		}
+		//console.log(batchNos);
+		console.log($scope.batches.length);
+		for(i=0;i<$scope.batches.length;i++)
+		{
+			
+		$scope.checkedBatches.push($scope.batches[i]);
+		}
+		
+	}());
+	
+	$scope.yearOfPassFilter=function(st)
+	{
+		for(var i=0;i<$scope.checkedYears.length;i++)
+			if($scope.checkedYears[i]==st.graduationYOP)
+				return true;
+		return false;
+	};
+
+	
+	
+	$scope.branchFilter=function(st)
+	{
+		for(var i=0;i<$scope.checkedBranches.length;i++)
+			if($scope.checkedBranches[i].indexOf(st.graduationBranch)!=-1)
+				return true;
+		return false;
+	};
+	
+	
+	
+	$scope.batchFilter=function(st)
+	{
+		for(var i=0;i<$scope.batches.length;i++)
+			if(parseInt($scope.checkedBatches[i])==st.batchNumber)
+				return true;
+		return false;
+	};
+	
 	
 	$scope.sscFilter=function(st)
 	{
@@ -181,20 +249,30 @@ function viewController($http, appUrl,$scope)
 
 	$scope.feeFilter=function(st)
 	{
-		if($scope.fee==-1)
-			return true;
-		else if($scope.fee==1)
-			return st.feeTotal==st.feePaid;
-		else if($scope.fee==0)
-			return st.feePaid==0;
+		var b1,b2=false,b3,b4,b5;
+		
+		if($scope.Paid==true)
+			 b1= st.feePaid-st.feeTotal==0;
+		else if($scope.pPaid==true && st.feeTotal!=0 && st.feePaid!=0)
+			b2= true;
+		else if($scope.free==true)
+			b3= st.feeTotal==0;
+		else if($scope.nPaid==true)
+			b4= st.feePaid==0 && st.feeTotal!=0;
 		else
-			return st.feePaid!=0;
+			b5= false;
+		return b1 || b2 || b3 || b4 || b5;
 	}
 	
 	
 	this.resetFilters=function()
 	{
-		$scope.fee=-1;
+		$scope.Paid=true;
+		$scope.pPaid=true;
+		$scope.nPaid=true;
+		$scope.free=true;
+		
+		//$scope.fee=-1;
 		$scope.degree=0;
 		$scope.aggregate=0;
 		$scope.inter=0;
@@ -205,6 +283,29 @@ function viewController($http, appUrl,$scope)
 		$scope.yearOfPass="";
 		$scope.studentName="";
 		$scope.batchNumber="";
+		$scope.checkedYears=[];
+		$scope.checkedBranches=[];
+		$scope.checkedBatches=[];
+		
+		for(i=0;i<$scope.branchValues.length;i++)
+		{
+		$scope.checkedBranches.push($scope.branchValues[i]);
+		}
+		
+		for(i=0;i<$scope.batches.length;i++)
+		{
+			
+		$scope.checkedBatches.push($scope.batches[i]);
+		}
+		
+		var year=new Date().getFullYear();
+		var i=0;
+		for(i=year+1;i>=year-4;i--)
+			{
+			
+			$scope.checkedYears.push(i);
+			}
+		
 	}
 	
 	
@@ -538,7 +639,7 @@ function viewController($http, appUrl,$scope)
 	{
 		if($scope.previousSelection!=null)
 			$scope.previousSelection.style.backgroundColor="#ffffff";
-		$scope.previousSelection=$event.currentTarget
+		$scope.previousSelection=$event.currentTarget;
 		console.log($event.currentTarget);
 		$event.currentTarget.style.backgroundColor="#b0dcd9";
 	  currentScope.student=student;
@@ -547,7 +648,7 @@ function viewController($http, appUrl,$scope)
 
 
 	$scope.findDuration=function(joinDate){
-		console.log(joinDate);
+		//console.log(joinDate);
 		
 		if(joinDate!=null && joinDate!="null"){
 		var one_day=1000*60*60*24;    // Convert both dates to milliseconds
@@ -562,7 +663,7 @@ function viewController($http, appUrl,$scope)
 		return Math.round(difference_ms/one_day);
 		}
 		else{
-			console.log("Test");
+			//console.log("Test");
 			return 'NA';
 		}
 	};

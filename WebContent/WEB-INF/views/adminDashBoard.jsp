@@ -14,9 +14,23 @@ String name;
 Admin admin=(Admin)request.getSession().getAttribute("admin");
 name=admin.getName();
 %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 var batchNos=[];
 var adminName='<%=name%>';
+
+
+
+$(document).ready( function(){
+
+	<c:forEach items="${batches }" var="b">
+	batchNos.push("${b.getBatchNumber()}");
+	</c:forEach>
+	console.log(batchNos.length);
+	
+	});
+
 
 </script>
 	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
@@ -26,7 +40,7 @@ var adminName='<%=name%>';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/ajaxOp.js"/>"></script>
@@ -434,17 +448,7 @@ var adminName='<%=name%>';
 						
 		</style> -->
 		
-<script>
-
-$(document).ready( function(){
-
-	<c:forEach items="${batches }" var="b">
-	batchNos.push("${b.getBatchNumber()}");
-	</c:forEach>
-	console.log(batchNos);
 	
-	});
-</script>	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
 	
@@ -1275,14 +1279,8 @@ $(document).ready( function(){
 								    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select YOP
 								    <span class="caret"></span></button>
 								    <ul class="dropdown-menu" style="font-size:12px;height:200px;overflow-y:scroll;" ng-model="yearOfPass">
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2019"/> 2019</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2018"/> 2018</a></li>
-									  <li><a tabindex="-1" href="#"><input type="checkbox" value="2017"/> 2017</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2016"/> 2016</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2015"/> 2015</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2014"/> 2014</a></li>
-									  <li><a tabindex="-1" href="#"><input type="checkbox" value="2013"/> 2013</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="2012"/> 2012</a></li>
+								    
+								      <li ng-repeat="yV in yearValues"><a tabindex="-1" href="#"><input type="checkbox" ng-model="checkedYears[$index]" ng-true-value="{{yV}}" ng-false-value="-1"/> {{yV}}</a></li> 
 								    </ul>
 								  </div>
                    			</div>
@@ -1292,9 +1290,9 @@ $(document).ready( function(){
 								    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select Batch
 								    <span class="caret"></span></button>
 								    <ul class="dropdown-menu" style="font-size:12px;height:200px;overflow-y:scroll;" ng-model="batchNumber">
-								      <c:forEach items="${batches }" var="b">
-								      	<li><a tabindex="-1" href="#"><input type="checkbox" value='${b.getBatchNumber() }'/> ${b.getBatchNumber() }</a></li>
-								      </c:forEach>
+	
+								      	<li ng-repeat="b in batches"><a tabindex="-1" href="#"><input ng-model="checkedBatches[$index]" ng-true-value="'{{b}}'" ng-false-value="-1" type="checkbox"/>{{b}}</a></li>
+								     
 								    </ul>
 								  </div>
 	                   			<!-- <select ng-model="batchNumber" id="multi-select-demobatch" multiple="multiple" style="width:15%;float:left;">
@@ -1309,23 +1307,9 @@ $(document).ready( function(){
 								    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select Branch
 								    <span class="caret"></span></button>
 								    <ul ng-model="branchName" class="dropdown-menu" style="font-size:12px;font-family: Segoe UI Semibold;height: 200px;overflow-y: scroll;">
-								      <li style="font-weight:600;">B Tech or M Tech Branches</li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="cse"/> CSE</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="id"/> IT</a></li>
-									  <li><a tabindex="-1" href="#"><input type="checkbox" value="ece"/> ECE</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="eee"/> EEE</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="mech"/> MECH</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="civil"/> CIVIL</a></li>
-									  <li><a tabindex="-1" href="#"><input type="checkbox" value="aero"/> AERO</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="eie"/> EIE</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="me"/> ME</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="btechany"/> AnyOther</a></li>
-								      <li style="font-weight:600;">Degree groups</li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="bsccomp"/> BSC(Comp)</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="bcomgen"/> BCom(Gen)</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="bcom"/> BCom</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="ba"/> BA</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="degreeany"/> AnyOther</a></li>
+								     
+								      <li ng-repeat="bV in branchValues"><a tabindex="-1" href="#"><input type="checkbox" ng-model="checkedBranches[$index]" ng-true-value="'{{bV}}'" ng-false-value="'NA'"/>{{bV}}</a></li>
+								      
 								    </ul>
 								  </div>
                    				<!-- <select ng-model="branchName" style="width:15%;float:left;" id="multi-select-demobranch" multiple="multiple">
@@ -1360,11 +1344,11 @@ $(document).ready( function(){
                    				<div class="dropdown" style="margin-top:-2% !important;">
 								    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select FeeType
 								    <span class="caret"></span></button>
-								    <ul class="dropdown-menu" style="font-size:12px;" ng-model="feePaid">
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="paid"/> Paid</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="partiallypaid"/> Partially Paid</a></li>
-									  <li><a tabindex="-1" href="#"><input type="checkbox" value="freefees"/> Free</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="notpaid"/> Not Paid</a></li>
+								    <ul class="dropdown-menu" style="font-size:12px;">
+								      <li><a tabindex="-1" href="#"><input ng-model="Paid" type="checkbox" value="paid"/> Paid</a></li>
+								      <li><a tabindex="-1" href="#"><input ng-model="pPaid" type="checkbox" value="partiallypaid"/> Partially Paid</a></li>
+									  <li><a tabindex="-1" href="#"><input ng-model="free" type="checkbox" value="freefees"/> Free</a></li>
+								      <li><a tabindex="-1" href="#"><input ng-model="nPaid" type="checkbox" value="notpaid"/> Not Paid</a></li>
 								    </ul>
 								  </div>
 								  <!-- <div class="dropdown" style="margin-top:-2% !important;">
@@ -1438,15 +1422,15 @@ $(document).ready( function(){
                    				<table style="width:100%">
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">SSC :</p></td>
-                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='SSC Percentage' ng-model="sSCPer" class='form-control inputFieldClass'></td>
+                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='SSC Percentage' ng-model="SSC" class='form-control inputFieldClass'></td>
                    					</tr>
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Inter :</p></td>
-                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='Inter Percentage' ng-model="interPer" class='form-control inputFieldClass'></td>
+                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='Inter Percentage' ng-model="inter" class='form-control inputFieldClass'></td>
                    					</tr>
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Degree :</p></td>
-                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='Degree Percentage' ng-model="degreePer" class='form-control inputFieldClass'></td>
+                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='Degree Percentage' ng-model="degree" class='form-control inputFieldClass'></td>
                    					</tr>
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Maths(10Th) :</p></td>
@@ -1661,7 +1645,7 @@ $(document).ready( function(){
                                <th class="theadTextDataClass">Rank</th>
                            </tr>
                        </thead>
-                       <tbody style="height:300px !important;overflow-y:scroll !important;" dir-paginate="t in ( fstudentsList= (view.studentsList |itemsPerPage:pageValues | filter:studentName:yearOfPass:graduationType:branchName:genderI:batchNumber | orderBy:sortKey:reverse | filter: { graduationYOP:yearOfPass, graduationType: graduationType, graduationBranch: branchName, gender: genderI, batchNumber: batchNumber} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter ) )">
+                       <tbody style="height:300px !important;overflow-y:scroll !important;" dir-paginate="t in ( fstudentsList= (view.studentsList |itemsPerPage:pageValues | filter:studentName:yearOfPass:graduationType:branchName:genderI:batchNumber | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
                            <tr ng-click='view.studentDetails(t,$event)'>
                                <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">
