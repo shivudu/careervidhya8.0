@@ -41,7 +41,7 @@
  
  </script> 
   <style>
-  .navbar-default .navbar-nav>.active> a, 
+  /*.navbar-default .navbar-nav>.active> a, 
 			.navbar-default .navbar-nav>.active> a:focus, 
 			.navbar-default .navbar-nav>.active> a:hover
         {
@@ -49,7 +49,7 @@
             text-transform:uppercase !important;
             font-size:12px !important;
             background-color:#ff6666 !important;
-        }
+        }*/
         a{
         color:blue !important;
         }
@@ -320,8 +320,8 @@
 <body>
 
 <!--section start-->
-<div class="container-fluid">
-		<!-- navbar start-->
+<!-- <div class="container-fluid">
+		<!-- navbar start
 		<div class="row firdiv">
 			<div class="col-md-6 col-sm-6 col-xs-6">
 				<i class="fa fa-refresh fa-spin fa-3x fa-fw" style="float:left;display:none;" id="ajaxPageLoader"></i><br>
@@ -336,7 +336,7 @@
 				
 			</div>
 		</div>
-</div>
+</div> -->
 
 <div class="container-fliud menuDiv">
 <nav class="navbar navbar-default navClass">
@@ -350,22 +350,25 @@
 	  <!--<a href="student_index.html" class="navbar-brand"><img class="logo" src="images/cvcorpLogo.png"></a>-->
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" onclick="displayDiv('home');"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-        <li><a href="#" onclick="displayDiv('profile');"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-		<li><a href="#" onclick="displayDiv('statistics');"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Results-Statistics</a></li>
+	    <ul style="float:left;">
+	     	<li style="list-style-type: none;"><i class="fa fa-refresh fa-spin fa-3x fa-fw" style="float:left;display:none;color:#4e4e4e;" id="ajaxPageLoader"></i></li>
+	     </ul>
+      <ul class="nav navbar-nav" style="float:right;">
+        <li class="active"><a href="#" onclick="displayDiv('home');"> Home</a></li>
+        <li><a href="#" onclick="displayDiv('profile');"> Profile</a></li>
+		<li><a href="#" onclick="displayDiv('statistics');"> Results-Statistics</a></li>
 		
 		<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Take Test <span class="notificationClassMain"> ${fn:length(qpAvail)+fn:length(qaqpAvail) }</span><span class="caret"></span></a>
+		<a class="dropdown-toggle" data-toggle="dropdown"> Take Test <span class="notificationClassMain"> ${fn:length(qpAvail)+fn:length(qaqpAvail) }</span><span class="caret"></span></a>
 		<ul class="dropdown-menu">
-		<li><a class="sylabusLinks" href="#" onclick="displayDiv('multipleChoice');"><i class="fa fa-quora" aria-hidden="true"></i> MultiChoice QP <span class="notificationClassSub">${fn:length(qpAvail) }</span></a></li>
-		<li><a class="sylabusLinks" href="#" onclick="displayDiv('theoreticQp');"><i class="fa fa-clipboard" aria-hidden="true"></i> Theory Type QP <span class="notificationClassSub">${fn:length(qaqpAvail) }</span></a></li>
+		<li><a class="sylabusLinks" href="#" onclick="displayDiv('multipleChoice');"> MultiChoice QP <span class="notificationClassSub">${fn:length(qpAvail) }</span></a></li>
+		<li><a class="sylabusLinks" href="#" onclick="displayDiv('theoreticQp');"> Theory Type QP <span class="notificationClassSub">${fn:length(qaqpAvail) }</span></a></li>
 		</ul>
 		</li>
 		
 		<li><a href="https://cvcorp.herokuapp.com/"><i class="fa fa-commenting-o" aria-hidden="true"></i> CVCORP Chart Room</a></li>
         <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i><i class="fa fa-book" aria-hidden="true"></i> View Syllabus and Resources<span class="caret"></span></a>
+		<a class="dropdown-toggle" data-toggle="dropdown"> View Syllabus and Resources<span class="caret"></span></a>
 		<ul class="dropdown-menu">
 		<li><a class="sylabusLinks" onclick="displayDiv('aptiSyllabus')">Aptitude & Reasoning</a></li>
 		<li><a class="sylabusLinks" onclick="displayDiv('javaSyllabus')">Technical</a></li>
@@ -374,7 +377,7 @@
 		</ul>
 		</li>
 		 <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-o" aria-hidden="true"></i> View Files<span class="caret"></span></a>
+		<a class="dropdown-toggle" data-toggle="dropdown"> View Files<span class="caret"></span></a>
 		<ul class="dropdown-menu">
 		<li><a class="sylabusLinks" onclick="displayDiv('JavaFiles')">Java Files</a></li>
 		<li><a class="sylabusLinks" onclick="displayDiv('MathFiles')">MathFiles</a></li>
@@ -385,12 +388,20 @@
 
 		</ul>
 		</li>
-		<li><a onclick="displayDiv('sumHunter')"><i class="fa fa-trophy" aria-hidden="true"></i>
+		<li><a onclick="displayDiv('sumHunter')">
 		Game</a></li>
 		<!--  <li><a onclick="displayDiv('jobs')"><i class="fa fa-trophy" aria-hidden="true"></i>
 		Jobs</a></li>-->
-		<li><a onclick="displayDiv('uploadResume')"><i class="fa fa-trophy" aria-hidden="true"></i>
+		<li><a onclick="displayDiv('uploadResume')">
 		Upload Resume</a></li>
+		<li style="border-left: 1px solid #dbdbdb;border-right: 1px solid #dbdbdb;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer; height: 50px;" data-toggle="dropdown"><i style="padding:14%;float:left;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span style="float:right;margin-top: 3%;" class="caret"></span></a>
+		   <ul class="dropdown-menu" style="left:-104px !important;">
+		   		<li><p style="color:#444 !important;padding-left: 4%;font-size: 12px !important;text-align:left;">Welcome <span style="letter-spacing:1px;font-family: Segoe UI Semibold !important;font-weight:600;font-size:12px;"><i><%=st.getFullName() %></i></p></li>
+				<li><p class="welcomeDate" id="welDate"></p></li>
+		   		<li><p style="margin-left:4%"><a onclick="displayDiv('changePassword')" style="text-align:left;color:#444;cursor:pointer;font-size: 12px !important;"><i style="color:#444;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></p></li>
+		   		<li><p style="margin-left:4%"><a href="Logout" style="color:#444;text-decoration:none;"><i style="color:#444;text-align:left;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></p></li>
+			</ul>
+		</li>
       </ul>
     </div>
   </div>

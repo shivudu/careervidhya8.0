@@ -1784,6 +1784,23 @@ div.scrollmenu a:hover {
 	font-family: Segoe UI Semibold !important;
 	
 }
+.modelSaveBtn
+{
+	width: 100% !important;
+    padding: 4px 17px !important;
+    background-color: #1c8cf4 !important;
+    border:1px solid #1c8cf4 !important;
+    opacity: 0.8 !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    border-radius: 1px !important;
+    text-shadow: none !important;
+	font-family: Segoe UI Semibold !important;
+    box-shadow: none;
+    margin:1%;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+	
+}
 .modelSearchBtn:hover
 {
 	color: #fff;
@@ -2047,3 +2064,6 @@ div.scrollmenuForReg {
 }
 	
 /*Scroll bar css end*/
+
+
+

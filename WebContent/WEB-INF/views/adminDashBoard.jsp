@@ -45,7 +45,7 @@ $(document).ready( function(){
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/ajaxOp.js"/>"></script>
 	<script src="<c:url value="/resources/js/AngularApp.js"/>"></script>
-	<!-- <script src="<c:url value="/resources/js/dirPagination.js"/>"></script>-->https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js
+	<!-- <script src="<c:url value="/resources/js/dirPagination.js"/>"></script>-->
 	<!-- <script src="<c:url value="/resources/js/multiSelector.js"/>"></script> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -564,12 +564,12 @@ $(document).ready( function(){
 			<li><a onclick="displayDiv('addNotification')" style="font-size: 12px !important;"> Post a New Notification</a></li>
 			</ul>
 			</li>
-			<li style="border-left: 1px solid #dbdbdb;border-right: 1px solid #dbdbdb;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i style="padding:14%;float:left;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span style="float:right;    margin-top: 35%;" class="caret"></span></a>
-			   <ul class="dropdown-menu" style="left:-107px !important;">
+			<li style="border-left: 1px solid #dbdbdb;border-right: 1px solid #dbdbdb;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer; height: 50px;" data-toggle="dropdown"><i style="padding:14%;float:left;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span style="float:right;margin-top: 30%;" class="caret"></span></a>
+			   <ul class="dropdown-menu" style="left:-104px !important;">
 			   		<li><p style="color:#444 !important;padding-left: 4%;font-size: 12px !important;text-align:left;">Welcome <span style="letter-spacing:1px;font-family: Segoe UI Semibold !important;font-weight:600;font-size:12px;"><i><%=name %></i></p></li>
 					<li><p class="welcomeDate" id="welDate"></p></li>
-			   		<li><p style="margin-left:1%"><a onclick="displayDiv('changePassword')" style="text-align:left;color:#444;cursor:pointer;font-size: 12px !important;"><i style="color:#444;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></p></li>
-			   		<li><p style="margin-left:1%"><a href="Logout" style="color:#444;text-decoration:none;"><i style="color:#444;text-align:left;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></p></li>
+			   		<li><p style="margin-left:4%"><a onclick="displayDiv('changePassword')" style="text-align:left;color:#444;cursor:pointer;font-size: 12px !important;"><i style="color:#444;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></p></li>
+			   		<li><p style="margin-left:4%"><a href="Logout" style="color:#444;text-decoration:none;"><i style="color:#444;text-align:left;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></p></li>
 				</ul>
 			</li>
 	      </ul>
@@ -647,7 +647,7 @@ $(document).ready( function(){
  
 	<!-- container starts here-->
 		<div class="container-fluid" style="width:100%;margin-top:0.3%;">
-			<div class="row" style="border:1px solid gray;">
+			<div class="row">
 	          	
 <!-- Welcome Page-->	
 
@@ -713,9 +713,9 @@ $(document).ready( function(){
 <!-- style="margin-top: -2% !important;margin-left: -1.6%;margin-right: -1.6%;" -->
 	
 <div id="regForm" style="display:none;">
-	<div class="container-fluid" style="padding:0px !important;margin-bottom:5%;margin-top:2%;">
+	<div class="container-fluid" style="padding:0px !important;margin-bottom:5%;">
 	<form id='registration' onsubmit="return false" class="form-horizontal">
-		<div class="row" style="margin:0px !important;">
+		<div class="row" style="margin: -4px -3px 0px -6px !important;">
 			<div class="col-md-2" style="background-color:#2F3D4D;height:370px;margin:0px !important;">
 				<div class="nav nav-tabs scrollmenuForReg" id="menu-centerForReg">
 	             <a data-toggle="tab" class="active regFomLinkClass" href="#personalForm">Personal</a><br>
@@ -731,9 +731,9 @@ $(document).ready( function(){
 			</div>
 			</div>
 			<div class="col-md-10" style="margin: 0% !important;">
-					<div class="tab-content" style="margin-left: -1.4% !important;margin-top: -2% !important;margin-right: -1.6% !important;">
+					<div class="tab-content" style="margin-left: -1.4% !important;margin-top: -1.8% !important;margin-right: -1.6% !important;">
 						<div id="personalForm" class="tab-pane fade in active formTabsClassBack">
-			                <h3 class="addFormHeadClass">Personal Details</h3>
+			                <h3 class="addFormHeadClass" style="margin-left: -2px;">Personal Details</h3>
 			                <div class="row">
 		                       <div class="col-md-6">
 		                            <div class="form-group formGroupClassReg">
@@ -795,7 +795,7 @@ $(document).ready( function(){
 						</div>
 						
 						<div id="eduactionForm"  class="tab-pane fade formTabsClassBack">
-							<h3 class="addFormHeadClass">Education Details</h3>
+							<h3 class="addFormHeadClass" style="margin-left: -2px;">Education Details</h3>
 			                <div class="row">
 		                       <div class="col-md-6">
 		                            <div class="form-group formGroupClassReg">
@@ -879,7 +879,7 @@ $(document).ready( function(){
 				         </div>
 						
 						<div id="feeForm"  class="tab-pane fade formTabsClassBack">
-							<h3 class="addFormHeadClass">Fee Details</h3>
+							<h3 class="addFormHeadClass" style="margin-left: -2px;">Fee Details</h3>
 			                <div class="row">
 		                       <div class="col-md-6">
 		                            <div class="form-group formGroupClassReg">
@@ -917,7 +917,7 @@ $(document).ready( function(){
 						</div>
 						
 						<div id="placementForm"  class="tab-pane fade formTabsClassBack">
-							<h3 class="addFormHeadClass">Placement Details</h3>
+							<h3 class="addFormHeadClass" style="margin-left: -2px;">Placement Details</h3>
 			                <div class="row">
 		                       <div class="col-md-6">
 		                            <div class="form-group formGroupClassReg">
@@ -926,7 +926,7 @@ $(document).ready( function(){
 		                                <input type="radio" value="placedyes" name="placed">Yes
 		                                </label>
 		                                <label class="radio-inline labelClassRegStd">
-		                                <input type="radio" value="placedno" checked name="placed">No
+		                                <input type="radio" value="placedno" name="placed">No
 		                                </label>
 		                            </div>
 		                            <div class="form-group formGroupClassReg">
@@ -999,7 +999,7 @@ $(document).ready( function(){
 						</div>
 						
 						<div id="otherForm"  class="tab-pane fade formTabsClassBack">
-							<h3 class="addFormHeadClass">Social Links</h3>
+							<h3 class="addFormHeadClass" style="margin-left: -2px;">Social Links</h3>
 			                <div class="row">
 	                       <div class="col-md-6">
 	                            <div class="form-group formGroupClassReg">
@@ -1013,11 +1013,11 @@ $(document).ready( function(){
 	                        </div>
 	                        <div class="col-md-6"></div>
 						</div>
-						<div class="form-group" style="margin-top:10%;"> 
+						<!-- <div class="form-group" style="margin-top:10%;"> 
 							<div class="col-sm-12">
 							<input type="submit" onclick="sendData('registerStudent?','','',0); return false;" value="Register" class="btn btn-default regBtnNewStyle">
 							</div>
-						</div>
+						</div> -->
 					</div>
 				
 			</div>
@@ -1594,7 +1594,7 @@ $(document).ready( function(){
 		        </div>
 		      </div>
            <div class="row" style="padding:0% 0% 0% 3.2%;">
-               <div class="col-md-12 scrollbar" style="width:100.6%;" id="style-7">
+               <div class="col-md-12 scrollbar" style="width:100.6%;border-bottom:1px solid gray" id="style-7">
                <div class="force-overflow"></div>
                    <table class="table table-bordered tableNewClass">
                        <thead class="theadBackClass">
@@ -1897,7 +1897,7 @@ $(document).ready( function(){
 	        <div class="row" ng-show="editableForm.$visible" >
               	<div class="col-md-1"></div>
               	<div class="col-md-5">
-              		<button type="submit" class="modelSearchBtn" ng-disabled="editableForm.$waiting">Save</button>
+              		<button type="submit" class="modelSaveBtn" ng-disabled="editableForm.$waiting">Save</button>
               	</div>
               	<div class="col-md-5">
                		<button type="button" class="modelCancleBtn" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancle</button>
