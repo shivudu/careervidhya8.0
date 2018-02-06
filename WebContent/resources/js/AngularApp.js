@@ -1,4 +1,5 @@
-var app=angular.module("App",["xeditable", "ui.bootstrap","angularUtils.directives.dirPagination"]);
+var app=angular.module("App",["xeditable", "ui.bootstrap"]);
+//,"angularUtils.directives.dirPagination"
 
 app.controller("viewController",viewController);
 
@@ -20,7 +21,7 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.aggregate=0;
 	$scope.inter=0;
 	$scope.SSC=0;
-	$scope.pageValues=10;
+	//$scope.pageValues=10;
 	this.requestAllStudents=function(){
 		$('#ajaxPageLoader').show();
 	$http.get(appUrl+"/viewAll").then(function(response){
@@ -33,11 +34,11 @@ function viewController($http, appUrl,$scope, $window)
 	
 	//karnakar written code start
 	
-	$scope.sort=function(keyname){
+	/*$scope.sort=function(keyname){
 		$scope.sortKey=keyname;
 		$scope.reverse=!$scope.reverse;
 		//console.log('Sort fun called');
-	}
+	}*/
 	//karnakar written code end
 	
 	

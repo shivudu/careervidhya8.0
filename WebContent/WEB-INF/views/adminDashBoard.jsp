@@ -45,7 +45,7 @@ $(document).ready( function(){
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/ajaxOp.js"/>"></script>
 	<script src="<c:url value="/resources/js/AngularApp.js"/>"></script>
-	<script src="<c:url value="/resources/js/dirPagination.js"/>"></script>
+	<!-- <script src="<c:url value="/resources/js/dirPagination.js"/>"></script>-->https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js
 	<!-- <script src="<c:url value="/resources/js/multiSelector.js"/>"></script> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -564,12 +564,12 @@ $(document).ready( function(){
 			<li><a onclick="displayDiv('addNotification')" style="font-size: 12px !important;"> Post a New Notification</a></li>
 			</ul>
 			</li>
-			<li style="float:right !important;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"> <i style="padding:14%;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-			   <ul class="dropdown-menu" style="left:-90px !important;">
-			   		<li><span class="welocmeName" style="color:#000 !important;font-size: 12px !important;">Welcome <span style="letter-spacing:1px;font-family: Segoe UI Semibold !important;font-weight:600;font-size:12px;"><i><%=name %></i></span></li>
-					<li><span class="welcomeDate" id="welDate"></span></li>
-			   		<li><a onclick="displayDiv('changePassword')" style="float:right;color:#000;cursor:pointer;font-size: 12px !important;">&nbsp<i style="color:#000;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></li>
-			   		<li><a href="Logout" style="float:right;color:#000"><i style="color:#000;marggin-right:1%;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+			<li style="border-left: 1px solid #dbdbdb;border-right: 1px solid #dbdbdb;font-size: 12px !important;" class="dropdown"><a class="dropdown-toggle" style="cursor:pointer;" data-toggle="dropdown"><i style="padding:14%;float:left;border:1px solid #4e4e4e;border-radius: 50%;" class="fa fa-user" aria-hidden="true"></i><span style="float:right;    margin-top: 35%;" class="caret"></span></a>
+			   <ul class="dropdown-menu" style="left:-107px !important;">
+			   		<li><p style="color:#444 !important;padding-left: 4%;font-size: 12px !important;text-align:left;">Welcome <span style="letter-spacing:1px;font-family: Segoe UI Semibold !important;font-weight:600;font-size:12px;"><i><%=name %></i></p></li>
+					<li><p class="welcomeDate" id="welDate"></p></li>
+			   		<li><p style="margin-left:1%"><a onclick="displayDiv('changePassword')" style="text-align:left;color:#444;cursor:pointer;font-size: 12px !important;"><i style="color:#444;" class="fa fa-wrench" aria-hidden="true"></i> Change Password</a></p></li>
+			   		<li><p style="margin-left:1%"><a href="Logout" style="color:#444;text-decoration:none;"><i style="color:#444;text-align:left;font-size: 12px !important;" class="fa fa-power-off" aria-hidden="true"></i> Logout</a></p></li>
 				</ul>
 			</li>
 	      </ul>
@@ -1555,14 +1555,14 @@ $(document).ready( function(){
                     	</div>
 		              </div>
 		              <div class="row" style="margin-top:1%;">
-		              	<div class="col-md-4"></div>
-		              	<div class="col-md-2">
-		              		<button class="modelSearchBtn">Search</button>
+		              	<!-- <div class="col-md-4"></div> -->
+		              	<div class="col-md-12">
+		              		<button data-dismiss="modal" class="modelSearchBtn close">Search</button>
 		              	</div>
-		              	<div class="col-md-2">
+		              	<!-- <div class="col-md-2">
 		               		<button class="modelCancleBtn">Cancle</button>
 		              	</div>
-		              	<div class="col-md-4"></div>
+		              	<div class="col-md-4"></div> -->
 		              </div>
 		            </div>
 		          </div>
@@ -1593,45 +1593,46 @@ $(document).ready( function(){
 		          
 		        </div>
 		      </div>
-           <div class="row" style="padding:0% 0% 0% 2.5%;">
-               <div class="col-md-12">
+           <div class="row" style="padding:0% 0% 0% 3.2%;">
+               <div class="col-md-12 scrollbar" style="width:100.6%;" id="style-7">
+               <div class="force-overflow"></div>
                    <table class="table table-bordered tableNewClass">
                        <thead class="theadBackClass">
                            <tr>
                                <th rowspan="2"class="theadTextDataClass" style="width:2%;">
                                <input ng-model="checkAll" type='checkbox' ng-click='selectAll()' type="checkbox"/></th>
-                               <th rowspan="2"class="theadTextDataClass" style="width:15%;cursor:pointer" ng-click="sort('fullName')">Name
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='fullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th rowspan="2"class="theadTextDataClass" style="width:15%;cursor:pointer">Name
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='fullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('batchNumber')">Batch
-								<span class="glyphicon sort-icon" ng-show="sortKey=='batchNumber'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>	                               	
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">Batch
+								<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='batchNumber'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->                             	
                                </th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationYOP')">YOP
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationYOP'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">YOP
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationYOP'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
                                <!-- <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('feePaid')">Fee
                                	<span class="glyphicon sort-icon" ng-show="sortKey=='feePaid'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                               </th> -->
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationBranch')">Branch
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationBranch'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               </th>-->
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">Branch
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationBranch'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
                                <th colspan="3" class="theadTextDataClass">Percentages</th>
                                <th colspan="2" class="theadTextDataClass">Math Scores</th>
                                <th colspan="3" class="theadTextDataClass">Progress</th>
                                <th colspan="2" class="theadTextDataClass">Performance</th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('stdAgeing')">Duration
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='stdAgeing'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">Duration
+                               	<!-- <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
                            </tr>
                            <tr class="theadBackClass">
-                               <th class="theadTextDataClass" style="border-right: 1px solid #ddd !important;cursor:pointer" ng-click="sort('sscPercentage')">10th
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='sscPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th class="theadTextDataClass" style="border-right: 1px solid #ddd !important;cursor:pointer" >10th
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='sscPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
-                               <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('interPercentage')">12th
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='interPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th class="theadTextDataClass" style="cursor:pointer">12th
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='interPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
-                               <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('graduationPercentage')">G
-                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                               <th class="theadTextDataClass" style="cursor:pointer">G
+                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
                                <!-- <th class="theadTextDataClass" style="cursor:pointer" ng-click="sort('aggregate')">A
                                	<span class="glyphicon sort-icon" ng-show="sortKey=='aggregate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
@@ -1645,7 +1646,8 @@ $(document).ready( function(){
                                <th class="theadTextDataClass">Rank</th>
                            </tr>
                        </thead>
-                       <tbody style="height:300px !important;overflow-y:scroll !important;" dir-paginate="t in ( fstudentsList= (view.studentsList | itemsPerPage:pageValues | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
+                  
+                       <tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
                            <tr ng-click='view.studentDetails(t,$event)'>
                                <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">
@@ -1672,7 +1674,7 @@ $(document).ready( function(){
                    </table>
                </div>
            </div>
-           <div class="row">
+           <!-- <div class="row">
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-md-2"><p class="pageShowClass">Show</p></div>
@@ -1699,7 +1701,7 @@ $(document).ready( function(){
 				<div class="col-md-8">
 					<dir-pagination-controls class="paginationStyleClass" max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>
 				</div>
-			</div>
+			</div>-->
 		</div>
 		<div class="col-md-3" style="position:sticky !important;top:0;">
 			<div class="row">
@@ -3235,5 +3237,7 @@ $(document).ready(function(){
   });
 });
 </script>
-
+<script>
+$('#scrollableid').slimScroll();
+</script>
 </html>
