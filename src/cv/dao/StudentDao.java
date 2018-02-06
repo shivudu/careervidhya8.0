@@ -14,8 +14,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
-
-
+import cv.dto.Company;
+import cv.dto.DriveStatus;
+import cv.dto.TempData;
 import cv.models.CVStudent;
 import cv.models.CustomFile;
 import cv.models.Present;
@@ -331,6 +332,44 @@ public class StudentDao {
 		String sql="update cv_students set feeTotal="+totalFee+" where email='"+email+"'";
 		template.update(sql);
 	}
+
+	public void updateTempData(TempData data) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(data.toString());
+		String sql="update cv_students set fblink='"+data.getFbLink()+"',"
+				+ "lnlink='"+data.getLnLink()+"',SSCBoard='"+data.getSscBoard()+"',"
+				+ "InterBoard='"+data.getInterBoard()+"', SSCMaths="+data.getSscMaths()+",InterMaths="+data.getInterMaths()
+				+" where email='"+data.getEmail()+"'";
+		template.update(sql);
+		
+	}
 	
+	public void updateDriveData(DriveStatus data) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(data.toString());
+		String sql="insert into companies (name,URL,location)"
+				+ " values('"+data.getName()+"','"+data.getURL()+"','"+data.getLocation()+"')";
+		template.update(sql);
+		
+	}
+	
+	//List Companies
+	public List<Company> getCompanies(String str) throws Exception
+	{
+		String sql="select * from companies where name like '%"+str+"%'";
+		List<Company> companies=template.query(sql, new RowMapper<Company>(){
+			public Company mapRow(ResultSet rs,int row)throws SQLException 
+			{
+				Company f=new Company();
+				f.setName(rs.getString("name"));
+				f.setCompany_id(rs.getInt("company_id"));
+				f.setLocation(rs.getString("location"));
+				f.setURL(rs.getString("URL"));
+								
+				return f;
+			}
+		});
+		return companies;
+	}
 	
 }

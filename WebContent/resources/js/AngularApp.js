@@ -2,7 +2,7 @@ var app=angular.module("App",["xeditable", "ui.bootstrap","angularUtils.directiv
 
 app.controller("viewController",viewController);
 
-app.constant("appUrl","http://localhost:8080/CareerVidhya_Operations8.0");
+app.constant("appUrl","http://13.59.96.99");
 
 app.run(['editableOptions', function(editableOptions) {
 	  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -253,11 +253,11 @@ function viewController($http, appUrl,$scope, $window)
 		
 		if($scope.Paid==true)
 			 b1= st.feePaid-st.feeTotal==0;
-		else if($scope.pPaid==true && st.feeTotal!=0 && st.feePaid!=0)
+		if($scope.pPaid==true && st.feeTotal!=0 && st.feePaid!=0)
 			b2= true;
-		else if($scope.free==true)
+		if($scope.free==true)
 			b3= st.feeTotal==0;
-		else if($scope.nPaid==true)
+		if($scope.nPaid==true)
 			b4= st.feePaid==0 && st.feeTotal!=0;
 		else
 			b5= false;

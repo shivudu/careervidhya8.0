@@ -1619,7 +1619,7 @@ $(document).ready( function(){
                                <th colspan="2" class="theadTextDataClass">Math Scores</th>
                                <th colspan="3" class="theadTextDataClass">Progress</th>
                                <th colspan="2" class="theadTextDataClass">Performance</th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('stdAgeing')">Ageing
+                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('stdAgeing')">Duration
                                	<span class="glyphicon sort-icon" ng-show="sortKey=='stdAgeing'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                </th>
                            </tr>
@@ -1645,7 +1645,7 @@ $(document).ready( function(){
                                <th class="theadTextDataClass">Rank</th>
                            </tr>
                        </thead>
-                       <tbody style="height:300px !important;overflow-y:scroll !important;" dir-paginate="t in ( fstudentsList= (view.studentsList |itemsPerPage:pageValues | filter:studentName:yearOfPass:graduationType:branchName:genderI:batchNumber | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
+                       <tbody style="height:300px !important;overflow-y:scroll !important;" dir-paginate="t in ( fstudentsList= (view.studentsList | itemsPerPage:pageValues | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
                            <tr ng-click='view.studentDetails(t,$event)'>
                                <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">

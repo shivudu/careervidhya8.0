@@ -4,6 +4,10 @@ import cv.dao.QuestionPaperDao;
 import cv.dao.ReportDao;
 import cv.dao.StudentDao;
 import cv.dao.StudentInGameDao;
+import cv.dto.CompaniesList;
+import cv.dto.Company;
+import cv.dto.DriveStatus;
+import cv.dto.TempData;
 import cv.models.Admin;
 import cv.models.CVStudent;
 import cv.models.CustomFile;
@@ -31,6 +35,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 public class StudentService {
 
@@ -495,6 +501,67 @@ public class StudentService {
 				
 				return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 				
+	}
+
+
+	public String updateData(String reqBody) {
+		// TODO Auto-generated method stub
+		 Gson g=new Gson();
+		 boolean status=false;
+		 TempData td=g.fromJson(reqBody, TempData.class);
+		 try{
+		 studentDao.updateTempData(td);
+		 status=true;
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 return "{\"status\":"+status+"}";
+	}
+	
+	public String updateDrive(String reqBody) {
+		// TODO Auto-generated method stub
+		 Gson g=new Gson();
+		 boolean status=false;
+		 DriveStatus td=g.fromJson(reqBody, DriveStatus.class);
+		 try{
+		 studentDao.updateDriveData(td);
+		 status=true;
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 return "{\"status\":"+status+"}";
+	}
+
+
+	public CVStudent getStudent(String email) {
+		// TODO Auto-generated method stub
+		CVStudent cv=null;
+		try{
+		cv=studentDao.getStudentByEmail(email);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return cv;
+	}
+
+
+	public CompaniesList getCompanies(String str) {
+		// TODO Auto-generated method stub
+		CompaniesList l=new CompaniesList();
+		try{
+		 l.setCompanies(studentDao.getCompanies(str));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return l;
 	}
 
 

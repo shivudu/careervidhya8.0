@@ -187,8 +187,11 @@ public class StudentController {
 		 
 		
 	}
-	
-	
+	@RequestMapping(value="/getStudent/{email}/any",method=RequestMethod.GET)
+	public @ResponseBody CVStudent getStudent(@PathVariable("email") String email)
+	{
+		return studentService.getStudent(email);
+	}
 	
 	
 }
