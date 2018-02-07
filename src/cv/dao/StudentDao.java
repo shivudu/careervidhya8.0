@@ -347,9 +347,34 @@ public class StudentDao {
 	public void updateDriveData(DriveStatus data) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println(data.toString());
-		String sql="insert into companies (name,URL,location)"
-				+ " values('"+data.getName()+"','"+data.getURL()+"','"+data.getLocation()+"')";
+		Integer company_id=null;
+		String sql;
+		String sqlGetID="select company_id from companies where name like '%"+data.getName()+"' limit 1";
+		try{
+		company_id=template.queryForObject(sqlGetID, Integer.class);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		//String sql="";
+		if(company_id==null){
+		sql="insert into companies (name)"
+				+ " values('"+data.getName()+"')";		
 		template.update(sql);
+		company_id=template.queryForObject(sqlGetID, Integer.class);
+		}
+		
+		sql="insert into student_interview_status(student_id,company_id,description,"
+				+ "WrittenRound_Status,TechnicalRound1_Status,TechnicalRound2_Status,ComsRound_Status,"
+				+ "HRRound_Status,FinalReport,designation,technicalstack,bond,bondduration,certificates,initialSalary,laterSalary)"
+				+ "values ("+data.getStudent_id()+","+company_id+",'"+data.getDescription()+"','"+data.getWrittenRound_Status()+"',"
+				+ "'"+data.getTechnicalRound1_Status()+"','"+data.getTechnicalRound2_Status()+"','"+data.getComsRound_Status()+"',"
+				+ "'"+data.getHRRound_Status()+"','"+data.getFinalReport()+"','"+data.getDesignation()+"','"+data.getTechnicalstack()+"',"
+				+ "'"+data.getBond()+"',"+data.getBondduration()+",'"+data.getCertificates()+"',"+data.getInitialSalary()+","
+				+ ""+data.getLaterSalary()+")";
+		
+		template.update(sql);
+		
 		
 	}
 	

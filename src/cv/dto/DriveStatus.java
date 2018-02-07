@@ -21,8 +21,7 @@ public class DriveStatus {
    private Double laterSalary;
    
    private String name;
-   private String URL;
-   private String location;
+
 public Integer getStudent_id() {
 	return student_id;
 }
@@ -125,18 +124,7 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public String getURL() {
-	return URL;
-}
-public void setURL(String uRL) {
-	URL = uRL;
-}
-public String getLocation() {
-	return location;
-}
-public void setLocation(String location) {
-	this.location = location;
-}
+
 @Override
 public String toString() {
 	return "DriveStatus [student_id=" + student_id + ", WrittenRound_Status=" + WrittenRound_Status
@@ -145,7 +133,7 @@ public String toString() {
 			+ ", joinDate=" + joinDate + ", HRRound_Status=" + HRRound_Status + ", FinalReport=" + FinalReport
 			+ ", designation=" + designation + ", technicalstack=" + technicalstack + ", bond=" + bond
 			+ ", bondduration=" + bondduration + ", certificates=" + certificates + ", initialSalary=" + initialSalary
-			+ ", laterSalary=" + laterSalary + ", name=" + name + ", URL=" + URL + ", location=" + location + "]";
+			+ ", laterSalary=" + laterSalary + ", name=" + name + "]";
 }
    
    
