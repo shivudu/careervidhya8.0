@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -568,11 +571,23 @@ public class AdminService {
 		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 	}
 
-	public void updateStudent(CVStudent student) {
+	public String updateStudent(String reqBody) {
 		// TODO Auto-generated method stub
+		Gson g=new Gson();
+		Boolean status=true;
+		String notification="Saved Successfully";
+		try{
+		CVStudent student=g.fromJson(reqBody, CVStudent.class);
+		studentDao.updateStudent(student);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			status=false;
+			notification="Error in Saving";
+		}
 		
-		
-		
+		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 	}
 
 	

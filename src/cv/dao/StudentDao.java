@@ -70,6 +70,15 @@ public class StudentDao {
 			public CVStudent mapRow(ResultSet rs,int row) throws SQLException{
 			CVStudent s=new CVStudent();
 			//s.setStudent_id(rs.getString(1));
+			
+			s.setFbLink(rs.getString("fblink"));
+			s.setLnLink(rs.getString("lnlink"));
+			s.setInactivereport(rs.getString("inactivereport"));
+			s.setStatus(rs.getString("status"));
+			s.setSscBoard(rs.getString("SSCBoard"));
+			s.setInterBoard(rs.getString("InterBoard"));
+			s.setSscMaths(rs.getDouble("SSCMaths"));
+			s.setLastlogin(""+rs.getDate("lastlogin"));
 			s.setBatchNumber(rs.getInt(1));
 			s.setFullName(rs.getString(2));
 			s.setEmail(rs.getString(3));
@@ -110,11 +119,21 @@ public class StudentDao {
 	public List<CVStudent> getStudents() {
 		// TODO Auto-generated method stub
 		
+		
 		String sql="select * from cv_students";
 		List<CVStudent> students=template.query(sql,new RowMapper<CVStudent>(){
 			public CVStudent mapRow(ResultSet rs,int row) throws SQLException{
 			CVStudent s=new CVStudent();
 			//s.setStudent_id(rs.getString(1));
+			s.setFbLink(rs.getString("fblink"));
+			s.setLnLink(rs.getString("lnlink"));
+			s.setInactivereport(rs.getString("inactivereport"));
+			s.setStatus(rs.getString("status"));
+			s.setSscBoard(rs.getString("SSCBoard"));
+			s.setInterBoard(rs.getString("InterBoard"));
+			s.setSscMaths(rs.getDouble("SSCMaths"));
+			s.setLastlogin(""+rs.getDate("lastlogin"));
+			s.setInterMaths(rs.getDouble("InterMaths"));
 			s.setBatchNumber(rs.getInt(1));
 			s.setFullName(rs.getString(2));
 			s.setEmail(rs.getString(3));
@@ -141,6 +160,7 @@ public class StudentDao {
 			s.setState(rs.getString("state"));
 			s.setJoinDate(""+rs.getDate("joinDate"));
 			s.setAttendancePerc(rs.getInt("attendancePerc"));
+			s.setStudent_id(rs.getInt("student_id"));
 			return s;
 			}	
 		});
@@ -395,6 +415,52 @@ public class StudentDao {
 			}
 		});
 		return companies;
+	}
+
+	public void updateStudent(CVStudent st)throws Exception {
+		// TODO Auto-generated method stub
+       String jd="";
+		if(st.getJoinDate()!=null && st.getJoinDate().equals("null"))
+			jd="joinDate="+st.getJoinDate()+",";
+		else if(st.getJoinDate()!=null && !st.getJoinDate().equals("null"))
+			jd="joinDate='"+st.getJoinDate()+"',";
+		if( st.getInterMaths()!=null && st.getInterMaths().equals("null"))
+			st.setInterMaths(null);
+		if(st.getSscMaths()!=null && st.getSscMaths().equals("null"))
+			st.setSscMaths(null);
+		
+		String sql="update cv_students set batchNumber="+st.getBatchNumber()+","
+				+ "fullName='"+st.getFullName()+"',"
+				+ "email='"+st.getEmail()+"',"
+				+ "parentName='"+st.getParentName()+"',"
+				+ "mobile='"+st.getMobile()+"',"
+				+ "mobile_Parent='"+st.getMobile_Parent()+"',"
+				+ "feePaid="+st.getFeePaid()+","
+				+ "feeTotal="+st.getfeeTotal()+","
+				+ "sscPercentage="+st.getSscPercentage()+","
+				+ "interPercentage="+st.getInterPercentage()+","
+				+ "graduationPercentage="+st.getGraduationPercentage()+","
+				+ "graduationCollege='"+st.getGraduationCollege()+"',"
+				+ "graduationYOP="+st.getGraduationYOP()+","
+				+ "graduationType='"+st.getGraduationType()+"'"
+				+ ",graduationBranch='"+st.getGraduationBranch()+"',"
+				+ "gender='"+st.getGender()+"',"
+				+ "dob='"+st.getDob()+"',"
+				+ "locality='"+st.getCity()+"',"
+				+ "city='"+st.getCity()+"',"
+				+ "state='"+st.getState()+"',"
+				+ jd
+				+ "graduationCity='"+st.getGraduationCity()+"',"
+				+ "SSCMaths="+st.getSscMaths()+","
+				+ "InterMaths="+st.getInterMaths()
+				+ ",SSCBoard='"+st.getSscBoard()+"',"
+				+ "InterBoard='"+st.getInterBoard()+"',"
+				+ "fblink='"+st.getFbLink()+"',"
+				+ "lnlink='"+st.getLnLink()+"',"
+				+ "status='"+st.getStatus()+"'"
+				+ ",inactivereport='"+st.getInactivereport()+"'"
+				+ " where student_id="+st.getStudent_id();
+		template.update(sql);
 	}
 	
 }

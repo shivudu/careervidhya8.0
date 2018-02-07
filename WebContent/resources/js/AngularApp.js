@@ -24,27 +24,29 @@ function viewController($http, appUrl,$scope, $window)
 	//$scope.pageValues=10;
 	this.requestAllStudents=function(){
 		$('#ajaxPageLoader').show();
-	$http.get(appUrl+"/viewAll").then(function(response){
+	$http.get("viewAll").then(function(response){
 		currentScope.studentsList=response.data["studentsList"];
 		$('#ajaxPageLoader').hide();
+		console.log(response.data);
 		//currentScope.filteredData=currentScope.studentsList;
 		//currentScope.JSONToCSVConvertor(currentScope.studentsList,"Testing",true);
 	});
+	
 	};
 	
 	//karnakar written code start
 	
-	/*$scope.sort=function(keyname){
+	$scope.sort=function(keyname){
 		$scope.sortKey=keyname;
 		$scope.reverse=!$scope.reverse;
 		//console.log('Sort fun called');
-	}*/
+	}
 	//karnakar written code end
 	
 	
 	this.requestBatchStudents=function(batchNumber){
 		$('#ajaxPageLoader').show();
-		$http.get(appUrl+"/viewBatch/"+batchNumber).then(function(response){
+		$http.get("viewBatch/"+batchNumber).then(function(response){
 			currentScope.studentsList=response.data["studentsList"];
 			$('#ajaxPageLoader').hide();
 			//currentScope.filteredData=currentScope.studentsList;
@@ -138,7 +140,7 @@ function viewController($http, appUrl,$scope, $window)
 	                {value:"MECH",text:"MECH"},
 	                {value:"CIVIL",text:"CIVIL"},
 	                {value:"Aeronautical",text:"Aeronautical"},
-	                {value:"Electronics & Instrumentation Engineering",text:"Electronics & Instrumentation Engineering"},
+	                {value:"EIE",text:"Electronics & Instrumentation Engineering"},
 	                {value:"Mechatronics Engineering",text:"Mechatronics Engineering"},
 	                {value:"BSC Computers",text:"BSC Computers"},
 	                {value:"BSC General",text:"BSC General"},
@@ -157,7 +159,7 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.checkedBatches=[];
 	
 	
-	$scope.branchValues=["CSE&IT","ECE","EEE","MECH","CIVIL","BSC","BCOM","Others"];
+	$scope.branchValues=["CSE&IT","ECE","EEE","MECH","CIVIL","BSC","BCOM","Others","EIE"];
 	$scope.checkedBranches=[];
 	
 	
@@ -173,48 +175,63 @@ function viewController($http, appUrl,$scope, $window)
 		for(i=year+1;i>=year-4;i--)
 			{
 			$scope.yearValues.push(i);
-			$scope.checkedYears.push(i);
+			$scope.checkedYears.push(-1);
 			}
 		for(i=0;i<$scope.branchValues.length;i++)
 		{
-		$scope.checkedBranches.push($scope.branchValues[i]);
+		$scope.checkedBranches.push("NA");
 		}
 		//console.log(batchNos);
 		console.log($scope.batches.length);
 		for(i=0;i<$scope.batches.length;i++)
 		{
 			
-		$scope.checkedBatches.push($scope.batches[i]);
+		$scope.checkedBatches.push("NA");
 		}
 		
 	}());
 	
+
+	
 	$scope.yearOfPassFilter=function(st)
 	{
-		for(var i=0;i<$scope.checkedYears.length;i++)
+		var count=0;
+		for(var i=0;i<$scope.checkedYears.length;i++){
 			if($scope.checkedYears[i]==st.graduationYOP)
 				return true;
-		return false;
+			if($scope.checkedYears[i]==-1)
+			count++;
+		}
+		return count==$scope.checkedYears.length;
 	};
 
 	
-	
+
 	$scope.branchFilter=function(st)
 	{
-		for(var i=0;i<$scope.checkedBranches.length;i++)
+	  var count=0;
+		for(var i=0;i<$scope.checkedBranches.length;i++){
 			if($scope.checkedBranches[i].indexOf(st.graduationBranch)!=-1)
 				return true;
-		return false;
+			if($scope.checkedBranches[i]=="NA")
+			count++;
+		}
+		return count==$scope.checkedBranches.length;
 	};
 	
 	
+	$scope.batchFilterChecked=false;
 	
 	$scope.batchFilter=function(st)
 	{
-		for(var i=0;i<$scope.batches.length;i++)
+		var count=0;
+		for(var i=0;i<$scope.batches.length;i++){
 			if(parseInt($scope.checkedBatches[i])==st.batchNumber)
 				return true;
-		return false;
+			if($scope.checkedBatches[i]=="NA")
+			count++;
+		}
+		return count==$scope.checkedBatches.length;
 	};
 	
 	
@@ -230,7 +247,6 @@ function viewController($http, appUrl,$scope, $window)
 	
 	$scope.interFilter=function(st)
 	{
-		
 		return $scope.inter<=st.interPercentage;
 	};
 	
@@ -250,6 +266,7 @@ function viewController($http, appUrl,$scope, $window)
 
 	$scope.feeFilter=function(st)
 	{
+	
 		var b1,b2=false,b3,b4,b5;
 		
 		if($scope.Paid==true)
@@ -268,6 +285,9 @@ function viewController($http, appUrl,$scope, $window)
 	
 	this.resetFilters=function()
 	{
+		//Resetting
+
+		
 		$scope.Paid=true;
 		$scope.pPaid=true;
 		$scope.nPaid=true;
@@ -282,7 +302,7 @@ function viewController($http, appUrl,$scope, $window)
 		$scope.graduationType="";
 		$scope.branchName="";
 		$scope.yearOfPass="";
-		$scope.studentName="";
+		$scope.studentSearchStr="";
 		$scope.batchNumber="";
 		$scope.checkedYears=[];
 		$scope.checkedBranches=[];
@@ -290,13 +310,13 @@ function viewController($http, appUrl,$scope, $window)
 		
 		for(i=0;i<$scope.branchValues.length;i++)
 		{
-		$scope.checkedBranches.push($scope.branchValues[i]);
+		$scope.checkedBranches.push("NA");
 		}
 		
 		for(i=0;i<$scope.batches.length;i++)
 		{
 			
-		$scope.checkedBatches.push($scope.batches[i]);
+		$scope.checkedBatches.push("NA");
 		}
 		
 		var year=new Date().getFullYear();
@@ -304,7 +324,7 @@ function viewController($http, appUrl,$scope, $window)
 		for(i=year+1;i>=year-4;i--)
 			{
 			
-			$scope.checkedYears.push(i);
+			$scope.checkedYears.push(-1);
 			}
 		
 	}
@@ -495,7 +515,7 @@ function viewController($http, appUrl,$scope, $window)
 	
 	this.fetchReport=function(email){ 
 		
-		let url=appUrl+"/getStudentReport/"+email+"/any";
+		let url="getStudentReport/"+email+"/any";
 		
 			//document.getElementById("V"+email).style.display="none";
 			//document.getElementById("ChartProgress").style.display="block";
@@ -544,6 +564,22 @@ function viewController($http, appUrl,$scope, $window)
 	{
 		return parseInt(v);
 	}
+	$scope.butifytheName=function(name)
+	{
+		if(name!=undefined){
+		var names=name.split(" ");
+		var bName="";
+		for(var i=0;i<names.length;i++)
+			{
+			 bName=bName+((names[i].charAt(0)+"").toUpperCase())+names[i].substring(1,names[i].length).toLowerCase()+" ";
+			}
+		return bName;
+		}
+		else
+			return "Student Area";
+	}
+	
+	
 	
 	
 	this.updateFee=function(t)
@@ -658,7 +694,7 @@ function viewController($http, appUrl,$scope, $window)
 		
 		var difference_ms = date2_ms - date1_ms; 
 		
-		 console.log(Math.round(difference_ms/one_day));
+		 //console.log(Math.round(difference_ms/one_day));
 		 // Convert back to days and return   
 		 
 		return Math.round(difference_ms/one_day);
@@ -668,4 +704,33 @@ function viewController($http, appUrl,$scope, $window)
 			return 'NA';
 		}
 	};
+	
+	$scope.saveStudent= function(){
+		console.log("testing");
+		$http.post("updateStudent",currentScope.student).then(function(response){
+			var data=response.data;
+			if(data["status"]){
+				   document.getElementById('success').style.display='block';
+				document.getElementById('reportT').innerHTML=data["notification"];
+				$('#success').flash_message({
+			        text: ' ',
+			        how: 'append',
+			        idR :'success'
+			    });
+				
+				
+				}
+				else{
+					document.getElementById('fail').style.display='block';
+					document.getElementById('reportF').innerHTML=data["notification"];
+					$('#fail').flash_message({
+				        text: ' ',
+				        how: 'append',
+				        idR :'fail'
+				    });
+					
+				}
+		});	
+	}
+	
 }

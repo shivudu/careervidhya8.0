@@ -6,7 +6,7 @@ public class CVStudent {
 
 	private String fullName;
 	
-	private String student_id;
+	private Integer student_id;
 	private int batchNumber;
 	private String email;
 	
@@ -34,6 +34,73 @@ public class CVStudent {
 
 	private int attendancePerc;
 	private String password_hash;
+	
+	private String interBoard;
+	private String sscBoard;
+	
+	private Double sscMaths;
+	private Double interMaths;
+	
+	private String status;
+	private String inactivereport;
+	private String fbLink;
+	private String lnLink;
+	
+	public String getInterBoard() {
+		return interBoard;
+	}
+	public void setInterBoard(String interBoard) {
+		this.interBoard = interBoard;
+	}
+	public String getSscBoard() {
+		return sscBoard;
+	}
+	public void setSscBoard(String sscBoard) {
+		this.sscBoard = sscBoard;
+	}
+	public Double getSscMaths() {
+		return sscMaths;
+	}
+	public void setSscMaths(Double sscMaths) {
+		this.sscMaths = sscMaths;
+	}
+	public Double getInterMaths() {
+		return interMaths;
+	}
+	public void setInterMaths(Double interMaths) {
+		this.interMaths = interMaths;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getInactivereport() {
+		return inactivereport;
+	}
+	public void setInactivereport(String inactivereport) {
+		this.inactivereport = inactivereport;
+	}
+	public String getFbLink() {
+		return fbLink;
+	}
+	public void setFbLink(String fbLink) {
+		this.fbLink = fbLink;
+	}
+	public String getLnLink() {
+		return lnLink;
+	}
+	public void setLnLink(String lnLink) {
+		this.lnLink = lnLink;
+	}
+	public String getLastlogin() {
+		return lastlogin;
+	}
+	public void setLastlogin(String lastlogin) {
+		this.lastlogin = lastlogin;
+	}
+	private String lastlogin;
 	
 	
 	private double aggregate;
@@ -255,10 +322,10 @@ public class CVStudent {
 	public void setPassword_hash(String password_hash) {
 		this.password_hash = password_hash;
 	}
-	public String getStudent_id() {
+	public Integer getStudent_id() {
 		return student_id;
 	}
-	public void setStudent_id(String student_id) {
+	public void setStudent_id(Integer student_id) {
 		this.student_id = student_id;
 	}
 	public String getGender() {

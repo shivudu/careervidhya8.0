@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -540,10 +541,11 @@ public class AdminController {
 			return "{\"status\":"+false+",\"notification\":\"Not acceptable\"}";
 	}
 	
-	@RequestMapping(value="/updateStudent/{email}",method=RequestMethod.POST)
-	public @ResponseBody String updateStudent(@ModelAttribute("student") CVStudent student)
+	@RequestMapping(value="/updateStudent",consumes="Application/JSON",produces="Application/JSON",method=RequestMethod.POST)
+	public @ResponseBody String updateStudent(@RequestBody String reqBody)
 	{
-		adminService.updateStudent(student);
-		return "Under Implementation";
+		System.out.println(reqBody);
+		return adminService.updateStudent(reqBody);
+		
 	}
 }

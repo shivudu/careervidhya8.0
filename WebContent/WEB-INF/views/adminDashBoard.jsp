@@ -856,7 +856,7 @@ $(document).ready( function(){
 										  <option value="MECH">MECH</option>
 										  <option value="CIVIL">CIVIL</option>
 										  <option value="Aeronautical">Aeronautical</option>
-										  <option value="Electronics & Instrumentation Engineering">Electronics & Instrumentation Engineering</option>
+										  <option value="EIE">Electronics & Instrumentation Engineering</option>
 										  <option value="Mechatronics Engineering">Mechatronics Engineering</option>
 										  <option value="other">Any other</option>
 										  </optgroup>
@@ -1238,7 +1238,7 @@ $(document).ready( function(){
 			<div class="row" style="padding:1% 0% 0% 2.5%;">
 				<div class="col-md-3">
 	                <div class="input-group">
-	                    <input type="text" ng-model="studentName" class="form-control inputFirstBox" name="allfields" placeholder="Search Student">
+	                    <input type="text" ng-model="studentSearchStr" class="form-control inputFirstBox" name="allfields" placeholder="Search Student">
 	                    <span class="input-group-addon search-btn"><i class="fa fa-search" aria-hidden="true"></i></span>
 	                    <!--<span class="input-group-addon search-btn"><i class="fa fa-question" aria-hidden="true"></i></span>-->
 	                </div>
@@ -1601,20 +1601,20 @@ $(document).ready( function(){
                            <tr>
                                <th rowspan="2"class="theadTextDataClass" style="width:2%;">
                                <input ng-model="checkAll" type='checkbox' ng-click='selectAll()' type="checkbox"/></th>
-                               <th rowspan="2"class="theadTextDataClass" style="width:15%;cursor:pointer">Name
-                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='fullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                               <th rowspan="2"class="theadTextDataClass" style="width:15%;cursor:pointer" ng-click="sort('fullName')">Name
+                               <span class="glyphicon sort-icon" ng-show="sortKey=='fullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                </th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">Batch
-								<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='batchNumber'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->                             	
+                               <th rowspan="2" class="theadTextDataClass" ng-click="sort('batchNumber')" style="cursor:pointer">Batch
+								<span class="glyphicon sort-icon" ng-show="sortKey=='batchNumber'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>                              	
                                </th>
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">YOP
-                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationYOP'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                               <th rowspan="2" class="theadTextDataClass" ng-click="sort('graduationYOP')" style="cursor:pointer">YOP
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationYOP'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> 
                                </th>
                                <!-- <th rowspan="2" class="theadTextDataClass" style="cursor:pointer" ng-click="sort('feePaid')">Fee
                                	<span class="glyphicon sort-icon" ng-show="sortKey=='feePaid'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                </th>-->
-                               <th rowspan="2" class="theadTextDataClass" style="cursor:pointer">Branch
-                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationBranch'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                               <th rowspan="2" class="theadTextDataClass" ng-click="sort('graduationBranch')" style="cursor:pointer">Branch
+                               	<span class="glyphicon sort-icon" ng-show="sortKey=='graduationBranch'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                </th>
                                <th colspan="3" class="theadTextDataClass">Percentages</th>
                                <th colspan="2" class="theadTextDataClass">Math Scores</th>
@@ -1628,8 +1628,8 @@ $(document).ready( function(){
                                <th class="theadTextDataClass" style="border-right: 1px solid #ddd !important;cursor:pointer" >10th
                                	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='sscPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
                                </th>
-                               <th class="theadTextDataClass" style="cursor:pointer">12th
-                               	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='interPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+                               <th class="theadTextDataClass" ng-click="sort('interMaths')" style="cursor:pointer">12th
+                               <span class="glyphicon sort-icon" ng-show="sortKey=='interMaths'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>  
                                </th>
                                <th class="theadTextDataClass" style="cursor:pointer">G
                                	<!-- <span class="glyphicon sort-icon" ng-show="sortKey=='graduationPercentage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
@@ -1647,11 +1647,11 @@ $(document).ready( function(){
                            </tr>
                        </thead>
                   
-                       <tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
+                       <tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
                            <tr ng-click='view.studentDetails(t,$event)'>
                                <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">
-                 					<p style="float:left;" ng-if="findDuration(t.joinDate) == 'NA'" class="feeNotificationDefault"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 100 " class="feeNotificationRed"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 70 && findDuration(t.joinDate) <100" class="feeNotificationYellow"></p><p style="float:left;" ng-if="findDuration(t.joinDate) < 70" class="feeNotificationGreen"></p><p style="text-transform:lowercase;text-align:left !important;cursor:pointer;">{{t.fullName}}</p>
+                 					<p style="float:left;" ng-if="findDuration(t.joinDate) == 'NA'" class="feeNotificationDefault"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 100 " class="feeNotificationRed"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 70 && findDuration(t.joinDate) <100" class="feeNotificationYellow"></p><p style="float:left;" ng-if="findDuration(t.joinDate) < 70" class="feeNotificationGreen"></p><p style="text-align:left !important;cursor:pointer;">{{butifytheName(t.fullName)}}</p>
                  				</td>
                                <td class="theadTextDataClass">{{t.batchNumber}}</td>
                                <td class="theadTextDataClass">{{t.graduationYOP}}</td>
@@ -1661,8 +1661,8 @@ $(document).ready( function(){
                                <td class="theadTextDataClass">{{t.interPercentage}}</td>
                                <td class="theadTextDataClass">{{t.graduationPercentage}}</td>
                                <!-- <td class="theadTextDataClass">{{view.convertToInt(t.aggregate)}}</td> -->
-                               <td class="theadTextDataClass">$80</td>
-                               <td class="theadTextDataClass">$80</td>
+                               <td class="theadTextDataClass">{{t.sscMaths}}</td>
+                               <td class="theadTextDataClass">{{t.interMaths}}</td>
                                <td class="theadTextDataClass">$80</td>
                                <td class="theadTextDataClass">$80</td>
                                <td class="theadTextDataClass">$80</td>
@@ -1706,7 +1706,8 @@ $(document).ready( function(){
 		<div class="col-md-3" style="position:sticky !important;top:0;">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="stdHeadhOne">{{view.student.fullName}}</p>
+					<p class="stdHeadhOne">{{butifytheName(view.student.fullName)}}<small><i class="fas fa-dot-circle" style="color:green"></i>{{view.student.lastlogin}}</small></p>
+					
 				</div>
 			</div>
 			<!-- <div style="border-bottom: 1px solid #dbdbdb !important;height: 5px;margin-top:-1%;"></div> -->
@@ -1715,7 +1716,7 @@ $(document).ready( function(){
              <a data-toggle="tab" href="#eduaction">Education</a>
              <a data-toggle="tab" href="#fee">Fee</a>
              <a data-toggle="tab" href="#address">Address</a>
-             
+             <a data-toggle="tab" href="#Status">Status</a>
              <a data-toggle="tab" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" title="Edit Student" href="" target='_blank'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
              <a data-toggle="tab" href='{{"downloadResume/"+view.student.email+"/any"}}' title="Student Resume" target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
              <a data-toggle="tab" onclick="myFunction()" title="Complete Details" href=""><i class="fa fa-external-link" aria-hidden="true"></i></a>
@@ -1822,12 +1823,12 @@ $(document).ready( function(){
                    				<tr>
                    					<td class="theadTextDataClassForDetails"><i class="fa fa-bar-chart" aria-hidden="true"></i> 10Th</td>
                    					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails" editable-text="view.student.math10th" e-name="math10th"> {{view.student.graduationPercentage}}</td>
+                   					<td class="theadTextDataClassForDetails" editable-text="view.student.sscMaths" e-name="sscMaths"> {{view.student.sscMaths}}</td>
                    				</tr>
                    				<tr>
                    					<td class="theadTextDataClassForDetails"><i class="fa fa-bar-chart" aria-hidden="true"></i> Inter</td>
                    					<td style="color:#444444 !important">:</td>
-                   					<td class="theadTextDataClassForDetails" editable-text="view.student.math12th" e-name="math12th"> {{view.student.graduationPercentage}}</td>
+                   					<td class="theadTextDataClassForDetails" editable-text="view.student.interMaths" e-name="interMaths"> {{view.student.interMaths}}</td>
                    				</tr>
                    			</thead>
                    		</table>
@@ -1871,6 +1872,34 @@ $(document).ready( function(){
        					<td style="color:#444444 !important">:</td>
        					<td class="theadTextDataClassForDetails" editable-select="view.student.state" e-name="state" e-ng-options="s.value as s.text for s in states"> {{view.student.state}}</td>
        				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-globe" aria-hidden="true"></i> FaceBook Link</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails" editable-text="view.student.fbLink" e-name="fbLink"> {{view.student.fbLink}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-globe" aria-hidden="true"></i> LinkedIn Link</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails" editable-text="view.student.lnLink" e-name="lnLink"> {{view.student.lnLink}}</td>
+       				</tr>
+       			</thead>
+       		</table>
+	        </div>
+	        
+	        <div id="Status" class="tab-pane fade">
+	          <table class="table">
+       			<thead>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Student Status</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails" editable-text="view.student.status" e-name="status"> {{view.student.status}}</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Status Report</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails" editable-text="view.student.inactivereport" e-name="inactivereport"> {{view.student.inactivereport}}</td>
+       				</tr>
+       				
        			</thead>
        		</table>
 	        </div>

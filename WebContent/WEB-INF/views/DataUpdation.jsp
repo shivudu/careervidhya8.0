@@ -514,7 +514,7 @@
     					{
     					 console.log("success");
     					 if($scope.flowCount==$scope.interviewsCount)
-    						 document.write("Your Data has been submitted successfully");
+    						 document.write("<center><h1>Thank You! for Submitting the Data</h1></center>");
     					 else{
     						 document.getElementById($scope.flowCount+"").style.backgroundColor="transparent";
     						 if($scope.flowCount+1<=$scope.interviewsCount)
@@ -572,6 +572,7 @@
     			{
     			 if(confirm("Are You sure You have no walk-in experiences?"))
     				 {
+    				 document.write("<center><h1>Thank You for Submitting the Data<br>Prepare Well, Opportunities Comes at any time</h1></center>");
     				 alert("Prepare Well, Opportunities Comes at any time");
     				 }
     			 
