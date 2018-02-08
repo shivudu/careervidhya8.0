@@ -1435,11 +1435,11 @@ $(document).ready( function(){
                    					</tr>
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Maths(10Th) :</p></td>
-                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='10Th Math Marks' ng-model="maths12th" class='form-control inputFieldClass'></td>
+                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='10Th Math Marks' ng-model="sscMaths" class='form-control inputFieldClass'></td>
                    					</tr>
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Maths(12Th)  :</p></td>
-                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='12Th Math Marks' ng-model="maths12th" class='form-control inputFieldClass'></td>
+                   						<td><input type='text' style="margin-left: 3.5%;" placeholder='12Th Math Marks' ng-model="interMaths" class='form-control inputFieldClass'></td>
                    					</tr>
                    					<!-- <tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;">SSC Percentage :</p></td>
@@ -1534,11 +1534,11 @@ $(document).ready( function(){
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Parent Name :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Parent Name' ng-model="pname" class='form-control inputFieldClass'></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Parent Name' ng-model="parentName" class='form-control inputFieldClass'></td>
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">City :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='City Name' ng-model="cityname" class='form-control inputFieldClass'></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='City Name' ng-model="city" class='form-control inputFieldClass'></td>
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">DOB :</p></td>
@@ -1546,11 +1546,11 @@ $(document).ready( function(){
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">GraduationCity :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='GraduationCity Name' ng-model="gradCityName" class='form-control inputFieldClass'></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='GraduationCity Name' ng-model="graduationCity" class='form-control inputFieldClass'></td>
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">College Name :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='College Name' ng-model="collegename" class='form-control inputFieldClass'></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='College Name' ng-model="graduationCollege" class='form-control inputFieldClass'></td>
                    				</tr>
                    			</table>
                     	</div>
@@ -1649,7 +1649,7 @@ $(document).ready( function(){
                        </thead>
                        <tbody style="height:400px;overflow-y:scroll">
                        
-                           <tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter | filter: statusFilter ) )"  ng-click='view.studentDetails(t,$event)'>
+                           <tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationCity: graduationCity, city: city, graduationCollege: graduationCollege, parentName: parentName, graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: sscMathsFilter | filter: interMathsFilter | filter: branchFilter | filter: batchFilter | filter: statusFilter ) )"  ng-click='view.studentDetails(t,$event)'>
                                <td  class="theadTextDataClass">
                                <span ng-style="t.status=='active'?{'border-left':'3px solid green'}: t.status=='placed' ? { 'border-left':'3px solid blue'} : {'border-left':'3px solid red'}"></span>
                                <input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
@@ -1907,13 +1907,121 @@ $(document).ready( function(){
        				<tr>
        					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Student Status</td>
        					<td style="color:#444444 !important">:</td>
-       					<td class="theadTextDataClassForDetails" editable-text="view.student.status" e-name="status"> {{view.student.status}}</td>
+       					<td class="theadTextDataClassForDetails" editable-select="view.student.status" e-name="status" e-ng-options="s.value as s.text for s in statuses"> {{view.student.status}}</td>
        				</tr>
        				<tr>
        					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i> Status Report</td>
        					<td style="color:#444444 !important">:</td>
-       					<td class="theadTextDataClassForDetails" editable-text="view.student.inactivereport" e-name="inactivereport"> {{view.student.inactivereport}}</td>
+       					<td class="theadTextDataClassForDetails" editable-textarea="view.student.inactivereport" e-name="inactivereport"> {{view.student.inactivereport}}</td>
        				</tr>
+       				<tr>
+       				
+       				<td>
+       				<span ng-show="!showCompanyEdits" ng-click="showCompanyEdits=true">Update Drive Data</span>
+       				
+       				</td>
+       				
+       				</tr>
+       				
+       				<tbody ng-show="showCompanyEdits" id="companyEdits">
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Company Name</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       					<input ng-change="fetchCompanies()" list="companyNames" ng-model="companyName">
+                        <datalist id="companyNames">
+                        <option ng-repeat="c in companies" value="{{c.name}}" />
+                       </datalist>
+                  
+       					</td>
+       				</tr>
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Select Rounds You have Cleared</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       					
+       					     <label class="checkbox"><input ng-true-value="'A'" ng-false-value="'NA'" ng-model="WrittenRound_Status" type="checkbox"  name="levewritten" id="levewritten"> Written Test</label>
+								<label class="checkbox"><input ng-true-value="'A'" ng-false-value="'NA'" ng-model="ComsRound_Status" type="checkbox"  name="f2ftexhlevel1" id="f2ftexhlevel1">GD/JAM/Communication</label>
+								<label class="checkbox"><input ng-true-value="'A'" ng-false-value="'NA'" ng-model="TechnicalRound1_Status" type="checkbox" name="gdround" id="gdround"> Technical Level 1</label>
+								<label class="checkbox"><input ng-true-value="'A'" ng-false-value="'NA'" ng-model="TechnicalRound2_Status" type="checkbox"  name="jamround" id="jamround">Technical Level 2</label>
+								<label class="checkbox"><input ng-true-value="'A'" ng-false-value="'NA'" ng-model="HRRound_Status" type="checkbox"  name="jamround" id="jamround" >HR/Final Level</label>
+       					
+       					</td>
+       				</tr>
+       				
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Any Bond ?</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				        <label class="radio-inline"><input type="radio" ng-model="bond" value="YES"/> Yes</label>
+			      			<label class="radio-inline"><input type="radio" checked ng-model="bond" value="NO" /> No</label>
+                  
+       					</td>
+       				</tr>
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Bond Duration(In Months)</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				      <input ng-model="bondduration" type="number" style="color:#000;" placeholder="Bond Duration in months"/>
+       					</td>
+       				</tr>
+       				
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Any Submission of Original Certificates ?</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				       <label class="radio-inline"><input type="radio" ng-model="certificates" value="YES" /> Yes</label>
+					       <label class="radio-inline"><input type="radio" ng-model="certificates" value="NO" /> No</label>
+       					</td>
+       				</tr>
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Initial Salary</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				      <input ng-model="initialSalary" type="text" placeholder="Initial Salary in Lacks Ex 3.4" name="initialsal"/>
+       					</td>
+       				</tr>
+       				
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Later Salary</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				      <input ng-model="laterSalary" type="text" placeholder="Enter Later Salary (if Any)" name="latersal"/>
+       					</td>
+       				</tr>
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Designation</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				     <input ng-model="designation" type="text" placeholder="Enter Your designation" name="designation"  id="designation"/>
+       					</td>
+       				</tr>
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"><i class="fa fa-user" aria-hidden="true"></i>Technical Stack / Roles</td>
+       					<td style="color:#444444 !important">:</td>
+       					<td class="theadTextDataClassForDetails">
+       				    <input ng-model="technicalstack" type="text" placeholder="Technical Stack or Role" name="technicalstack"/>
+       					</td>
+       				</tr>
+       				
+       				<tr>
+       					<td class="theadTextDataClassForDetails"></td>
+       					<td style="color:#444444 !important">
+       					<button ng-click="saveDriveData()" id="saveDriveButton" class="btn btn-default" style="color:#00a69c;padding: 3% 10% !important;">SAVE</button>
+       					</td>
+       					<td class="theadTextDataClassForDetails">
+       				   
+       					</td>
+       				</tr>
+       				</tbody>
+       			
        				
        			</thead>
        		</table>

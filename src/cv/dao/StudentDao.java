@@ -462,5 +462,18 @@ public class StudentDao {
 				+ " where student_id="+st.getStudent_id();
 		template.update(sql);
 	}
+
+	public void setLoginTime(Integer student_id) {
+		// TODO Auto-generated method stub
+		try{
+			String sql="update cv_students set lastlogin=now() where student_id="+student_id;
+			template.update(sql);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

@@ -148,6 +148,12 @@ function viewController($http, appUrl,$scope, $window)
 	                {value:"Other",text:"Any Other"}
 	              
 	                ];
+	
+	$scope.statuses=[
+	                 {value:"placed",text:"Placed"},
+	                 {value:"active",text:"Active"},
+	                 {value:"done",text:"Course Finished"},
+	                 ];
 	 
 	
 	// Filter Students Data
@@ -241,11 +247,11 @@ function viewController($http, appUrl,$scope, $window)
 			return true;
 		var a=false,n=false,p=false;
 		if($scope.activeStatus!=false)
-			a= st.status=='active';
+			a= (st.status=='active');
 		if($scope.doneStatus!=false)
-			n= st.status=='done';
-		if($scope.placedStatus)
-			p=st.status=='placed';
+			n= (st.status=='done');
+		if($scope.placedStatus!=false)
+			p= (st.status=='placed');
 		
 		return a || n || p;
 		
@@ -265,6 +271,24 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.interFilter=function(st)
 	{
 		return $scope.inter<=st.interPercentage;
+	};
+	
+	$scope.sscMaths=0;
+	$scope.interMaths=0;
+	
+	
+	$scope.activeStatus=true;
+	
+	
+	$scope.sscMathsFilter=function(st)
+	{
+		
+		return $scope.sscMaths<=st.sscMaths;
+	};
+	
+	$scope.interMathsFilter=function(st)
+	{
+		return $scope.interMaths<=st.interMaths;
 	};
 	
 	$scope.aggregateFilter=function(st)
@@ -306,6 +330,8 @@ function viewController($http, appUrl,$scope, $window)
 	{
 		//Resetting
 
+		$scope.sscMaths=0;
+		$scope.interMaths=0;
 		
 		$scope.Paid=false;
 		$scope.pPaid=false;
@@ -313,7 +339,7 @@ function viewController($http, appUrl,$scope, $window)
 		$scope.free=false;
 		
 		//Resetting status
-		$scope.activeStatus=false;
+		$scope.activeStatus=true;
 		$scope.doneStatus=false;
 		$scope.placedStatus=false;
 		
@@ -754,7 +780,70 @@ function viewController($http, appUrl,$scope, $window)
 				    });
 					
 				}
-		});	
-	}
+		});
+		
+	};
+	
+	$scope.showCompanyEdits=false;
+	
+		$scope.fetchCompanies=function()
+    	{
+    		
+    		
+    		if($scope.companyName!=null && $scope.companyName.length>=1)
+    		$http.get("companies/"+$scope.companyName).then(function(response){
+    			console.log(response);
+    			$scope.companies=response.data.companies;
+    		});
+    	};
+
+    	
+    	$scope.WrittenRound_Status="NA";
+		$scope.TechnicalRound1_Status="NA";
+		$scope.TechnicalRound2_Status="NA";
+		$scope.HRRound_Status="NA";
+		$scope.ComsRound_Status="NA";
+    	
+    	$scope.saveDriveData=function()
+		{
+			
+			
+			$scope.drivesData={
+	    			
+	    		    name:$scope.companyName,
+	    			student_id:currentScope.student.student_id,
+	    			WrittenRound_Status:$scope.WrittenRound_Status,
+	    			ComsRound_Status:$scope.ComsRound_Status,
+	    			description:$scope.description,
+	    			TechnicalRound1_Status:$scope.TechnicalRound1_Status,
+	    			TechnicalRound2_Status:$scope.TechnicalRound2_Status,
+	    			HRRound_Status:$scope.HRRound_Status,
+	    			bond:$scope.bond,
+	    			bondduration:$scope.bondduration,
+	    			initialSalary:$scope.initialSalary,
+	    			laterSalary:$scope.laterSalary,
+	    			designation:$scope.designation,
+	    			FinalReport:"YES",
+	    			certificates:$scope.certificates,
+	    			technicalstack:$scope.technicalstack
+	    			
+	    			
+	    	};
+			console.log($scope.drivesData);
+			$http.post("updateDrive",$scope.drivesData).then(
+			function(response)
+			{
+				if(response.data.status)
+					{
+					 console.log("success");
+					}
+					else
+					{
+					 alert("Save Not Success full please enter valid data and Try again");
+					}
+			}
+			);
+			
+		};
 	
 }

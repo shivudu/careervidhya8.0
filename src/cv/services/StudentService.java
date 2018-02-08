@@ -91,6 +91,7 @@ public class StudentService {
 					request.getSession().setAttribute("student", student);
 					request.getSession().setMaxInactiveInterval(-1);
 					
+					studentDao.setLoginTime(student.getStudent_id());
 					if(student.getIsRegistered().equals("N"))
 						studentDao.setIsRegistered(student.getEmail());
 				
