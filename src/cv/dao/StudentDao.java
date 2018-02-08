@@ -132,7 +132,7 @@ public class StudentDao {
 			s.setSscBoard(rs.getString("SSCBoard"));
 			s.setInterBoard(rs.getString("InterBoard"));
 			s.setSscMaths(rs.getDouble("SSCMaths"));
-			s.setLastlogin(""+rs.getDate("lastlogin"));
+			s.setLastlogin(""+rs.getTimestamp("lastlogin"));
 			s.setInterMaths(rs.getDouble("InterMaths"));
 			s.setBatchNumber(rs.getInt(1));
 			s.setFullName(rs.getString(2));

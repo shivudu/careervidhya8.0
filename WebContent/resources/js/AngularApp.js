@@ -163,10 +163,10 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.checkedBranches=[];
 	
 	
-	$scope.Paid=true;
-	$scope.pPaid=true;
-	$scope.nPaid=true;
-	$scope.free=true;
+	$scope.Paid=false;
+	$scope.pPaid=false;
+	$scope.nPaid=false;
+	$scope.free=false;
 	
 	
 	(function(){
@@ -186,7 +186,7 @@ function viewController($http, appUrl,$scope, $window)
 		for(i=0;i<$scope.batches.length;i++)
 		{
 			
-		$scope.checkedBatches.push("NA");
+		$scope.checkedBatches.push(-1);
 		}
 		
 	}());
@@ -228,10 +228,27 @@ function viewController($http, appUrl,$scope, $window)
 		for(var i=0;i<$scope.batches.length;i++){
 			if(parseInt($scope.checkedBatches[i])==st.batchNumber)
 				return true;
-			if($scope.checkedBatches[i]=="NA")
+			if($scope.checkedBatches[i]==-1)
 			count++;
 		}
 		return count==$scope.checkedBatches.length;
+	};
+	
+	
+	$scope.statusFilter=function(st){
+		
+		if( !$scope.activeStatus && !$scope.doneStatus && !$scope.placedStatus)
+			return true;
+		var a=false,n=false,p=false;
+		if($scope.activeStatus!=false)
+			a= st.status=='active';
+		if($scope.doneStatus!=false)
+			n= st.status=='done';
+		if($scope.placedStatus)
+			p=st.status=='placed';
+		
+		return a || n || p;
+		
 	};
 	
 	
@@ -266,6 +283,8 @@ function viewController($http, appUrl,$scope, $window)
 
 	$scope.feeFilter=function(st)
 	{
+		if(!$scope.Paid && !$scope.pPaid && !$scope.free && !$scope.nPaid)
+			return true;
 	
 		var b1,b2=false,b3,b4,b5;
 		
@@ -288,10 +307,15 @@ function viewController($http, appUrl,$scope, $window)
 		//Resetting
 
 		
-		$scope.Paid=true;
-		$scope.pPaid=true;
-		$scope.nPaid=true;
-		$scope.free=true;
+		$scope.Paid=false;
+		$scope.pPaid=false;
+		$scope.nPaid=false;
+		$scope.free=false;
+		
+		//Resetting status
+		$scope.activeStatus=false;
+		$scope.doneStatus=false;
+		$scope.placedStatus=false;
 		
 		//$scope.fee=-1;
 		$scope.degree=0;
@@ -316,7 +340,7 @@ function viewController($http, appUrl,$scope, $window)
 		for(i=0;i<$scope.batches.length;i++)
 		{
 			
-		$scope.checkedBatches.push("NA");
+		$scope.checkedBatches.push(-1);
 		}
 		
 		var year=new Date().getFullYear();

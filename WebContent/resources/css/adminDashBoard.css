@@ -1515,7 +1515,7 @@ table.tableNewClass thead {
     border-radius:50%;
     margin-left: 1px !important;
     float: left !important;
-    margin-right: 11px !important;
+  
     margin-top: 3% !important;
 }
 .feeNotificationGreen
@@ -1526,7 +1526,7 @@ table.tableNewClass thead {
     border-radius:50%;
     margin-left: 1px !important;
     float: left !important;
-    margin-right: 11px !important;
+  
     margin-top: 3% !important;
 }
 .feeNotificationDefault
@@ -1537,7 +1537,7 @@ table.tableNewClass thead {
     border-radius:50%;
     margin-left: 1px !important;
     float: left !important;
-    margin-right: 11px !important;
+
     margin-top: 3% !important;
 }
 .feeNotificationYellow
@@ -1548,7 +1548,7 @@ table.tableNewClass thead {
     border-radius:50%;
     margin-left: 1px !important;
     float: left !important;
-    margin-right: 11px !important;
+   
     margin-top: 3% !important;
 }
 .panel-heading
@@ -2067,3 +2067,13 @@ div.scrollmenuForReg {
 
 
 
+/*Css written by shiva*/
+.statusActive{
+	border-left:"3px solid green"
+}
+.statusDone{
+	border-left:"3px solid red"
+}
+.statusPlaced{
+	border-left:"3px solid blue"
+}

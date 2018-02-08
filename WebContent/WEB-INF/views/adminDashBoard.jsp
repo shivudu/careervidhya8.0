@@ -1245,10 +1245,10 @@ $(document).ready( function(){
 	            </div>
 	            <div class="col-md-3"><button class="advancedSearchBtn" data-toggle="modal" data-target="#myModalAdv">Advanced Search <i class="fa fa-search-plus" style="margin-left: 5% !important;" aria-hidden="true"></i></button></div>
                 <div class="col-md-2 theadTextDataClass" style="text-align:right;">
-				<!--<div class="col-md-4"> <a class="col-md-4" data-toggle="tab" ng-click='view.fetchReport(view.student.email)' href="#progressbar"><button class="profileBtnStd"><i class="fa fa-user-circle" aria-hidden="true"></i></button></a></div> -->
+				<button onclick="displayDiv('stArea')" ng-click="view.requestAllStudents()" class="dropbtn">Reload Data</button>
 					
                 </div>
-                <div class="col-md-2"><button class="dropbtn" style="width:80%;float:right;" ng-click="view.resetFilters()"><i class="fa fa-tag" style="" aria-hidden="true"></i> Reset</button></div>
+                <div class="col-md-2"><button class="dropbtn" style="width:80%;float:right;" ng-click="view.resetFilters()"><i class="fa fa-tag" style="" aria-hidden="true"></i> Reset Fltrs</button></div>
                 <div class="col-md-2 dropdown dropdownClass">
 				  <button class="dropbtn" style="width:99%;"><i class="fa fa-bars" style="" aria-hidden="true"></i> Actions</button>
 				  <div class="dropdown-content">
@@ -1390,9 +1390,10 @@ $(document).ready( function(){
 			                	<div class="dropdown" style="margin-top:-2% !important;">
 								    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select ST Status
 								    <span class="caret"></span></button>
-								    <ul class="dropdown-menu" style="font-size:12px;" ng-model="feePaid">
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="active"/> Active</a></li>
-								      <li><a tabindex="-1" href="#"><input type="checkbox" value="inactive"/> InActive</a></li>
+								    <ul class="dropdown-menu" style="font-size:12px;">
+								      <li><a tabindex="-1" href="#"><input type="checkbox" ng-model="activeStatus" value="active"/> Active</a></li>
+								      <li><a tabindex="-1" href="#"><input type="checkbox" ng-model="doneStatus" value="done"/> InActive</a></li>
+								      <li><a tabindex="-1" href="#"><input type="checkbox" ng-model="placedStatus" value="placed"/> Placed</a></li>
 								    </ul>
 								</div>
 			                </div>
@@ -1646,14 +1647,16 @@ $(document).ready( function(){
                                <th class="theadTextDataClass">Rank</th>
                            </tr>
                        </thead>
-                  
-                       <tbody ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter ) )">
-                           <tr ng-click='view.studentDetails(t,$event)'>
-                               <td class="theadTextDataClass"><input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
+                       <tbody style="height:400px;overflow-y:scroll">
+                       
+                           <tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: branchFilter | filter: batchFilter | filter: statusFilter ) )"  ng-click='view.studentDetails(t,$event)'>
+                               <td  class="theadTextDataClass">
+                               <span ng-style="t.status=='active'?{'border-left':'3px solid green'}: t.status=='placed' ? { 'border-left':'3px solid blue'} : {'border-left':'3px solid red'}"></span>
+                               <input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">
-                 					<p style="float:left;" ng-if="findDuration(t.joinDate) == 'NA'" class="feeNotificationDefault"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 100 " class="feeNotificationRed"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 70 && findDuration(t.joinDate) <100" class="feeNotificationYellow"></p><p style="float:left;" ng-if="findDuration(t.joinDate) < 70" class="feeNotificationGreen"></p><p style="text-align:left !important;cursor:pointer;">{{butifytheName(t.fullName)}}</p>
+                 					<p style="text-align:left !important;cursor:pointer;">{{butifytheName(t.fullName)}}</p>
                  				</td>
-                               <td class="theadTextDataClass">{{t.batchNumber}}</td>
+                               <td class="theadTextDataClass"><span>{{t.batchNumber}}</span></td>
                                <td class="theadTextDataClass">{{t.graduationYOP}}</td>
                                <!-- <td class="theadTextDataClass">{{t.feePaid}}</td> -->
                                <td class="theadTextDataClass">{{t.graduationBranch}}</td>
@@ -1668,9 +1671,12 @@ $(document).ready( function(){
                                <td class="theadTextDataClass">$80</td>
                                <td class="theadTextDataClass">$80</td>
                                <td class="theadTextDataClass">$80</td>
-                               <td class="theadTextDataClass">{{findDuration(t.joinDate)}}</td>
+                               <td class="theadTextDataClass">
+                               <p style="float:left;" ng-if="findDuration(t.joinDate) == 'NA'" class="feeNotificationDefault"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 100 " class="feeNotificationRed"></p><p style="float:left;" ng-if="findDuration(t.joinDate) > 70 && findDuration(t.joinDate) <100" class="feeNotificationYellow"></p><p style="float:left;" ng-if="findDuration(t.joinDate) < 70" class="feeNotificationGreen"></p>
+                               {{findDuration(t.joinDate)}}</td>
                            </tr>
                        </tbody>
+                       
                    </table>
                </div>
            </div>
@@ -1706,7 +1712,11 @@ $(document).ready( function(){
 		<div class="col-md-3" style="position:sticky !important;top:0;">
 			<div class="row">
 				<div class="col-md-12">
-					<p class="stdHeadhOne">{{butifytheName(view.student.fullName)}}<small><i class="fas fa-dot-circle" style="color:green"></i>{{view.student.lastlogin}}</small></p>
+					<p class="stdHeadhOne">{{butifytheName(view.student.fullName)}}
+					<span ng-click="editableForm.$show()" ng-show="!editableForm.$visible" title="Edit Student"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                     <span title="Student Resume" target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                     <span onclick="myFunction()" title="Complete Details"><i class="fa fa-external-link" aria-hidden="true"></i></span>
+					<small><p class="feeNotificationGreen"></p>{{view.student.lastlogin}}</small></p>
 					
 				</div>
 			</div>
@@ -1717,14 +1727,19 @@ $(document).ready( function(){
              <a data-toggle="tab" href="#fee">Fee</a>
              <a data-toggle="tab" href="#address">Address</a>
              <a data-toggle="tab" href="#Status">Status</a>
-             <a data-toggle="tab" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" title="Edit Student" href="" target='_blank'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-             <a data-toggle="tab" href='{{"downloadResume/"+view.student.email+"/any"}}' title="Student Resume" target='_blank'><i class="fa fa-file-image-o" aria-hidden="true"></i></a>
-             <a data-toggle="tab" onclick="myFunction()" title="Complete Details" href=""><i class="fa fa-external-link" aria-hidden="true"></i></a>
+             
            </div>
            <form editable-form name="editableForm" onaftersave="saveStudent()">
 			<div class="tab-content">
 			
-	        <div id="personal" class="tab-pane fade in active">
+			<div id="welcome" class="tab-pane fade in active">
+			   
+			     WELCOME STUDENT INFORMATION
+			</div>
+			
+			
+			
+	        <div id="personal" class="tab-pane fade">
 	          <table class="table">
        			<thead>
        				<tr>
