@@ -40,11 +40,14 @@ $(document).ready( function(){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-   	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="<c:url value="/resources/js/ajaxOp.js"/>"></script>
 	<script src="<c:url value="/resources/js/AngularApp.js"/>"></script>
+	<script src="<c:url value="/resources/js/dashboard.js"/>"></script>
+	<script src="<c:url value="/resources/js/calenderviewController.js"/>"></script>
 	<!-- <script src="<c:url value="/resources/js/dirPagination.js"/>"></script>-->
 	<!-- <script src="<c:url value="/resources/js/multiSelector.js"/>"></script> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -54,6 +57,7 @@ $(document).ready( function(){
 	<script src="<c:url value="/resources/js/xeditable.js"/>"></script>
 	<!-- <script src="<c:url value="/resources/js/multiSelectBox.js"/>"></script> -->
 	
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/dashboard.css"/>"/>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/xeditable.css"/>"/>
 	<!-- <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/multiSelector.css"/>"/> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
@@ -649,8 +653,376 @@ $(document).ready( function(){
 		<div class="container-fluid" style="width:100%;margin-top:0.3%;">
 			<div class="row">
 	          	
-<!-- Welcome Page-->	
+<!-- Welcome Page-->
 
+ <div id="welcome" ng-controller="dashBoardController as dcl" class="container-fluid welcomeRow" style="margin-top:3%;">
+        <!--  Dashboard by Vishal -->
+        <div class="row dashboard">
+            <div class="col-md-8 dashboard1">
+                <div class="row">
+                    <!---------------------------- Student Small Block Starts Here ------------------------------------->
+                    <div class="col-md-6 dashboarda" style=" ">
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>450</h3>
+                                <p>Students</p>
+                            </div>
+                            <div class="tabl">
+                                <table>
+                                    <tr class="rowb">
+                                        <td>CSE</td>
+                                        <td class="pad">: </td>
+                                        <td> 14</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>IT</td>
+                                        <td class="pad">: </td>
+                                        <td> 12</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>ECE</td>
+                                        <td class="pad">: </td>
+                                        <td>09</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>EEE</td>
+                                        <td class="pad">: </td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>EIE</td>
+                                        <td class="pad">: </td>
+                                        <td>02</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>OTHERS</td>
+                                        <td class="pad">: </td>
+                                        <td>35</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <a data-toggle="tab" href="#students" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!----------------------------------------------Batch Small Block Start Here --------------------------------->
+                    <div class="col-md-6 dashboardb" style=" ">
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>14</h3>
+                                <p>Batches</p>
+                            </div>
+                            <div class="tabl tabl2">
+                                <table>
+                                    <tr class="rowb">
+                                        <td>Finished Batches</td>
+                                        <td class="pad">: </td>
+                                        <td>09</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>Active Batches</td>
+                                        <td class="pad">: </td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>Last Batch</td>
+                                        <td class="pad">: </td>
+                                        <td>14</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>Start Date</td>
+                                        <td class="pad">: </td>
+                                        <td>10/12/2017</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <a data-toggle="tab" href="#studentsList" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------------------------- Row for Progress Bar Starts Here -------------------------------------------->
+                <div class="row">
+                    <!------------------------------------- Progress Bar Starts Here -------------------------------------------------->
+                    <div class="col-md-7" style="background-color: #fff !important;">
+                        <div class="nav nav-tabs scrollmenuForReg1 menu-centerForReg1" style=" ">
+                            <a ng-click="dcl.getBatchProgress(v)" data-toggle="tab" ng-repeat="v in dcl.batchNumbers" class="regFomLinkClass1">Batch {{v}}</a>
+                      
+                        </div>
+                        <br />
+                        <!-- Skill Bars -->
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{dcl.javaPerc}}" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Java <i class="val">{{dcl.javaPerc}}%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time <i class="val">100 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{dcl.mathPerc}}" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Aptitude <i class="val">{{dcl.mathPerc}}%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time<i class="val">50 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{dcl.commsPerc}}" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Communication<i class="val">{{dcl.commsPerc}}%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time<i class="val">75 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Web Development <i class="val">86%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time <i class="val">74 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Linux<i class="val">80%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time<i class="val">55 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar progressc">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">mySQL<i class="val">80%</i></span>
+                            </div>
+                        </div>
+                        <div class="progress skill-bar">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Time<i class="val">55 Days</i></span>
+                            </div>
+                        </div>
+
+                        <div class="progress skill-bar">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                <span class="skill">Mock Test<i class="val">8 Test</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="">
+                        <!-------------------------------------------------- Calender Starts Here ----------------------------------->
+                        <div class="calender" ng-controller="calenderViewCtrl as cl">
+                            <header>
+                                <button ng-click="cl.previousMonth()" class="month">«</button>
+                                <h2> {{cl.MONTHS[cl.selectedMonth].name}} {{cl.selectedYear}}</h2>
+                                <button class="month" ng-click="cl.nextMonth()">»</button>
+                            </header>
+                            <table>
+                                <tr class="days1">
+                                    <td class="days">S</td>
+                                    <td class="days">M</td>
+                                    <td class="days">T</td>
+                                    <td class="days">W</td>
+                                    <td class="days">Th</td>
+                                    <td class="days">F</td>
+                                    <td class="days">S</td>
+                                </tr>
+                               <tbody id="calenderDates">
+                                  
+                                  </tbody>
+                            </table>
+                        </div>
+                        <!------------------------- Calender Ends Here --------------------------------------------------->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="#" class="tab-pane fade in active col-md-4 dashboard2" style="">
+                    <!------------------------------------- By Default Home Page ----------------------------------------->
+                    <div class="row" style="background-color: #fff;">
+                        <div class="col-md-12">
+                            <div class="nav nav-tabs scrollmenuForReg menu-centerForReg" style=" ">
+                                <a data-toggle="tab" class="active regFomLinkClass" href="#java">Java</a>
+                                <a data-toggle="tab" class="regFomLinkClass" href="#aptitude">Aptitude</a>
+                                <a data-toggle="tab" class="regFomLinkClass" href="#communication">Comm.</a>
+                                <a data-toggle="tab" class="regFomLinkClass" href="#webdev">Web Dev</a>
+                                <a data-toggle="tab" class="regFomLinkClass" href="#linux">Linux</a>
+                                <a data-toggle="tab" class="regFomLinkClass" href="#mysql">MySQL</a>
+                            </div>
+                            <div class="tab-content" style="">
+                                <h3 style="color:#000;">Syllabus</h3>
+                                <div id="java" class="tab-pane fade in active formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+
+                                </div>
+                                <div id="aptitude" class="tab-pane fade formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus1" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+
+                                </div>
+                                <div id="communication" class="tab-pane fade formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus2" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+                                </div>
+                                <div id="webdev" class="tab-pane fade formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus3" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+                                </div>
+                                <div id="linux" class="tab-pane fade formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus4" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+                                </div>
+                                <div id="mysql" class="tab-pane fade formTabsClassBack" style="margin-top: 10px;">
+                                    <div id="syllabus5" style="height: 500px; overflow-x: hidden; overflow-y: scroll;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!------------------------------------Default Home Page Ends Here -------------------------------->
+                </div>
+                <div id="students" class="tab-pane fade in col-md-4 dashboard2" style="border: 1px solid black;">
+                    <!------------------------------------------- students page -------------------------------------->
+                  
+                  
+                    <div class="row" style=" background-color: fff;">
+                        <div class="col-md-12">
+                            
+                            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-options="options">
+            
+                            </canvas> 
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="row" style="height: 338px; overflow-x: hidden; overflow-y: scroll; margin-top: 5px; background-color: #fff">
+                        <div class="col-md-12">
+                            <div class="nav nav-tabs scrollmenuForReg menu-centerForReg" style="color: #fff;">Students List</div>
+                            <div class="tab-pane fade in active formTabsClassBack">
+                                <table id="tablecse" class="same" style="width: 100%;">
+                                    <tr>
+                                        <th class="same1">Batch</th>
+                                        <th class="same1">Student Name</th>
+                                        <th class="same1">more info</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="same1">10</td>
+                                        <td class="same1">Vishal Kumar</td>
+                                        <td class="same1"><a href="#"><i class="fas fa-external-link-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="same1">10</td>
+                                        <td class="same1">Vishal Kumar</td>
+                                        <td class="same1"><a href="#"><i class="fas fa-external-link-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="same1">10</td>
+                                        <td class="same1">Vishal Kumar</td>
+                                        <td class="same1"><a href="#"><i class="fas fa-external-link-alt"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="same1">10</td>
+                                        <td class="same1">Vishal Kumar</td>
+                                        <td class="same1"><a href="#"><i class="fas fa-external-link-alt"></i></a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade formTabsClassBack">
+                                <table id="tableit" class="same" style="width: 100%;">
+                                    <tr>
+                                        <th class="same1">Batch</th>
+                                        <th class="same1">Student Name</th>
+                                        <th class="same1">more info</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------------------------- Student Page Ends Here --------------------------------------->
+
+                <div id="studentsList" class="tab-pane fade col-md-4 dashboard2" style="border: 1px solid green;">
+                    <!--------------------------------------- batches Page ------------------------------------------------->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="nav nav-tabs scrollmenuForReg menu-centerForReg" style="color: #fff!important;">
+                                <span>Batch Progress :</span>
+                                <div class="dropdown btn-group">
+                                    <button type="button" class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                                                  Batch All <span class="caret"></span></button>
+                                    <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#" data-value="0">Batch All</a></li>
+                                        <li><a href="#" data-value="14">Batch 14</a></li>
+                                        <li><a href="#" data-value="13">Batch 13</a></li>
+                                        <li><a href="#" data-value="12">Batch 12</a></li>
+                                        <li><a href="#" data-value="11">Batch 11</a></li>
+                                        <li><a href="#" data-value="10">Batch 10</a></li>
+                                        <li><a href="#" data-value="09">Batch 09</a></li>
+                                        <li><a href="#" data-value="08">Batch 08</a></li>
+                                        <li><a href="#" data-value="07">Batch 07</a></li>
+                                        <li><a href="#" data-value="06">Batch 06</a></li>
+                                        <li><a href="#" data-value="05">Batch 05</a></li>
+                                        <li><a href="#" data-value="04">Batch 04</a></li>
+                                        <li><a href="#" data-value="03">Batch 03</a></li>
+                                        <li><a href="#" data-value="02">Batch 02</a></li>
+                                        <li><a href="#" data-value="01">Batch 01</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="tab" style="height: 500px; overflow-x: hidden; overflow-y: scroll;">
+                                <div class="block" style="">
+                                    <div class="row">
+                                        <div class="col-md-2" style="padding: 0px; margin-left: 14px;">
+                                            <p class="pbatch" style="">14</p>
+                                        </div>
+                                        <div class="col-md-6" style="margin-left: -25px;">
+                                            <p class="psdate" style=""><span><i class="fa fa-calendar-alt" style=""></i></span> Start Date: <span>02/10/2017</span></p>
+                                            <p class="pedate" style=""><span><i class="fas fa-calendar" style=""></i></span> End Date: <span>30/02/2018</span></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span style="float: left;"><i class="fa fa-users fauser" style=""></i></span>
+                                            <p style="font-size: 21px; margin: 0px; width: 40%; float: left; color: #28b779;">32</p>
+                                            <button type="button" class="btn-style" style="">more<span style="margin-left: 2px;"><i class="fa fa-arrow-circle-right"></i></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="block" style="">
+                                    <div class="row">
+                                        <div class="col-md-2" style="padding: 0px; margin-left: 14px;">
+                                            <p class="pbatch" style="">13</p>
+                                        </div>
+                                        <div class="col-md-6" style="margin-left: -25px;">
+                                            <p class="psdate" style=""><span><i class="fa fa-calendar-alt" style=""></i></span> Start Date: <span>05/06/2017</span></p>
+                                            <p class="pedate" style=""><span><i class="fas fa-calendar" style=""></i></span> End Date: <span>21/01/2018</span></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span style="float: left;"><i class="fa fa-users fauser" style=""></i></span>
+                                            <p style="font-size: 21px; margin: 0px; width: 40%; float: left; color: #28b779;">20</p>
+                                            <button type="button" class="btn-style" style="">more<span style="margin-left: 2px;"><i class="fa fa-arrow-circle-right"></i></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+<!--  
 <div id="welcome" class="container-fluid welcomeRow" style="margin-top:10%;">
   
     <div class="row">
@@ -691,7 +1063,8 @@ $(document).ready( function(){
     <div class="col-sm-6 col-xs-12 col-md-6" id="TopicsUnFinished"></div>
     </div><br>
 </div>
-	
+
+-->	
 <!-- Welcome Page end-->
 	
 
@@ -1137,46 +1510,44 @@ $(document).ready( function(){
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-        	<form id="" class="formClass">
+        	<form ng-submit="sendMail()" class="formClass">
 		<div class="row" style="margin-top:1% !important;">
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="to">To :</label>
                 <div class="col-sm-7" id="mailToStudentTo">
-                    <input list="singleStudentMailsList" type="text"class="form-control" onkeyup="getStudentsMails(this.value)"  name="recipients" id="recipientsSt" placeholder="Add recipients" required/>
-                     <datalist id="singleStudentMailsList">
-                     </datalist>
-                     <i class="fa fa-plus-square" onclick="addCC('mailToStudentTo','recipients')" style="cursor:pointer" aria-hidden="true"></i>
-                    
-                     
-                       <div id="mailToStudentTo"></div>
+                   <div style="padding:3%; border:1px solid black">
+                   <span style="background-color:gray;margin:3%;" ng-repeat="st in view.filteredData">{{st.email}}</span>
+                   
+                   </div>
+                 
                 </div>
                 
                 <div class="col-sm-2">
-                    <input type="button" onclick="displayD('ccrecipientsSt')" class="btn btn-default" style="margin:2px 0px 2px 0px;" name="cc" id="cc" value="CC"/>
-                    <input type="button" onclick="displayD('bccrecipientsSt')" class="btn btn-default" name="bcc" id="bcc" value="Bcc"/>
+                    <input type="button" ng-click="isCCVisibile=true" class="btn btn-default" style="margin:2px 0px 2px 0px;" name="cc" value="CC"/>
+                    <input type="button" ng-click="isBCCVisibile=true" class="btn btn-default" name="bcc" value="Bcc"/>
                 </div>
                 </div>
                 
         </div>
        
 
-        <div class="row" style="margin-top:1% !important;display:none;" id="ccrecipientsSt">
+        <div ng-show="isCCVisibile" class="row" style="margin-top:1% !important;">
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="to">Cc :</label>
                 <div class="col-sm-7" id="mailToStudentCC">
-                    <input type="text"class="form-control"  name="ccrecipients" placeholder="Add Cc"/>
-                   <i class="fa fa-plus-square" onclick="addCC('mailToStudentCC','ccrecipients')" style="cursor:pointer" aria-hidden="true"></i>
+                    <input type="text"class="form-control" ng-keyup="prepareCC()"  ng-model="ccrecipients" placeholder="Add Cc"/>
+                  
                 </div>
                 <div class="col-sm-2"></div>
                 </div>
         </div>
 
-        <div class="row" style="margin-top:1% !important;display:none;" id="bccrecipientsSt">
+        <div ng-show="isBCVisibile" class="row" style="margin-top:1% !important;">
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="to">Bcc :</label>
                 <div class="col-sm-7" id="mailToStudentbCC">
-                    <input type="text"class="form-control"  name="bccrecipients" placeholder="Add Bcc"/>
-                    <i class="fa fa-plus-square" onclick="addCC('mailToStudentbCC','bccrecipients')" style="cursor:pointer" aria-hidden="true"></i>
+                    <input type="text"class="form-control"  ng-model="bccrecipients" placeholder="Add Bcc"/>
+                   
                 </div>
                 <div class="col-sm-2"></div>
                 </div>
@@ -1187,7 +1558,7 @@ $(document).ready( function(){
             <div class="form-group">
                     <label class="control-label col-sm-3" for="email">Subject :</label>
                 <div class="col-sm-7">
-                    <textarea name="subject" class="form-control" style="height: 40px !important;" id="subject" placeholder="Enter the subject" rows="3" required></textarea>
+                    <textarea ng-model="subject" class="form-control" style="height: 40px !important;" placeholder="Enter the subject" rows="3" required></textarea>
                 </div>
                 <div class="col-sm-2">
                     
@@ -1200,7 +1571,7 @@ $(document).ready( function(){
             <div class="form-group">
                     <label class="control-label col-sm-3" for="email">Message :</label>
                 <div class="col-sm-7">
-                    <textarea name="message" class="form-control" style="height: 250px !important;" id="message" placeholder="Enter your message" rows="30" id="comment" required></textarea>
+                    <textarea ng-model="message" class="form-control" style="height: 250px !important;" placeholder="Enter your message" rows="30"></textarea>
                 </div>
                 <div class="col-sm-2">
                     
@@ -1210,7 +1581,7 @@ $(document).ready( function(){
         <div class="row" style="margin:1% 0% 1% 0% !important;">
             <div class="col-md-3"></div>
             <div class="col-md-7">
-                <input type="submit" onclick="" class="btn btn-default viewTableBtn" style="width:50% !important;margin:auto !important;display:block !important;" value="send" id="send"/>
+                <input type="submit" class="btn btn-default viewTableBtn" style="width:50% !important;margin:auto !important;display:block !important;" value="send"/>
             </div>
             <div class="col-md-2"></div>
         </div>
@@ -1498,7 +1869,7 @@ $(document).ready( function(){
                    							 <div class="dropdown inputFieldClass" style="margin-left:3% !important;">
 											    <button class="btn btn-default dropdown-toggle dropMultiSelectBtns" type="button" data-toggle="dropdown">Select State
 											    <span class="caret"></span></button>
-											    <ul class="dropdown-menu" ng-model="state">
+											    <ul class="dropdown-menu">
 											      <li><a href="#"> Telangana</a></li>
 											      <li><a href="#"> AndraPradesh</a></li>
 												  <li><a href="#"> Other</a></li>
@@ -1523,15 +1894,8 @@ $(document).ready( function(){
                    			</div>
                    			<div class="col-md-6 modelTableClass" style="pading:1%;">
                    			<table style="width:100%">
-                   				<tr>
-                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Placed :</p></td>
-                   					<td style="text-align:left;font-size:12px;"><label class="radio-inline"><input type="radio" name="placed" ng-model="yes"> Yes</label>
-									<label class="radio-inline"><input type="radio" name="placed" ng-model="no"> No</label></td>
-                   				</tr>
-                   				<tr>
-                   					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Company Name :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='Company Name' ng-model="companyName" class='form-control inputFieldClass'></td>
-                   				</tr>
+                   				
+                   				
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">Parent Name :</p></td>
                    					<td><input type='text' style="margin-left: 3.5%;" placeholder='Parent Name' ng-model="parentName" class='form-control inputFieldClass'></td>
@@ -1542,7 +1906,7 @@ $(document).ready( function(){
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">DOB :</p></td>
-                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='yyyy-mm-dd' ng-model="dobDate" class='form-control inputFieldClass'></td>
+                   					<td><input type='text' style="margin-left: 3.5%;" placeholder='yyyy-mm-dd' ng-model="dob" class='form-control inputFieldClass'></td>
                    				</tr>
                    				<tr>
                    					<td><p class="selectBoxClass1" style="padding-left:1px !important;padding-top: 6% !important;">GraduationCity :</p></td>
@@ -1916,8 +2280,8 @@ $(document).ready( function(){
        				</tr>
        				<tr>
        				
-       				<td>
-       				<span ng-show="!showCompanyEdits" ng-click="showCompanyEdits=true">Update Drive Data</span>
+       				<td style="text-align:center" colspan="3">
+       				<span style="background-color:#77021d;padding: 2%;color:  white;font-weight: 550;cursor:  pointer;" ng-show="!showCompanyEdits" ng-click="showCompanyEdits=true">Update Drive Data</span>
        				
        				</td>
        				
@@ -3392,4 +3756,153 @@ $(document).ready(function(){
 <script>
 $('#scrollableid').slimScroll();
 </script>
+
+<script>
+    $(document).ready(function() {
+        //$(document).on("scroll", onScroll);
+
+        //smoothscroll
+        $('.menu-centerForReg a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            //$(document).off("scroll");
+
+            $('a').each(function() {
+                $(this).removeClass('active');
+            })
+            $(this).addClass('active');
+        });
+
+    });
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('.menu-centerForReg1 a[href^="#"]').on('click', function(ee) {
+            ee.preventDefault();
+            //$(document).off("scroll");
+
+            $('a').each(function() {
+                $(this).removeClass('active');
+            })
+            $(this).addClass('active');
+        });
+    });
+
+</script>
+<!-- JavaScript Code for Syllabus for all the Courses -->
+<script>
+    function select() {
+        var a = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> File Handling </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Exception Class </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        var b = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Time and Distance </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Time and Work </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        var c = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Group Discussion </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Interview Skills </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        var d = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> HTML, CSS & JavaScript </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Bootstrap & jQuery </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        var e = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Linux Linux Linux </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Linux1 Linux1 Linux1 </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        var f = "<div class='row'>" +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Database </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class = "col-md-6 colu">' +
+            '<div class = "sys">' +
+            '<p> Relational Database </p>' +
+            '<input type = "button" value = "exam" style = "padding: 2px; border-radius: 20px; background-color: green; color: #fff; font-size: 10px;"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        for (var i = 1; i < 20; i++) {
+            document.getElementById('syllabus').innerHTML += a;
+        }
+        for (var j = 1; j < 25; j++) {
+            document.getElementById('syllabus1').innerHTML += b;
+        }
+        for (var k = 1; k < 15; k++) {
+            document.getElementById('syllabus2').innerHTML += c;
+        }
+        for (var l = 1; l < 10; l++) {
+            document.getElementById('syllabus3').innerHTML += d;
+        }
+        for (var m = 1; m < 5; m++) {
+            document.getElementById('syllabus4').innerHTML += e;
+        }
+        for (var n = 1; n < 50; n++) {
+            document.getElementById('syllabus5').innerHTML += f;
+        }
+    }
+
+</script>
+<script type="text/javascript">
+    function updateButton() {
+        document.getElementById("demo").innerHTML = document.getElementById("period_dropdown").value;
+    }
+
+</script>
+<!-- Javascript for Animation Progress Bar -->
+
 </html>

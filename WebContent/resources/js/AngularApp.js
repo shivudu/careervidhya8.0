@@ -1,4 +1,4 @@
-var app=angular.module("App",["xeditable", "ui.bootstrap"]);
+var app=angular.module("App",["xeditable", "ui.bootstrap","chart.js"]);
 //,"angularUtils.directives.dirPagination"
 
 app.controller("viewController",viewController);
@@ -380,6 +380,21 @@ function viewController($http, appUrl,$scope, $window)
 	}
 	
 	
+	$scope.isCCVisibile=false;
+	$scope.isBCCVisibile=false;
+	
+	
+	this.sendMail=function()
+	{
+		
+	}
+	
+	$scope.prepareCC=function()
+	{
+		console.log("Test prepare");
+		if($scope.ccrecipients.indexOf(" ")>0)
+			$scope.ccrecipients=$scope.ccrecipients+";     ";
+	}
 	
 	
 	

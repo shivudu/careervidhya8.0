@@ -462,8 +462,6 @@ public class AdminController {
 		System.out.println(file.getContentType());
 		System.out.println(file.getName());
 		return adminService.fileUpload(file,fileName,subject,BatchNos,request,file.getContentType());
-		 
-		
 	}
 	
 	@RequestMapping(value="/downloadResume/{email}/{any}",method=RequestMethod.GET)
