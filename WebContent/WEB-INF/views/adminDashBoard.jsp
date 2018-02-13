@@ -696,40 +696,9 @@ $(document).ready( function(){
                 <div class="row">
                     <!------------------------------------- Progress Bar Starts Here -------------------------------------------------->
                     <div class="col-md-6" style="padding:1%">
+                       <br><br>
                        
-                       
-                        <div class="small-box bg-green">
-                            <div class="inner">
-                                <h3>{{dcl.allBatches[0].batchNumber}}</h3>
-                                <p>Batches</p>
-                            </div>
-                            <div class="tabl tabl2">
-                                <table>
-                                    <tr class="rowb">
-                                        <td>Finished Batches</td>
-                                        <td class="pad">: </td>
-                                        <td>{{dcl.allBatches.length-4}}</td>
-                                    </tr>
-                                    <tr class="rowb" style="background-color:#00a65a !important">
-                                        <td>Active Batches</td>
-                                        <td class="pad">: </td>
-                                        <td>04</td>
-                                    </tr>
-                                    <tr class="rowb">
-                                        <td>Last Batch</td>
-                                        <td class="pad">: </td>
-                                        <td>{{dcl.allBatches[0].batchNumber}}</td>
-                                    </tr>
-                                    <tr class="rowb" style="background-color:#00a65a !important">
-                                        <td>Start Date</td>
-                                        <td class="pad">: </td>
-                                        <td>{{dcl.allBatches[0].beginDate}}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                            <a data-toggle="tab" href="#studentsList" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
+                      <h1 style="text-align:center;color:#000 !important">Events Will be Shown Here</h1>  
                         
                         
                     </div>
@@ -763,6 +732,40 @@ $(document).ready( function(){
             
             <div class="col-md-4 col-sm-4" style="height:570px;overflow:auto;">
             <h2 style="text-align:center;font-family:fantasy;font-size:25px;">BATCHES INFO</h2>
+            <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>{{dcl.allBatches[0].batchNumber}}</h3>
+                                <p>Batches</p>
+                            </div>
+                            <div class="tabl tabl2">
+                                <table>
+                                    <tr class="rowb">
+                                        <td>Finished Batches</td>
+                                        <td class="pad">: </td>
+                                        <td>{{dcl.allBatches.length-4}}</td>
+                                    </tr>
+                                    <tr class="rowb" style="background-color:#00a65a !important">
+                                        <td>Active Batches</td>
+                                        <td class="pad">: </td>
+                                        <td>04</td>
+                                    </tr>
+                                    <tr class="rowb">
+                                        <td>Last Batch</td>
+                                        <td class="pad">: </td>
+                                        <td>{{dcl.allBatches[0].batchNumber}}</td>
+                                    </tr>
+                                    <tr class="rowb" style="background-color:#00a65a !important">
+                                        <td>Start Date</td>
+                                        <td class="pad">: </td>
+                                        <td>{{dcl.allBatches[0].beginDate}}</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <a data-toggle="tab" href="#studentsList" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+            
+            
             <div ng-repeat="b in dcl.allBatches">
                            <div class="block" style="">
                                     <div class="row">
@@ -1635,7 +1638,7 @@ $(document).ready( function(){
 												<option value='60'>60</option>
 						                    </select>
                    						</td>
-                   					</tr> -->
+                   					</tr>
                    					
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;">State :</p></td>
@@ -1650,7 +1653,7 @@ $(document).ready( function(){
 											    </ul>
 											  </div>
                    						</td>
-                   					</tr>
+                   					</tr>  
                    					<tr>
                    						<td><p class="selectBoxClass1" style="padding-left:1px !important;">Gender :</p></td>
                    						<td>
@@ -1663,7 +1666,7 @@ $(document).ready( function(){
 										    </ul>
 										  </div>
                    						</td>
-                   					</tr>
+                   					</tr> -->
                    				</table>
                    			</div>
                    			<div class="col-md-6 modelTableClass" style="pading:1%;">
@@ -1788,8 +1791,8 @@ $(document).ready( function(){
                        <tbody style="height:400px;overflow-y:scroll">
                        
                            <tr ng-repeat="t in ( fstudentsList= (view.studentsList | filter:studentSearchStr | orderBy:sortKey:reverse | filter: { graduationCity: graduationCity, city: city, graduationCollege: graduationCollege, parentName: parentName, graduationType: graduationType, gender: genderI} | filter: sscFilter | filter: interFilter | filter: aggregateFilter | filter: degreeFilter | filter: feeFilter | filter: yearOfPassFilter  | filter: sscMathsFilter | filter: interMathsFilter | filter: branchFilter | filter: batchFilter | filter: statusFilter ) )"  ng-click='view.studentDetails(t,$event)'>
-                               <td  class="theadTextDataClass">
-                               <span ng-style="t.status=='active'?{'border-left':'3px solid green'}: t.status=='placed' ? { 'border-left':'3px solid blue'} : {'border-left':'3px solid red'}"></span>
+                               <td ng-style="t.status=='active'?{'border-left':'3px solid green'}: t.status=='placed' ? { 'border-left':'3px solid blue'} : {'border-left':'3px solid red'}" class="theadTextDataClass">
+                             
                                <input ng-click="view.checkStudent(t,$event)" type="checkbox"/></td>
                                <td class="theadTextDataClass">
                  					<p style="text-align:left !important;cursor:pointer;">{{butifytheName(t.fullName)}}</p>
@@ -1852,8 +1855,8 @@ $(document).ready( function(){
 				<div class="col-md-12">
 					<p class="stdHeadhOne">{{butifytheName(view.student.fullName)}}
 					<span ng-click="editableForm.$show()" ng-show="!editableForm.$visible" title="Edit Student"><i class="fas fa-edit"></i></span>
-                     <span title="Student Resume" target='_blank'><i class="fas fa-info-circle"></i></span>
-              
+                     <span title="Student Details"><a style="text-decoration:none;color:#000" href="studentProfile/{{view.student.student_id}}" target="_blanck"><i class="fas fa-info-circle"></i></a></span>
+                     <span title="Download Resume"><a style="text-decoration:none;color:#000" href="downloadResume/{{view.student.email}}/any" target="_blanck"><i class="fas fa-download"></i></a></span> 
 					<small><p class="feeNotificationGreen"></p>{{view.student.lastlogin}}</small></p>
 					
 				</div>
@@ -2152,6 +2155,9 @@ $(document).ready( function(){
        					<td class="theadTextDataClassForDetails"></td>
        					<td style="color:#444444 !important">
        					<button ng-click="saveDriveData()" id="saveDriveButton" class="btn btn-default" style="color:#00a69c;padding: 3% 10% !important;">SAVE</button>
+       					
+       					<span id="cancelDriveButton" class="btn btn-default" ng-click="showCompanyEdits=false;this.style.display='none'" style="color:red;border:1px solid red;padding: 3% 10% !important;">Cancel</span>
+       					
        					</td>
        					<td class="theadTextDataClassForDetails">
        				   
@@ -2164,24 +2170,6 @@ $(document).ready( function(){
        		</table>
 	        </div>
 		        
-	        <div id="progressbar" class="tab-pane fade">
-	        <div id='progress'></div>
-			 	<div class='container-fluid' id='ChartProgress' style='width:96%;margin:auto;border:1px solid #00a69c;border-radius:10px;'>
-			 	
-			 	<div class='row'>
-			 	<span id='ChartAError' style='color:#d00d0d;font-size:20px;'></span>
-			 	<canvas id='ChartA'  style='display:none;width:100%;height: auto;'></canvas>
-			 	</div>
-			 	<div class='row'>
-			 	<span id='ChartMError' style='color:#d00d0d;font-size:20px;'></span>
-			 	<canvas id='ChartM'  style='display:none;width:100%;height: auto;'></canvas> 	</div>
-			 	</div>
-	        </div>
-
-	        <div id="placement" class="tab-pane fade">
-	        	<h3>Placement</h3>
-	        	<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	        </div>
 	        
 	        <div class="row" ng-show="editableForm.$visible" >
               	<div class="col-md-1"></div>
@@ -2189,7 +2177,7 @@ $(document).ready( function(){
               		<button type="submit" class="modelSaveBtn" ng-disabled="editableForm.$waiting">Save</button>
               	</div>
               	<div class="col-md-5">
-               		<button type="button" class="modelCancleBtn" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancle</button>
+               		<button type="button" class="modelCancleBtn" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">Cancel</button>
               	</div>
               	<div class="col-md-1"></div>
               </div>

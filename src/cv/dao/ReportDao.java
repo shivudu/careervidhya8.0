@@ -10,7 +10,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-
+import cv.dto.DetailedReport;
+import cv.dto.DriveStatus;
 import cv.models.CVStudent;
 import cv.models.Notification;
 import cv.models.QAAnswer;
@@ -158,4 +159,80 @@ return ans;
 		String sql="select distinct topic from qabank where subject='"+subject+"' and topic like '%"+topic+"%'";
 		return template.queryForList(sql, String.class);
 	}
+	
+	public List<DetailedReport> getStudentDetailedReport(String email)throws Exception {
+		// TODO Auto-generated method stub
+		String sql="select * from reports join questionpaper on reports.qp_id=questionpaper.qp_id where reports.student_id='"+email+"' and scorePer100 >=0";
+		
+		List<DetailedReport> report=template.query(sql, new RowMapper<DetailedReport>(){
+			public DetailedReport mapRow(ResultSet rs,int row)throws SQLException
+			{
+				DetailedReport r=new DetailedReport();
+				
+				r.setCreationDate(""+rs.getDate("creationDate"));
+				r.setAdmin_email(rs.getString("email"));
+				r.setDateDone(""+rs.getDate("dateDone"));
+				r.setStudent_email(rs.getString("student_id"));
+				r.setScorePer100(rs.getDouble("scorePer100"));
+				r.setBatchNos(rs.getString("BatchNos"));
+				r.setDuration(rs.getInt("duration"));
+				r.setIsPractice(rs.getString("isPractice"));
+				r.setQp_id(rs.getInt("qp_id"));
+				r.setQp_type(rs.getString("qp_type"));
+				r.setExamDate(""+rs.getDate("examDate"));
+				r.setTestName(rs.getString("testName"));
+				r.setRemarks(rs.getString("remarks"));
+				r.setQuestions(rs.getString("questions"));
+				return r;
+			}
+			
+		});
+			
+		
+     return report;
+	}
+	
+	public int getTotalExamsForBatch(int batchNumber)throws Exception{
+		String sql="select count(*) from questionpaper where BatchNos like '%,"+batchNumber+",%'";
+	 return	template.queryForObject(sql, Integer.class);
+	}
+	
+	public List<DriveStatus> getStudentDriveData(int student_id)throws Exception {
+		// TODO Auto-generated method stub
+		String sql="select * from student_interview_status join companies on companies.company_id=student_interview_status.company_id where student_id="+student_id+" order by FinalReport desc";
+		
+		List<DriveStatus> report=template.query(sql, new RowMapper<DriveStatus>(){
+			public DriveStatus mapRow(ResultSet rs,int row)throws SQLException
+			{
+				DriveStatus d=new DriveStatus();
+				
+				  d.setBond(rs.getString("bond"));
+				  d.setBondduration(rs.getString("bondduration"));
+				  d.setCertificates(rs.getString("certificates"));
+				  d.setComsRound_Status(rs.getString("ComsRound_Status"));
+				  d.setDescription(rs.getString("description"));
+				  d.setDesignation(rs.getString("designation"));
+				  d.setFinalReport(rs.getString("FinalReport"));
+				  d.setHRRound_Status(rs.getString("HRRound_Status"));
+				  d.setInitialSalary(rs.getDouble("initialSalary"));
+				  d.setJoinDate(""+rs.getDate("joinDate"));
+				  d.setLaterSalary(rs.getDouble("laterSalary"));
+				  d.setName(rs.getString("name"));
+				  d.setStudent_id(rs.getInt("student_id"));
+				  d.setTechnicalRound1_Status(rs.getString("TechnicalRound1_Status"));
+				  d.setTechnicalRound2_Status(rs.getString("TechnicalRound2_Status"));
+				  d.setTechnicalstack(rs.getString("technicalstack"));
+				  d.setWrittenRound_Status(rs.getString("WrittenRound_Status"));
+				  
+				
+				return d;
+			}
+			
+		});
+			
+		
+     return report;
+	}
+	
+	
 }

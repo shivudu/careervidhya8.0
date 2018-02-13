@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import cv.dto.BatchesList;
+import cv.dto.DetailedReports;
+import cv.dto.DriveStatuses;
 import cv.dto.MailData;
 import cv.models.Admin;
 import cv.models.Batch;
@@ -41,6 +43,7 @@ import cv.services.BatchService;
 import cv.services.QAQuestionService;
 import cv.services.QuestionPaperService;
 import cv.services.QuestionService;
+import cv.services.StudentService;
 
 
 
@@ -577,4 +580,43 @@ public class AdminController {
 		return adminService.updateStudent(reqBody);
 		
 	}
+	
+	@RequestMapping(value="/studentProfile/{student_id}",method=RequestMethod.GET)
+	public ModelAndView getStudentProfile(@PathVariable("student_id") Integer student_id)
+	{
+		ModelAndView mv=new ModelAndView("studentProfile");
+        CVStudent st=adminService.getStudentById(student_id);
+        mv.addObject("st", st);
+		return mv;
+		
+	}
+	
+	@RequestMapping(value="/getStudentDetailedReport/{email}/any",produces="Application/JSON",method=RequestMethod.GET)
+	public @ResponseBody DetailedReports getStudentDetailedReport(@PathVariable("email") String email)
+	{
+		DetailedReports d=new DetailedReports();
+		d.setReports(adminService.getStudentDetailedReport(email));
+		return d;
+		
+	}
+	
+	
+	@RequestMapping(value="/getTotalExamsForBatch/{batchNumber}",produces="Application/JSON",method=RequestMethod.GET)
+	public @ResponseBody String getTotalExamsForBatch(@PathVariable("batchNumber") int batchNumber)
+	{
+
+
+		return adminService.getTotalExamsForBatch(batchNumber);
+		
+	}
+	
+	@RequestMapping(value="/getStudentDriveData/{student_id}",produces="Application/JSON",method=RequestMethod.GET)
+	public @ResponseBody DriveStatuses getStudentDriveData(@PathVariable("student_id") int student_id)
+	{
+
+          DriveStatuses ds=new DriveStatuses();
+		 ds.setDriveData(adminService.getStudentDriveData(student_id));
+		return ds;
+	}
+	
 }

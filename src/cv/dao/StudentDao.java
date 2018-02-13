@@ -181,6 +181,19 @@ public class StudentDao {
 	   return student;
 		
 	}
+	
+	
+	public CVStudent getStudentById(Integer student_id)throws Exception {
+		// TODO Auto-generated method stub
+		CVStudent student=null;
+		String sql="select * from cv_students where student_id=?";  
+		
+	   student=template.queryForObject(sql, new Object[]{student_id},new BeanPropertyRowMapper<CVStudent>(CVStudent.class));  
+		student.setAggregate();
+		
+	   return student;
+		
+	}
 
 
 

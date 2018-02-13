@@ -25,6 +25,8 @@ import org.springframework.mail.SimpleMailMessage;
 import cv.dao.AdminDao;
 import cv.dao.ReportDao;
 import cv.dao.StudentDao;
+import cv.dto.DetailedReport;
+import cv.dto.DriveStatus;
 import cv.models.Admin;
 
 import cv.models.CVStudent;
@@ -590,5 +592,52 @@ public class AdminService {
 		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 	}
 
+	public CVStudent getStudentById(Integer student_id) {
+		// TODO Auto-generated method stub
+		CVStudent st=null;
+		try{
+		st=studentDao.getStudentById(student_id);
+		}catch(Exception e){
+		
+		}
+		return st;
+	}
+
+	public List<DetailedReport> getStudentDetailedReport(String email) {
+		// TODO Auto-generated method stub
+		List<DetailedReport> report=null;
+		try{
+			report=reportDao.getStudentDetailedReport(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return report;
+	}
+
+	public String getTotalExamsForBatch(int batchNumber)
+	{
+		int totalTestsCount=-1;
+		boolean status=true;
+		try{
+			totalTestsCount=reportDao.getTotalExamsForBatch(batchNumber);
+		}
+		catch(Exception e){
+			status=false;
+			
+		}
+		return "{\"status\":"+status+",\"totalTestsCount\":"+totalTestsCount+"}";
+	}
+	
+	public List<DriveStatus> getStudentDriveData(int student_id){
+		List<DriveStatus> l=null;
+		
+		try {
+			l=reportDao.getStudentDriveData(student_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return l;
+	}
 	
 }
