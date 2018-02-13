@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 
+import cv.dto.BatchesList;
+import cv.dto.MailData;
 import cv.models.Admin;
 import cv.models.Batch;
 import cv.models.CVStudent;
@@ -335,6 +338,26 @@ public class AdminController {
 		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
 	}
 	
+	
+	@RequestMapping(value="/sendMailJSON",consumes="Application/JSON",produces="Application/JSON",method=RequestMethod.POST)
+	public @ResponseBody String sendMailJSON(@RequestBody String reqBody,@ RequestParam(value="studentsNames",required=false) String[] names){
+	
+		 System.out.println(reqBody);
+		String notification="Mail Sent successfully";
+		Gson g=new Gson();
+	    MailData m=g.fromJson(reqBody, MailData.class);
+		
+		//System.out.println(cc[0]);
+		boolean status=adminService.sendMail(m.getRecipients(),m.getCcrecipients(),m.getSubject(),m.getMessage(),m.getBccrecipients(),names);
+		
+		if(!status)
+			notification="There is a problem in sending the mail please contact admin";
+		
+		return "{\"status\":"+status+",\"notification\":\""+notification+"\"}";
+	}
+	
+	
+	
 	@RequestMapping(value="/getStudentsMails/{text}")
 	public @ResponseBody StudentsList getStudentsMails(@PathVariable String text)
 	{
@@ -351,6 +374,14 @@ public class AdminController {
 
 	public void setBatchService(BatchService batchService) {
 		this.batchService = batchService;
+	}
+	
+	@RequestMapping(value="/getBatches",method=RequestMethod.GET)
+	public @ResponseBody BatchesList getBatches()
+	{
+		BatchesList l=new BatchesList();
+		l.setBatches(batchService.getBatches());
+		return l;
 	}
 
 	@RequestMapping(value="/addBatch",method=RequestMethod.GET)

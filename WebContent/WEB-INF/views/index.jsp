@@ -61,7 +61,7 @@
 <body>
 	<div class="container-fluid" style="height:520px;">
 		<div class="container-fluid">
-			<div class="row headDiv" style="margin-right: 0px !important;margin-left: 0px !important;">
+			<div class="row headDiv" style="margin-right: 0px !important;margin-left: 0px !important;background-color:#efefef !important">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<a href="/"><img class="logoHome" src="<c:url value="/resources/images/cvcorpLogo.png"/>"></a>
 					<!-- <strong><span style="color:red;font-size:33px">CV</span><span style="color:black;font-size:33px">CORP</span></strong>-->
@@ -141,10 +141,10 @@
 		</div>
 		</div>
 		<!--footer start-->
-			<div class="container-fluid footerDivIndex">
+			<div class="container-fluid footerDivIndex" style="background-color:#efefef !important">
 			    <div class="row">
 			        <div class="col-md-12">
-			            <p class="footersIndex" style="color:#fff;">@CVCORPCopyRightsReserved</p>
+			            <p class="footersIndex" style="color:#000;">@CVCORPCopyRightsReserved</p>
 			        </div>
 			    </div>
 			</div>

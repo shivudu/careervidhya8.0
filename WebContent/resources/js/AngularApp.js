@@ -11,7 +11,69 @@ app.run(['editableOptions', function(editableOptions) {
 
 
 
-function viewController($http, appUrl,$scope, $window)
+
+app.service("studentsService",function($http){
+	
+	var studentsList=[];
+	
+	var getStudents=function(fn){
+		
+		if(studentsList.length==0){
+		$http.get("viewAll").then(function(response){
+			studentsList=response.data["studentsList"];
+			
+			 fn(studentsList);
+			//currentScope.filteredData=currentScope.studentsList;
+			//currentScope.JSONToCSVConvertor(currentScope.studentsList,"Testing",true);
+			
+		});
+		}
+		else{
+			fn(studentsList);
+		}
+	};
+	var modifyStudent=function(st)
+	{
+		
+		
+		$http.post("updateStudent",st).then(function(response){
+			var data=response.data;
+			if(data["status"]){
+				   document.getElementById('success').style.display='block';
+				document.getElementById('reportT').innerHTML=data["notification"];
+				$('#success').flash_message({
+			        text: ' ',
+			        how: 'append',
+			        idR :'success'
+			    });
+				
+				
+				}
+				else{
+					document.getElementById('fail').style.display='block';
+					document.getElementById('reportF').innerHTML=data["notification"];
+					$('#fail').flash_message({
+				        text: ' ',
+				        how: 'append',
+				        idR :'fail'
+				    });
+					
+				}
+		});
+		
+		
+	};
+	
+	return {
+		getStudents: getStudents,
+	    modifyStudent:modifyStudent
+	};
+});
+
+
+
+
+function viewController($http, appUrl,$scope, $window,studentsService)
 {
 	var currentScope=this;
 	
@@ -21,17 +83,14 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.aggregate=0;
 	$scope.inter=0;
 	$scope.SSC=0;
+	
+	$scope.activeStatus=true;
 	//$scope.pageValues=10;
 	this.requestAllStudents=function(){
-		$('#ajaxPageLoader').show();
-	$http.get("viewAll").then(function(response){
-		currentScope.studentsList=response.data["studentsList"];
-		$('#ajaxPageLoader').hide();
-		console.log(response.data);
-		//currentScope.filteredData=currentScope.studentsList;
-		//currentScope.JSONToCSVConvertor(currentScope.studentsList,"Testing",true);
-	});
-	
+		studentsService.getStudents(function(studentsList){
+			currentScope.studentsList=studentsList; 
+		
+		});
 	};
 	
 	//karnakar written code start
@@ -199,6 +258,22 @@ function viewController($http, appUrl,$scope, $window)
 	
 
 	
+$scope.statusFilter=function(st){
+		
+		if( !$scope.activeStatus && !$scope.doneStatus && !$scope.placedStatus)
+			return true;
+		var a=false,n=false,p=false;
+		if($scope.activeStatus!=false)
+			a= (st.status=='active');
+		if($scope.doneStatus!=false)
+			n= (st.status=='done');
+		if($scope.placedStatus!=false)
+			p= (st.status=='placed');
+		
+		return a || n || p;
+		
+	};
+	
 	$scope.yearOfPassFilter=function(st)
 	{
 		var count=0;
@@ -241,21 +316,7 @@ function viewController($http, appUrl,$scope, $window)
 	};
 	
 	
-	$scope.statusFilter=function(st){
-		
-		if( !$scope.activeStatus && !$scope.doneStatus && !$scope.placedStatus)
-			return true;
-		var a=false,n=false,p=false;
-		if($scope.activeStatus!=false)
-			a= (st.status=='active');
-		if($scope.doneStatus!=false)
-			n= (st.status=='done');
-		if($scope.placedStatus!=false)
-			p= (st.status=='placed');
-		
-		return a || n || p;
-		
-	};
+	
 	
 	
 	$scope.sscFilter=function(st)
@@ -277,7 +338,7 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.interMaths=0;
 	
 	
-	$scope.activeStatus=true;
+	
 	
 	
 	$scope.sscMathsFilter=function(st)
@@ -384,16 +445,68 @@ function viewController($http, appUrl,$scope, $window)
 	$scope.isBCCVisibile=false;
 	
 	
-	this.sendMail=function()
+	$scope.sendMail=function()
 	{
+		console.log("Testing Send MAil");
+		var emails=[];
+		for(var i=0;i<currentScope.filteredData.length;i++)
+			emails.push(currentScope.filteredData[i].email);
+		$scope.mailData={
+			recipients:emails,
+		    ccrecipients:$scope.ccrecipients,
+		    bccrecipients:$scope.bccrecipients,
+		    subject:$scope.subject,
+		    message:$scope.message 
+		};
 		
-	}
-	
+		
+		$http.post("sendMailJSON",	$scope.mailData	   ).then(function(response){
+			 
+			 
+			 var data=response.data;
+			 if(data["status"]){
+				 $("#closeMailModal").click();
+				   document.getElementById('success').style.display='block';
+				document.getElementById('reportT').innerHTML=data["notification"];
+				
+				$('#success').flash_message({
+			        text: ' ',
+			        how: 'append',
+			        idR :'success'
+			    });
+				
+				
+				}
+				else{
+					document.getElementById('fail').style.display='block';
+					document.getElementById('reportF').innerHTML=data["notification"];
+					$('#fail').flash_message({
+				        text: ' ',
+				        how: 'append',
+				        idR :'fail'
+				    });
+					
+				}
+			 
+		});
+	};
+	$scope.ccrecipients=[];
 	$scope.prepareCC=function()
 	{
 		console.log("Test prepare");
-		if($scope.ccrecipients.indexOf(" ")>0)
-			$scope.ccrecipients=$scope.ccrecipients+";     ";
+		if($scope.ccrecipient.indexOf(",")>0 || $scope.ccrecipient.indexOf(" ")>0){
+			$scope.ccrecipients.push($scope.ccrecipient.substring(0,$scope.ccrecipient.length-1));
+		    $scope.ccrecipient="";
+		}
+	}
+	$scope.bccrecipients=[];
+	$scope.prepareBCC=function()
+	{
+		console.log("Test prepare");
+		if($scope.bccrecipient.indexOf(",")>0 || $scope.bccrecipient.indexOf(";")>0){
+			$scope.bccrecipients.push($scope.bccrecipient.substring(0,$scope.bccrecipient.length-1));
+		    $scope.bccrecipient="";
+		}
 	}
 	
 	
@@ -772,31 +885,8 @@ function viewController($http, appUrl,$scope, $window)
 	
 	$scope.saveStudent= function(){
 		console.log("testing");
-		$http.post("updateStudent",currentScope.student).then(function(response){
-			var data=response.data;
-			if(data["status"]){
-				   document.getElementById('success').style.display='block';
-				document.getElementById('reportT').innerHTML=data["notification"];
-				$('#success').flash_message({
-			        text: ' ',
-			        how: 'append',
-			        idR :'success'
-			    });
-				
-				
-				}
-				else{
-					document.getElementById('fail').style.display='block';
-					document.getElementById('reportF').innerHTML=data["notification"];
-					$('#fail').flash_message({
-				        text: ' ',
-				        how: 'append',
-				        idR :'fail'
-				    });
-					
-				}
-		});
-		
+	
+		 studentsService.modifyStudent(currentScope.student);
 	};
 	
 	$scope.showCompanyEdits=false;

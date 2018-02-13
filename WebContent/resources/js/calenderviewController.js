@@ -139,7 +139,10 @@ function calenderViewCtrl($scope,$http)
 		
 		for(t=1;t<=7;t++)
 			{     if(tempDays<=days && temp<=tempDays){
-				  element.append("<td class='dates'>"+tempDays+"</td>");
+				  if(clScope.DATE==tempDays)
+				  element.append("<td style='background-color:#e7e7e7' class='dates'>"+tempDays+"</td>");
+				  else
+					  element.append("<td class='dates'>"+tempDays+"</td>");  
 				  tempDays++;
 		        	}
 			   else{

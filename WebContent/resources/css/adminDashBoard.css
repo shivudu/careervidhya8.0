@@ -584,10 +584,11 @@ a{
 {
 
     /*background:linear-gradient(to left,white,#323e60);*/
-    background-color: #404041;
+    background-color: #efefef;
     margin-top:5%;
     width: 100%;;
     height: 80px;
+    color:#000 !important;
 }
 .resetBtn
 {
@@ -972,10 +973,11 @@ a{
 		{
 
 		    /*background:linear-gradient(to left,white,#323e60);*/
-		    background-color: #404041;
+		    background-color: #e7e7e7 !important;
 		    margin-top:8%;
 		    width: 100%;;
 		    height: 43px;
+		    color:#000 !important;
 		}
 		.footerDivIndex
 		{
